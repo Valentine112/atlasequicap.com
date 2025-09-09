@@ -146,7 +146,7 @@
                         <div class="_16-140 bold">Customizable watchlists</div>
                     </div>
                 </div>
-                <div class="trading-tools__image-wrapper"><img src="assets.website-files.com/619e597619e2f98fc5b1d35b/61abd1904e4e0f92268e2d88_trading-tools-img.png" loading="lazy" width="700" srcset="assets.website-files.com/619e597619e2f98fc5b1d35b/61abd1904e4e0f92268e2d88_trading-tools-img-p-500.png 500w, assets.website-files.com/619e597619e2f98fc5b1d35b/61abd1904e4e0f92268e2d88_trading-tools-img-p-800.png 800w, assets.website-files.com/619e597619e2f98fc5b1d35b/61abd1904e4e0f92268e2d88_trading-tools-img.png 1400w"
+                <div class="trading-tools__image-wrapper"><img src="assets.website-files.com/619e597619e2f98fc5b1d35b/61abd1904e4e0f92268e2d88_trading-tools-img.png" loading="lazy" width="700" srcset="assets.website-files.com/619e597619e2f98fc5b1d35b/61abd1904e4e0f92268e2d88_trading-tools-img.png 500w, assets.website-files.com/619e597619e2f98fc5b1d35b/61abd1904e4e0f92268e2d88_trading-tools-img.png 800w, assets.website-files.com/619e597619e2f98fc5b1d35b/61abd1904e4e0f92268e2d88_trading-tools-img.png 1400w"
                         sizes="(max-width: 767px) 88vw, (max-width: 991px) 85vw, 64vw" alt="" class="trading-tool-img" /></div>
             </div>
         </div>

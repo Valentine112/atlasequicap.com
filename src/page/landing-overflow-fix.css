@@ -2,7 +2,7 @@ body{
     overflow-x: hidden!important;
 }
 .footer .footer-sub{
-    width: 30%;
+    width: 45%;
     display: inline-block;
     margin: 1.5%;
 }
@@ -14,6 +14,7 @@ body{
     margin-bottom: 10px;
     color: #fff;
     padding: 1% 1%;
+    font-size: 15px;
 }
 .login-register-links{
     margin: 5% 0;
