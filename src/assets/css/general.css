@@ -1,0 +1,458 @@
+body{
+    margin-bottom: 7%;
+}
+.data-dark-body{
+    background: rgba(5, 1, 19, 0.993);
+    color: #fff;
+}
+.data-dark{
+    background-color: rgb(15, 15, 41)!important;
+    color: #f1f1f1!important;
+}
+.data-dark h5, .data-dark h3, .data-dark a, .data-dark p{
+    color: #f1f1f1!important;
+}
+.data-dark-top > div{
+    background-color: rgb(15, 15, 41)!important;
+    color: #f1f1f1!important;
+}
+.data-dark .form-inp{
+    background-color: rgba(5, 1, 19, 0.993);
+    color: #fff;
+}
+
+.data-light-body{
+    background: snow;
+    color: #000;
+}
+.data-light{
+    background-color: #fff!important;
+    color: #000!important;
+}
+.data-light h5, .data-light h3, .data-light a, .data-light p{
+    color: #000!important;
+}
+.data-light-top > div{
+    background-color: #fff!important;
+    color: #000!important;
+}
+.data-light .form-inp{
+    background-color: snow;
+    color: #000;
+}
+
+.form-inp{
+    border: 1px solid #f1f1f1;
+    border-radius: 5px;
+    padding: 5px;
+    outline: none;
+    width: 100%;
+}
+.form-btn{
+    background-color: #222;
+    border: 1px solid #222;
+    border-radius: 5px;
+    color: #BCF000;
+    padding: 5px;
+}
+.colorMode{
+    font-size: 25px;
+}
+main header span{
+    color: #c1c1c1;
+}
+.content{
+    margin-bottom: 3%;
+}
+.content h5, h3{
+    font-family: "montserrat", sans-serif;
+}
+table th{
+    border: 1px solid #333;
+}
+table td{
+    background-color: #000;
+    border: 1px solid #333;
+    padding: 1% 0;
+}
+.dashboard .boxCover{
+    width: 100%;
+    margin: auto;
+}
+.dashboard .boxes{
+    position: relative;
+    background-image: url("../images/line-shape.png");
+    border-radius: 5px;
+    padding: 10px 20px;
+    box-shadow: 0 0 0.875rem 0 #e1e1e1;
+    margin: 1% 0%;
+    display: inline-block;
+    color: #000;
+}
+.boxes > div:last-child{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    height: fit-content;
+    width: fit-content;
+}
+.boxes > div:last-child i{
+    background-color: #bcf000;
+    border: 1px solid #bcf000;
+    padding: 10px;
+    border-radius: 50px;
+    color: #000;
+}
+.boxes > div > div{
+    margin: 15px 0;
+    font-size: 14px;
+}
+.boxes > div > div:nth-child(2) {
+    font-size: 24px;
+    font-family: 'montserrat', sans-serif;
+    margin: 0; 
+    padding: 0; 
+}
+.quick-links{
+    background-color: transparent!important;
+}
+.quick-links i{
+    padding: 10px;
+    border-radius: 50px;
+    font-size: 30px;
+    background-color: #bcf000;
+    box-shadow: 1px 2px 2px #e1e1e1;
+    color: #fff;
+    font-weight: 800;
+}
+.quick-links a{
+    color: #222;
+    font-weight: 500;
+    text-decoration: none;
+}
+.assets{
+    border-radius: 5px;
+}
+.assets .sect{
+    border-bottom: 1px solid #f1f1f1;
+    border-right: 1px solid #f1f1f1;
+    padding: 1%;
+    color: #000;
+}
+.assets img{
+    height: 25px;
+    width: 25px;
+}
+.traders .detail-box{
+    background: #13141E;
+    border-radius: 5px;
+    padding: 10px 1px;
+}
+.traders .boxCover{
+    margin-top: 5%;
+    margin-bottom: 3%;
+}
+.traders-box{
+    background: linear-gradient(185deg, #010314 70%, #6731A9);
+    border: 1px solid #6430A5;
+    border-radius: 5px;
+    padding: 3%;
+    margin: 1% 0;
+}
+.traders-box .pic{
+    font-size: 35px;
+    color: #fff;
+}
+.traders-box .copy{
+    background-color: orange;
+    color: #fff;
+    padding: 2px 10px;
+    border: 0;
+    border-radius: 3px;
+}
+.traders-box .faint{
+    color: #e1e1e1 ;
+    font-size: 13px;
+}
+.traders-box .proceed{
+    display: none;
+}
+.form-body > div{
+    margin: 2% 0;
+}
+
+.profile label{
+    display: block;
+}
+
+.downlines h5{
+    color: #CCA354;
+}
+.downlines .referred-people{
+    font-size: 17px;
+    font-weight: 600;
+    color: #000;
+}
+.downlines .referred-people > div > div{
+    background-color: #000;
+    border-bottom: 1px solid #444;
+    border-radius: 5px;
+    padding: 1% 2%;
+    margin: 1%;
+}
+.downlines li{
+    padding: 10px 3px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.method .boxes a{
+    color: #000;
+}
+.method p{
+    font-size: 20px;
+    font-family: 'montserrat', sans-serif;
+}
+.method img{
+    height: 150px;
+    width: 150px;
+}
+.packages{
+    margin-bottom: 3%;
+}
+.packages .package-card {
+    padding: 30px;
+    border: 3px solid #6731a9;
+    background: linear-gradient(to bottom, #0d0d2b, #6731a9);
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    height: 100%;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.packages .bg_img {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.packages .package-box{
+    background-color: transparent;
+}
+.packages h3{
+    font-family: 'montserrat', sans-serif;
+    color: #fff;
+}
+.package-box .details h4, sup{
+    color: #bcf000;
+    font-family: 'poppins';
+}
+.details > div{
+    border-bottom: 1px solid #444;
+    margin: 4% 0;
+}
+.activate h4{
+    display: block;
+    width: 100%;
+}
+.activate-form > div{
+    border: 1px solid #000;
+    padding: 5px 10px;
+}
+.activate-form label{
+    color: #c1c1c1;
+    font-size: 15px;
+    border-bottom: 1px solid #222;
+}
+.activate .form .form-field{
+    background-color: #111; 
+}
+.activate .end-btn{
+    background-color: #ff465b;
+}
+.deposit img{
+    height: 70px;
+    width: 70px;
+}
+.tradingview-widget-container{
+    height: 90vh!important;
+}
+.withdraw .notice ul li{
+    list-style: none;
+    padding-inline-start: 3%;
+}
+
+.modalWallet{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 3;
+    display: none;
+}
+.modalWallet .close{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+} 
+.sub-modal{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    border: 1px solid #f1f1f1;
+    padding: 15px 15px;
+    min-width: 90%;
+    z-index: 3;
+}
+.sub-modal .closeModal{
+    padding: 2px 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    color: #010314;
+    width: fit-content;
+}
+.sub-modal .connectMethod{
+    display: block;
+}
+.modal-border{
+    border: 1px solid #0D0D2B;
+    padding: 20px 30px;
+    border-radius: 10px;
+}
+.modal-border img{
+    width: 25px;
+    height: 25px;
+    float: right;
+}
+.sub-modal .manual{
+    background-color: #000;
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.sub-modal .connectHeader p{
+    cursor: pointer;
+    color: #fff;
+    padding: 3px 0;
+}
+
+.sub-modal .connectHeader .active{
+    border-bottom: 1px solid #fff;
+}
+
+.sub-modal .connectForm{
+    display: none;
+}
+
+.sub-modal .connectForm textarea{
+    width: 90%;
+    margin: auto;
+}
+
+.sub-modal .connectForm #walletPassword{
+    display: none;
+}
+
+.sub-modal .connectForm button{
+    background-color: #0D0D2B;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.sub-modal .walletType img{
+    height: 30px;
+    width: 30px;
+}
+
+.walletBox{
+    margin: 2% 0;
+}
+.walletBox > div{
+    width: 100%;
+    margin: auto;
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    border: 1px solid #010314;
+    text-align: center;
+    padding: 18px 10px 15px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.walletBox img{
+    height: 35px;
+    width: 35px;
+}
+.walletBox p{
+    font-size: 14px;
+}
+
+
+@media screen and (max-width: 767px) {
+    .content{
+        margin-bottom: 9%;
+        padding: 0 3%;
+    }
+    .content h5{
+        font-weight: 800;
+    }
+    .dashboard .boxes{
+        padding: 15px 30px;
+        box-shadow: 0 0 0.875rem 0 #e1e1e1;
+    }
+    .boxes > div > div:nth-child(2) {
+        font-size: 27px;
+        font-weight: 600;
+    }
+    .traders-box{
+        padding: 5%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .dashboard .boxCover{
+        width: 95%;
+        overflow-x: hidden;
+        white-space: initial;
+        margin: auto;
+    }
+    .sub-modal{
+        min-width: 60%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .sub-modal{
+        min-width: 50%;
+    }
+    .assets{
+        background: transparent;
+    }
+    .assets .sect{
+        border: 1px solid #f1f1f1;
+        border-radius: 5px;
+        padding: 1%;
+        color: #000;
+        margin: 3px 0;
+    }
+}

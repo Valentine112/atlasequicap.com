@@ -1,0 +1,24 @@
+{
+    "name": "mac/nft",
+    "autoload": {
+        "psr-4": {
+            "Mac\\Nft\\": "src/",
+            "Router\\": "router/",
+            "Config\\": "config/",
+            "Service\\": "service/",
+            "Model\\": "model/",
+            "Controller\\": "controller/",
+            "Query\\": "query/",
+            "Src\\Config\\": "src/config/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Valentine",
+            "email": "valenny112@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.8"
+    }
+}

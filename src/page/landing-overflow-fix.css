@@ -1,0 +1,29 @@
+body{
+    overflow-x: hidden!important;
+}
+.footer .footer-sub{
+    width: 30%;
+    display: inline-block;
+    margin: 1.5%;
+}
+.footer .footer-2{
+    float: right;
+}  
+.footer-2 a{
+    display: block;
+    margin-bottom: 10px;
+    color: #fff;
+    padding: 1% 1%;
+}
+.login-register-links{
+    margin: 5% 0;
+}
+.login-register-links a:first-child{
+    background-color: #30DEAB;
+}
+.login-register-links a{
+    background-color: #000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}

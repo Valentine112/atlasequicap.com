@@ -1,0 +1,20 @@
+*{
+    font-family: 'SourceSansPro', sans-serif;
+}
+main{
+    margin: 1% 0;
+    padding: 1% 0;
+}
+@media screen and (min-width: 767px) {
+    main{
+        padding: 0% 10%;
+        margin: 7% 0;
+    }
+}
+
+main h1 span{
+    font-family: 'montserrat', sans-serif;
+}
+h1 .username{
+    font-size: 16px;
+}

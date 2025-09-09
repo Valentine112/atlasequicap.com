@@ -1,0 +1,43 @@
+/* keyframes css start */
+@include keyframes (customRounded) {
+  0% {
+    @include transform(translate(-50%, -50%) rotate(0deg)); }
+  100% {
+    @include transform(translate(-50%, -50%) rotate(360deg)); } }
+
+@include keyframes (customaPulse) {
+  0% {
+    @include transform(translate(-50%, -50%) scale(1)); }
+  25% {
+    @include transform(translate(-50%, -50%) scale(1.05)); }
+  50% {
+    @include transform(translate(-50%, -50%) scale(1.1)); }
+  75% {
+    @include transform(translate(-50%, -50%) scale(1.05)); }
+  100% {
+    @include transform(translate(-50%, -50%) scale(1)); } }
+
+@include keyframes (customLight) {
+  0% {
+    opacity: 1; }
+  25% {
+    opacity: 0.6; }
+  50% {
+    opacity: 1; }
+  75% {
+    opacity: 0.6; }
+  100% {
+    opacity: 1; } }
+
+@include keyframes (CustomBounce) {
+  0% {
+    @include transform(translateY(0)); }
+  25% {
+    @include transform(translateY(-5)); }
+  50% {
+    @include transform(translateY(-10)); }
+  75% {
+    @include transform(translateY(-5)); }
+  100% {
+    @include transform(translateY(0)); } }
+/* keyframes css end */

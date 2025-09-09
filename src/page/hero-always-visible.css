@@ -1,0 +1,166 @@
+/* Hide horizontal scrollbar and clamp viewport */
+html, body {
+  overflow-x: clip !important;
+  overscroll-behavior-x: contain !important;
+  scrollbar-width: none !important; /* Firefox */
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none !important;
+}
+/* Universal horizontal overflow fix */
+*, *::before, *::after {
+  box-sizing: border-box !important;
+}
+
+html, body {
+  overflow-x: hidden !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative;
+}
+
+/* Prevent grid/row/col elements from causing overflow */
+.container, .w-layout-grid, .w-row, .w-col, .hero-grid, .hero-section, .overflow-hidden {
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+}
+/* Remove horizontal overflow on all screen sizes */
+html, body {
+  overflow-x: hidden !important;
+  width: 100vw;
+  max-width: 100vw;
+}
+/* Responsive hero image adjustments */
+#w-node-_2a915cd7-d620-9c82-0c33-ee484132d29e-0cb1d35c {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#w-node-_2a915cd7-d620-9c82-0c33-ee484132d29e-0cb1d35c .hero-img,
+#w-node-_2a915cd7-d620-9c82-0c33-ee484132d29e-0cb1d35c .hero-img-mob {
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 991px) {
+  #w-node-_2a915cd7-d620-9c82-0c33-ee484132d29e-0cb1d35c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 24px;
+  }
+  #w-node-_2a915cd7-d620-9c82-0c33-ee484132d29e-0cb1d35c .hero-img,
+  #w-node-_2a915cd7-d620-9c82-0c33-ee484132d29e-0cb1d35c .hero-img-mob {
+    max-width: 220px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 767px) {
+  #w-node-_2a915cd7-d620-9c82-0c33-ee484132d29e-0cb1d35c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 16px;
+  }
+  #w-node-_2a915cd7-d620-9c82-0c33-ee484132d29e-0cb1d35c .hero-img,
+  #w-node-_2a915cd7-d620-9c82-0c33-ee484132d29e-0cb1d35c .hero-img-mob {
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+}
+body{
+    overflow-x: hidden!important;
+}
+#w-node-_0512910d-78fb-021e-468f-e79650829949-0cb1d35c,
+.hero-text-wrapper,
+.hero-section,
+.hero-grid,
+.container,
+section.section._100vh,
+body,
+html {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 9999 !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+@media (max-width: 991px) {
+  #w-node-_0512910d-78fb-021e-468f-e79650829949-0cb1d35c,
+  .hero-text-wrapper,
+  .hero-section,
+  .hero-grid,
+  .container,
+  section.section._100vh,
+  body,
+  html {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 9999 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}
+
+@media (max-width: 767px) {
+  #w-node-_0512910d-78fb-021e-468f-e79650829949-0cb1d35c,
+  .hero-text-wrapper,
+  .hero-section,
+  .hero-grid,
+  .container,
+  section.section._100vh,
+  body,
+  html {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 9999 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}
+/* Force hero text section to be visible on all screen sizes */
+/* Force hero text section to be visible and on top on all screen sizes */
+#w-node-_0512910d-78fb-021e-468f-e79650829949-0cb1d35c {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 9999 !important;
+ 
+}
+
+@media (max-width: 991px) {
+  #w-node-_0512910d-78fb-021e-468f-e79650829949-0cb1d35c {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 9999 !important;
+  }
+}
+@media (max-width: 767px) {
+  #w-node-_0512910d-78fb-021e-468f-e79650829949-0cb1d35c {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 9999 !important;
+  }
+}
