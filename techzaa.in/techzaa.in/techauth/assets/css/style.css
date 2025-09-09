@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html {
+    @apply relative scroll-smooth;
+}
+
+body {
+    font-size: 15px;
+    @apply font-body overflow-x-hidden text-gray-900;
+}
+
+@supports (-webkit-overflow-scrolling: touch) {
+    body {
+        cursor: pointer;
+    }
+}
+
+input,
+textarea,
+button,
+select,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply font-semibold;
+}

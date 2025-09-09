@@ -156,8 +156,8 @@
         <div class="container relative">
             <div class="w-layout-grid _6-6-grid">
                 <div class="api-sdk__text-wrapper">
-                    <h2 class="h2 bm-30">Open API and SDK for algorithmic trading</h2>
-                    <div class="_18-140 bm-35">Automate your trading strategies and access real-time market data with our robust API and SDK, available to all users.</div>
+                    <h2 class="h2 bm-30">Access to explore our copytrading system.</h2>
+                    <div class="_18-140 bm-35">Save your self the hassle and copy from any of our top traders with good result and good ROI.</div>
                     <div class="hp__text-block-w-check-wrapper-copy"><img src="assets.website-files.com/619e597619e2f98fc5b1d35b/61a632fc9ff41d7c79b1a3f9_roadmap__%D1%81heck.svg" loading="lazy" alt="" class="check-icon" />
                         <div class="_16-140 bold">Real-time data feeds</div>
                     </div>
@@ -253,30 +253,30 @@
                 });
             });
             </script>
-            <div class="w-layout-grid team-grid">
+            <div class="testimony">
                 <div id="w-node-_839a53d7-bb2a-4b09-5812-9110b114fed7-0cb1d35c" class="roadmap__meet-the-team-col-wrapper">
                     <h2 class="h2 bm-30">Reviews</h2>
                     <div class="_16-140 bm-40">Hear from others what is being said about our performance and services</div>
                 </div>
-                <div id="w-node-_839a53d7-bb2a-4b09-5812-9110b114fee0-0cb1d35c" class="roadmap__meet-the-team-2-col-wrapper">
-                    <div class="team-member-cart">
-                        <img src="assets.website-files.com/619e597619e2f98fc5b1d35b/61a632fa2cc58ee9ea690dd1_roadmap__Gor.png" loading="lazy" width="164" alt="" class="team-member-photo" />
-                        <div class="_12-140 light-grey center">Gor Shipaktsyan</div>
-                        <div>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam harum natus sit sed quidem quia qui atque iste quae officiis consequuntur soluta dolor, saepe ducimus excepturi voluptates consectetur! Molestias, sed.
-                        </div>
+                <div class="review-sub">
+                    <div>
+                        <img src="assets.website-files.com\619e597619e2f98fc5b1d35b\61a632fb74f72689c4e6be47_roadmap__Marta.png" alt="">
+                        <h4>Tiffany Blendish</h4>
+                        <p>
+                            I’ve been involved in trading for several years, and I can confidently say that this platform has completely transformed the way I approach the markets. Before discovering it, I struggled with unreliable data, slow executions, and the constant fear of missing out on opportunities. But since joining, everything has changed for the better.
+                            <br><br>
+                            Most importantly, I’ve seen tangible results. With consistent use of the tools and strategies available here, I’ve been able to improve my win rate, protect my capital better, and steadily grow my portfolio. I appreciate that the platform doesn’t just promise overnight success — instead, it equips you with the resources and environment to build long-term, sustainable results.
+                        </p>
                     </div>
-                    <div class="team-member-cart"><img src="assets.website-files.com/619e597619e2f98fc5b1d35b/61a632fa9ad9ba2b8ac4872b_roadmap__Andres.png" loading="lazy" width="164" alt="" class="team-member-photo" />
-                        <div class="_12-140 light-grey center">Andrés Ruiz<br/>Back End Developer</div>
-                    </div>
-                    <div class="team-member-cart"><img src="assets.website-files.com/619e597619e2f98fc5b1d35b/61a632fb3ca0450fcd72b41b_roadmap__Krunal.png" loading="lazy" width="164" alt="" class="team-member-photo" />
-                        <div class="_12-140 light-grey center">Krunal Amin<br/>CEO &amp; Founder</div>
-                    </div>
-                    <div class="team-member-cart"><img src="assets.website-files.com/619e597619e2f98fc5b1d35b/61a632fbf0879683bdd06d41_roadmap__JT.png" loading="lazy" width="164" alt="" class="team-member-photo" />
-                        <div class="_12-140 light-grey center">JT McHorse<br/>Front End Developer</div>
-                    </div>
-                    <div class="team-member-cart"><img src="assets.website-files.com/619e597619e2f98fc5b1d35b/61a632fb74f72689c4e6be47_roadmap__Marta.png" loading="lazy" width="164" alt="" class="team-member-photo" />
-                        <div class="_12-140 light-grey center">Marta Brezden<br/>UI/UX Designer</div>
+
+                    <div>
+                        <img src="assets.website-files.com\619e597619e2f98fc5b1d35b\61a632fbf0879683bdd06d41_roadmap__JT.png" alt="">
+                        <h4>Scott Levi</h4>
+                        <p>
+                            When I first started trading, I was overwhelmed. The stock market felt like a jungle of numbers, charts, and terms I couldn’t fully understand. I tried a few platforms before, but most of them either overcomplicated things or didn’t give me the tools I needed to actually improve. That all changed the moment I found this platform.
+                            <br><br>
+                            I would recommend this platform to anyone who wants to take trading seriously. Whether you’re a beginner who feels lost, or someone experienced looking for a better edge, this is the place to be. It’s been one of the best decisions I’ve made for my financial future.
+                        </p>
                     </div>
                 </div>
             </div>

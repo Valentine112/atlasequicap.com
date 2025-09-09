@@ -27,3 +27,22 @@ body{
     border-radius: 5px;
     text-decoration: none;
 }
+.testimony img{
+    height: 50px;
+    width: 50px;
+}
+.review-sub > div{
+    background-color: #111;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 1.5% 0;
+}
+
+@media screen and (min-width: 767px){
+    .review-sub > div{
+        width: 45%;
+        display: inline-block;
+        margin: 1.5%;
+    }
+}
