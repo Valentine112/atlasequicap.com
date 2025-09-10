@@ -27,7 +27,14 @@
 
 
 function res(type, message) {
-    return `<div class="alert alert-${type} py-1">${message}</div>`
+    return `<div class="alert text-${type} py-1">${message}</div>`
+}
+
+function togglePassword(self) {
+    const type = password.type === 'password' ? 'text' : 'password';
+    password.type = type;
+
+    self.classList.toggle('toggle-active', type === 'text');
 }
 
 async function log(self, type) {
@@ -49,16 +56,21 @@ async function log(self, type) {
     const message = document.getElementById("message")
 
     if(type == "register") {
-        username = document.getElementById("username")
-        fullname = document.getElementById("fullname")
+        let fullname = document.getElementById("fullname"),
+        country = document.getElementById("country"),
+        phone = document.getElementById("phone")
+
+        console.log(country.value)
 
         fullname.value.trim().length < 1 ? error = "fullname" :
-        username.value.trim().length < 1 ? error = "username" : null
+        phone.value.trim().length < 1 ? error = "phone" :
+        country.value.trim().length < 1 ? error = "country" : null
 
         if(error != "") message.innerHTML = res("warning", "Please fill the forms")
 
-        error == "username" ? username.focus() : 
-        error == "fullname" ? fullname.focus() : null
+        error == "fullname" ? fullname.focus() : 
+        error == "phone" ? phone.focus() : 
+        error == "country" ? country.focus() : null
 
         if(error != "") return
 
@@ -71,7 +83,8 @@ async function log(self, type) {
         }
 
         data.val['fullname'] = fullname.value
-        data.val['username'] = username.value
+        data.val['country'] = country.value
+        data.val['phone'] = phone.value
 		data.val['referred'] = referred
 
     }
@@ -128,18 +141,15 @@ async function log(self, type) {
         if(val.status === 1) {
             //proceed to login
             //window.location = type == ("register" | "password") ? "login" : type == "login" ? "user/home" : null
-            
-            if(type == "register" || type == "password"){
+            if(type == "register") {
+                message.innerHTML = res("success", "An email has been sent to you, please follow the instructions to verify your account")
+            }
+            if(type == "password"){
                 window.location = "login"
                 return
             }
             
-            if(type == "login"){
-                window.location = "user/home"
-                return
-            }
-
-            if(type == "auth"){
+            if(type == "login" || type == "auth"){
                 window.location = "user/home"
                 return
             }

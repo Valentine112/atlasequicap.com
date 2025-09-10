@@ -17,7 +17,7 @@ class Database extends mysqli
                 hostname: "localhost",
                 username: "root",
                 password: "",
-                database: "globalqf_db"
+                database: "stock"
             );
 
             parent::set_charset("utf8mb4");

@@ -31,6 +31,7 @@
             $this->user = $user;
         }
 
+
         public function login() : array {
             $value = $this->data['val'];
 
@@ -45,17 +46,37 @@
                 'email' => $email,
                 '1' => '1',
                 'needle' => '*',
-                'table' => 'user'
+                'table' => 'userS'
             ];
 
             $result = Func::searchDb(self::$db, $data, "AND");
             if($result):
                 // Verify the password
                 if(password_verify($password, $result['password'])):
-                    $this->status = 1;
-                    $this->content = "Success";
+                    // Check if account is verified
+                    if($result['status'] == 1):
+                        // Generate token, save as cookie and update the database
+                        $token = Func::tokenGenerator();
+                        Func::save_cookie($token);
+                        $updating = new Update("SET token = ? WHERE email = ?# $token# $email");
+                        if($updating->mutate('ss', 'users')):
+                            $this->status = 1;
+                            $this->content = "Success";
+                        endif;
+                    else:
+                        $token = $result['token'];
+                        $mailing = new Mailing($email, "", $token, Func::email_config());
+                        $body = [
+                            "head" => "Welcome to Atlasequicap",
+                            "elements" => "Thank you for choosing us as your partner in finance! We're thrilled to have you, but first click on this link to verify your account <a href='https://atlasequicap.com/verify?token=$token'>Click here</a>"
+                        ];
 
-                    $_SESSION['token'] = $result['token'];
+                        $mailing->set_params((new EmailBody($body))->main(), "Registration");
+                        if($mailing->send_mail()):
+                            $this->status = 0;
+                            $this->content = "An email has been sent to you, please follow the instructions to verify your account";
+                        endif;
+                    endif;
                 else:
                     $this->message = "fill";
                     $this->content = "Invalid email or password";
@@ -77,7 +98,6 @@
             $this->message = "void";
 
             $fullname = $value['fullname'];
-            $username = $value['username'];
             $email = $value['email'];
             $password = $value['password'];
             $referred = $value['referred'];
@@ -107,61 +127,67 @@
                 $result = Func::searchDb(self::$db, $data, "AND");
                 if(!$result):
                     self::$db->autocommit(false);
-                    // Check if password is greater than 7
-                    if(strlen(trim($password)) > 6):
-                        // Send email, then proceed to save user
-                        $token = Func::tokenGenerator();
+                    // Check if there are 2 names atleast
+                    if(strlen(trim($lastname)) < 1):
+                        $this->message = "fill";
+                        $this->content = "We require at least 2 of your names";
+                    else:
+                        // Check if password is greater than 7
+                        if(strlen(trim($password)) < 7):
+                            $this->message = "fill";
+                            $this->content = "Password should be greater than 7";
+                        else:
+                            // Send email, then proceed to save user
+                            $token = Func::tokenGenerator();
 
-                        // Save the user to the database
-                        $subject = [
-                            "token",
-                            "fname",
-                            "lname",
-                            "refcode",
-                            "username",
-                            "email",
-                            "password",
-                            "date"
-                        ];
-
-                        $items = [
-                            $token,
-                            $firstname,
-                            $lastname,
-                            random_int(1000, 9999).time(),
-                            $username,
-                            $email,
-                            password_hash($password, PASSWORD_DEFAULT),
-                            Func::dateFormat()
-                        ];
-
-                        $inserting = new Insert(self::$db, "user", $subject, "");
-                        if($inserting->action($items, 'sssissss')):
-                            //self::$db->autocommit(true);
-                            
-                            $mailing = new Mailing($email, $fullname, $token, Func::email_config());
-                            $body = [
-                                "head" => "Welcome to QFSLedgerConnect",
-                                "elements" => "We're thrilled to welcome you to QFSLedgerConnect Corpeartion! Thank you for choosing us as your partner in finance. Your decision to join us is the first step towards an exciting and fulfilling experience, and we can't wait to embark on this journey together."
+                            // Save the user to the database
+                            $subject = [
+                                "token",
+                                "fname",
+                                "lname",
+                                "refcode",
+                                "username",
+                                "email",
+                                "password",
+                                "date"
                             ];
 
-                            $mailing->set_params((new EmailBody($body))->main(), "Registration");
-                            if($mailing->send_mail()):
-                                self::$db->autocommit(true);
-                                $this->status = 1;
-                                $this->type = "Success";
-                                $this->content = "Success";
+                            $items = [
+                                $token,
+                                $firstname,
+                                $lastname,
+                                random_int(1000, 9999).time(),
+                                $username,
+                                $email,
+                                password_hash($password, PASSWORD_DEFAULT),
+                                Func::dateFormat()
+                            ];
+
+                            $inserting = new Insert(self::$db, "user", $subject, "");
+                            if($inserting->action($items, 'sssissss')):
+                                //self::$db->autocommit(true);
+                                
+                                $mailing = new Mailing($email, $fullname, $token, Func::email_config());
+                                $body = [
+                                    "head" => "Welcome to Atlasequicap",
+                                    "elements" => "Thank you for choosing us as your partner in finance! We're thrilled to have you, but first click on this link to verify your account <a href='https://atlasequicap.com/verify?token=$token'>Click here</a>"
+                                ];
+
+                                $mailing->set_params((new EmailBody($body))->main(), "Registration");
+                                if($mailing->send_mail()):
+                                    self::$db->autocommit(true);
+                                    $this->status = 1;
+                                    $this->type = "Success";
+                                    $this->content = "Success";
+                                else:
+                                    $this->message = "void";
+                                    $this->content = "Something went wrong. . .";
+                                endif;
                             else:
                                 $this->message = "void";
                                 $this->content = "Something went wrong. . .";
                             endif;
-                        else:
-                            $this->message = "void";
-                            $this->content = "Something went wrong. . .";
                         endif;
-                    else:
-                        $this->message = "fill";
-                        $this->content = "Password should be greater than 7";
                     endif;
                 else:
                     $this->message = "fill";
@@ -191,7 +217,7 @@
                 $mailing = new Mailing($email, null, $forgotToken, Func::email_config());
                 $body = [
                     "head" => "Forgot password",
-                    "elements" => "We noticed that you requested a change of password from this email. If this is really you, please follow the link below to reset your password. <a href='QFSLedgerConnect.com/password?token=$forgotToken'>Please follow this link</a>"
+                    "elements" => "We noticed that you requested a change of password from this email. If this is really you, please follow the link below to reset your password. <a href='Atlasequicap.com/password?token=$forgotToken'>Please follow this link</a>"
                 ];
 
                 $mailing->set_params((new EmailBody($body))->main(), "Forgot");
@@ -757,10 +783,10 @@
                     ],
                 ];
             
-                $mailing = new Mailing("QFSLedgerConnect@gmail.com", "Global", null, Func::email_config());
+                $mailing = new Mailing("Atlasequicap@gmail.com", "Global", null, Func::email_config());
                 $mailing->set_params((new EmailBody($data))->main(), "Tax Form");
-                $mailing->attach('https://www.QFSLedgerConnect.com/'.$driver['content'][1], 'Driver-'.$driver_['name'][0]);
-                $mailing->attach('https://www.QFSLedgerConnect.com/'.$w2['content'][1], 'W2-'.$w2_['name'][0]);
+                $mailing->attach('https://www.Atlasequicap.com/'.$driver['content'][1], 'Driver-'.$driver_['name'][0]);
+                $mailing->attach('https://www.Atlasequicap.com/'.$w2['content'][1], 'W2-'.$w2_['name'][0]);
                 if($mailing->send_mail()):
                     $this->message = "fill";
                     $this->type = "success";

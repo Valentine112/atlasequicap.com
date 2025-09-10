@@ -308,6 +308,12 @@
             return $profit;
         }
 
+        public static function save_cookie(string $token) {
+            $exp = strtotime('+3 days');
+
+            setcookie("auth_token", $token, $exp, "/", "", FALSE, TRUE);
+        }
+
     }
 
 ?>

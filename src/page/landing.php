@@ -34,14 +34,14 @@
 
 <body>
     <div class="overflow-hidden">
-        <div class="navbar">
+        <div class="navbar" style="z-index: 10000!important;">
             <div class="container">
                 <div class="navbar-wrapper" style="display: flex; align-items: center; justify-content: space-between;">
                     <a href="/" aria-current="page" class="brand w-inline-block w--current"><img src="assets.website-files.com/619e597619e2f98fc5b1d35b/619e64296c3bf906257741b6_unidex-logo.svg" loading="lazy" alt=""/></a>
                     <nav class="navbar-links" style="display: flex; gap: 2rem;">
                         <a href="#faq" class="navbar-link" style="text-decoration: none; color: #fff; font-weight: 500; font-size: 1rem;">FAQ</a>
                         <a href="#review" class="navbar-link" style="text-decoration: none; color: #fff; font-weight: 500; font-size: 1rem;">Review</a>
-                        <a href="login.php" class="navbar-link" style="text-decoration: none; color: #fff; font-weight: 500; font-size: 1rem;">Login</a>
+                        <a onclick="login(this)" class="navbar-link" style="text-decoration: none; color: #fff; font-weight: 500; font-size: 1rem; cursor: pointer;">Login</a>
                     </nav>
                 </div>
             </div>
@@ -179,79 +179,79 @@
             <div class="background-circle-red _02"></div>
             <h2 class="h2 bm-60">Frequently Asked Questions</h2>
             <div class="faq-layout-demo">
-                            <div class="faq-item">
-                                    <button class="faq-question" aria-expanded="false">
-                                        <span class="faq-q-text">What is this platform for?</span>
-                                        <span class="faq-icon" aria-hidden="true">
-                                            <svg width="18" height="18" viewBox="0 0 18 18"><polyline points="4 7 9 12 14 7" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                        </span>
-                                    </button>
-                                    <div class="faq-answer">Our platform allows you to trade stocks, ETFs, and other financial instruments with advanced tools and real-time data.</div>
-                            </div>
-                            <div class="faq-item">
-                                    <button class="faq-question" aria-expanded="false">
-                                        <span class="faq-q-text">How do I open an account?</span>
-                                        <span class="faq-icon" aria-hidden="true">
-                                            <svg width="18" height="18" viewBox="0 0 18 18"><polyline points="4 7 9 12 14 7" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                        </span>
-                                    </button>
-                                    <div class="faq-answer">Click the "Sign Up" button at the top right and follow the instructions to create your account in minutes.</div>
-                            </div>
-                            <div class="faq-item">
-                                    <button class="faq-question" aria-expanded="false">
-                                        <span class="faq-q-text">Is my money safe?</span>
-                                        <span class="faq-icon" aria-hidden="true">
-                                            <svg width="18" height="18" viewBox="0 0 18 18"><polyline points="4 7 9 12 14 7" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                        </span>
-                                    </button>
-                                    <div class="faq-answer">We use industry-standard security and partner with regulated brokers to keep your funds secure.</div>
-                            </div>
-                            <div class="faq-item">
-                                    <button class="faq-question" aria-expanded="false">
-                                        <span class="faq-q-text">Can I trade on mobile?</span>
-                                        <span class="faq-icon" aria-hidden="true">
-                                            <svg width="18" height="18" viewBox="0 0 18 18"><polyline points="4 7 9 12 14 7" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                        </span>
-                                    </button>
-                                    <div class="faq-answer">Yes, our platform is fully responsive and also available as a mobile app for iOS and Android.</div>
-                            </div>
-                            <div class="faq-item">
-                                    <button class="faq-question" aria-expanded="false">
-                                        <span class="faq-q-text">What are the fees?</span>
-                                        <span class="faq-icon" aria-hidden="true">
-                                            <svg width="18" height="18" viewBox="0 0 18 18"><polyline points="4 7 9 12 14 7" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                        </span>
-                                    </button>
-                                    <div class="faq-answer">We offer competitive, transparent pricing. See our pricing page for full details.</div>
-                            </div>
+                <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span class="faq-q-text">What is this platform for?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 18 18"><polyline points="4 7 9 12 14 7" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer">Our platform allows you to trade stocks, ETFs, and other financial instruments with advanced tools and real-time data.</div>
+                </div>
+                <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span class="faq-q-text">How do I open an account?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 18 18"><polyline points="4 7 9 12 14 7" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer">Click the "Sign Up" button at the top right and follow the instructions to create your account in minutes.</div>
+                </div>
+                <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span class="faq-q-text">Is my money safe?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 18 18"><polyline points="4 7 9 12 14 7" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer">We use industry-standard security and partner with regulated brokers to keep your funds secure.</div>
+                </div>
+                <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span class="faq-q-text">Can I trade on mobile?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 18 18"><polyline points="4 7 9 12 14 7" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer">Yes, our platform is fully responsive and also available as a mobile app for iOS and Android.</div>
+                </div>
+                <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span class="faq-q-text">What are the fees?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <svg width="18" height="18" viewBox="0 0 18 18"><polyline points="4 7 9 12 14 7" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer">We offer competitive, transparent pricing. See our pricing page for full details.</div>
+                </div>
             </div>
             <style>
-            .faq-layout-demo { max-width: 800px; margin: 0 auto 40px; }
-            .faq-item { border-bottom: 1px solid #eee; }
-            .faq-question { background: none; border: none; width: 100%; text-align: left; font-size: 1.2em; padding: 20px 0; cursor: pointer; outline: none; transition: color 0.2s; display: flex; align-items: center; justify-content: space-between; }
-            .faq-q-text { flex: 1; }
-            .faq-icon { display: inline-flex; margin-left: 12px; transition: transform 0.3s cubic-bezier(.4,2,.6,1); }
-            .faq-item.open .faq-icon { transform: rotate(180deg); }
-            .faq-question[aria-expanded="true"] { color: #0077ff; }
-            .faq-answer { display: none; padding: 0 0 20px 0; color: #555; }
-            .faq-item.open .faq-answer { display: block; }
-            </style>
+                .faq-layout-demo { max-width: 800px; margin: 0 auto 40px; }
+                .faq-item { border-bottom: 1px solid #eee; }
+                .faq-question { background: none; border: none; width: 100%; text-align: left; padding: 20px 0; cursor: pointer; outline: none; transition: color 0.2s; display: flex; align-items: center; justify-content: space-between; }
+                .faq-q-text { flex: 1; }
+                .faq-icon { display: inline-flex; margin-left: 12px; transition: transform 0.3s cubic-bezier(.4,2,.6,1); }
+                .faq-item.open .faq-icon { transform: rotate(180deg); }
+                .faq-question[aria-expanded="true"] { color: #0077ff; }
+                .faq-answer { display: none; padding: 0 0 20px 0; color: #555; }
+                .faq-item.open .faq-answer { display: block; }
+                </style>
             <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                document.querySelectorAll('.faq-question').forEach(function(btn) {
-                    btn.addEventListener('click', function() {
-                        var item = btn.parentElement;
-                        var open = item.classList.toggle('open');
-                        btn.setAttribute('aria-expanded', open);
-                        document.querySelectorAll('.faq-item').forEach(function(other) {
-                            if (other !== item) {
-                                other.classList.remove('open');
-                                other.querySelector('.faq-question').setAttribute('aria-expanded', false);
-                            }
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.querySelectorAll('.faq-question').forEach(function(btn) {
+                        btn.addEventListener('click', function() {
+                            var item = btn.parentElement;
+                            var open = item.classList.toggle('open');
+                            btn.setAttribute('aria-expanded', open);
+                            document.querySelectorAll('.faq-item').forEach(function(other) {
+                                if (other !== item) {
+                                    other.classList.remove('open');
+                                    other.querySelector('.faq-question').setAttribute('aria-expanded', false);
+                                }
+                            });
                         });
                     });
                 });
-            });
             </script>
             <div class="testimony">
                 <div id="w-node-_839a53d7-bb2a-4b09-5812-9110b114fed7-0cb1d35c" class="roadmap__meet-the-team-col-wrapper">
@@ -316,6 +316,28 @@
         <script src="d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=619e597619e2f98fc5b1d35b" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="assets.website-files.com/619e597619e2f98fc5b1d35b/js/unidex.cafd2cb49.js" type="text/javascript"></script>
     <!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+    <script>
+        function getCookieByName(name) {
+            const cookieString = document.cookie;
+            const cookies = cookieString.split(';');
+
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i].trim(); // Remove leading/trailing whitespace
+
+                // Check if this cookie starts with the desired name
+                if (cookie.startsWith(name + '=')) {
+                // Extract and return the value
+                return cookie.substring(name.length + 1);
+                }
+            }
+            return null; // Cookie not found
+        }
+        function login(self){
+            event.preventDefault();
+            // Check for cookie
+            getCookieByName('auth_token') ? window.location.href = 'user/home' : window.location.href = 'login';
+        }
+    </script>
 </body>
 
 </html>

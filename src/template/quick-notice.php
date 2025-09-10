@@ -24,11 +24,11 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            box-shadow: 3px 3px 20px 2px #f1f1f1;
+            box-shadow: 3px 3px 20px 2px #141E2C;
             padding-left: 35px;
             padding-right: 25px;
             margin: auto;
-            background-color: #f1f1f1;
+            background-color: #111;
             border-radius: 5px;
             cursor: pointer;
         }

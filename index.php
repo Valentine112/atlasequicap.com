@@ -23,7 +23,7 @@
         require "src/page/login.php";
     })
 
-    ->get('/register', function() {
+    ->get('/signup', function() {
         require "src/page/register.php";
     })
 

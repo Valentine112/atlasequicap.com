@@ -15,12 +15,12 @@
             ];
 
             if(!empty($_SESSION['token'])):
-                $sessionToken = Func::cleanData($_SESSION['token'], 'string');
+                $sessionToken = Func::cleanData($_COOKIE['auth_token'], 'string');
 
                 // Check if the token actually exist
                 $selecting = new Select(new Database);
                 $selecting->more_details("WHERE token = ?# $sessionToken");
-                $action = $selecting->action("id", "user");
+                $action = $selecting->action("id", "users");
 
                 if($action != null) return $action;
 
