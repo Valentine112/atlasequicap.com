@@ -16,9 +16,10 @@
 <body class="data-light-body">
     <?php include "src/template/quick-notice.php"; ?>
     <div class="section">
-        <div class="container-sb">
+        <div class="wrapper d-flex align-items-stretch">
             <?php include "src/template/sb/sidebar.php"; ?>
-            <section class="content">
+
+            <section class="content p-4 p-md-5 pt-5">
                 <?php include "src/template/head.php"; ?>
                 <main>
                     <header>
@@ -29,27 +30,27 @@
                         <div class="data-header">
                             <div>
                                 <div class="wallet-sec active">Stocks Trading</div>
-                                &emsp;&emsp;
-                                <div class="wallet-sec">Crypto Trading</div>
+                                &emsp;
+                                <div class="wallet-sec">Cryptocurrency Trading</div>
                             </div>
                         </div>
                         <div class="data-body">
                             <div class="row justify-content-between align-items-center mb-4">
                                 <div class="col-5">
-                                    <p>TRADING ID</p>
-                                    <p>ST-VT-4868680821</p>
+                                    <div class="sub-sect">TRADING ID</div>
+                                    <p class="trade-id sub-head">ST-VT-4868680821</p>
                                 </div>
                                 <div class="col-5 text-end">
-                                    <button class="btn btn-transparent" style="background-color: #303C51; color: #fff;">Deposit</button>
+                                    <a href="deposit" class="btn btn-transparent">Deposit</a>
                                 </div>
                             </div>
-                            <div class="row col-11 mx-auto justify-content-between align-items-center mb-4" style="border: 1px solid grey; padding: 20px; border-radius: 10px;">
+                            <div class="row col-11 mx-auto justify-content-between align-items-center mb-4" style="border: 1px solid #303f50; padding: 20px; border-radius: 10px;">
                                 <div class="col-5">
-                                    <h5 class="h4">$0.00</h5>
-                                    <p><span id="walletType">Crypto</span> Balance</p>
+                                    <div class="balance sub-head">$0.00</div>
+                                    <span><span id="walletType">Crypto</span>Wallet Balance</span>
                                 </div>
-                                <div class="col-5 text-end">
-                                    <button class="btn btn-transparent" style="background-color: #303C51; color: #fff;"><i class="las la-wallet"></i>Transfer</button>
+                                <div class="col-7 text-end align-items-center">
+                                    <a href="" class="btn btn-transparent"><i class="las la-wallet"></i>&ensp;Transfer</a>
                                 </div>
                             </div>
                         </div>
@@ -59,57 +60,22 @@
                         <!-- TradingView Widget BEGIN -->
                         <div class="tradingview-widget-container">
                             <div class="tradingview-widget-container__widget"></div>
-                            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Apple quotes by TradingView</span></a></div>
-                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+                            <div class="tradingview-widget-copyright">
+                                <a href="https://www.tradingview.com/symbols/NASDAQ-MSFT/?exchange=NASDAQ" rel="noopener nofollow" target="_blank"><span class="blue-text">MSFT chart by TradingView</span></a>
+                            </div>
+                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
                                 {
-                                "lineWidth": 2,
-                                "lineType": 0,
-                                "chartType": "area",
-                                "fontColor": "rgb(106, 109, 120)",
-                                "gridLineColor": "rgba(242, 242, 242, 0.06)",
-                                "volumeUpColor": "rgba(34, 171, 148, 0.5)",
-                                "volumeDownColor": "rgba(247, 82, 95, 0.5)",
-                                "backgroundColor": "#0F0F0F",
-                                "widgetFontColor": "#DBDBDB",
-                                "upColor": "#22ab94",
-                                "downColor": "#f7525f",
-                                "borderUpColor": "#22ab94",
-                                "borderDownColor": "#f7525f",
-                                "wickUpColor": "#22ab94",
-                                "wickDownColor": "#f7525f",
-                                "colorTheme": "dark",
+                                "symbol": "NASDAQ:MSFT",
+                                "chartOnly": false,
+                                "dateRange": "12M",
+                                "noTimeScale": false,
+                                "colorTheme": "light",
                                 "isTransparent": true,
                                 "locale": "en",
-                                "chartOnly": false,
-                                "scalePosition": "right",
-                                "scaleMode": "Normal",
-                                "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
-                                "valuesTracking": "1",
-                                "changeMode": "price-and-percent",
-                                "symbols": [
-                                    [
-                                    "Apple",
-                                    "AAPL|1D"
-                                    ]
-                                ],
-                                "dateRanges": [
-                                    "1d|1",
-                                    "1m|30",
-                                    "3m|60",
-                                    "12m|1D",
-                                    "60m|1W",
-                                    "all|1M"
-                                ],
-                                "fontSize": "10",
-                                "headerFontSize": "medium",
-                                "autosize": true,
                                 "width": "100%",
-                                "height": "100%",
-                                "noTimeScale": false,
-                                "hideDateRanges": false,
-                                "hideMarketStatus": false,
-                                "hideSymbolLogo": false
-                            }
+                                "autosize": true,
+                                "height": "100%"
+                                }
                             </script>
                         </div>
                         <!-- TradingView Widget END -->
@@ -120,17 +86,143 @@
                             <p class="title">Popular Positions</p>
                         </header>
                         <div class="positions-body">
-                            <div class="row col-11 justify-content-between align-items-center mb-4">
-                                <div class="col-sm-6 row justify-content-start align-items-center">
+                            <div class="row col-12 justify-content-between align-items-center mb-4">
+                                <div class="col-8 row justify-content-start align-items-center">
                                     <div class="col-2">
                                         <img src="../src/assets/logos/aapl.png" alt="">
                                     </div>
-                                    <div class="col-5">
-                                        <span><h5>Apple Inc.</h5>AAPL</span>
+                                    <div class="col-8">
+                                        <span><div class="stock-name">Apple Inc.</div>AAPL</span>
                                     </div> 
                                 </div>
-                                <div class="col-sm-4 text-end">
-                                    <button class="btn btn-transparent" style="background-color: #303C51; color: #fff;">Trade</button>
+                                <div class="col-4 text-end">
+                                    <a href="stocks/terminal?symbol=aapl" class="btn btn-transparent" style="background-color: #303C51;">Trade</a>
+                                </div>
+                            </div>
+
+                            <div class="row col-12 justify-content-between align-items-center mb-4">
+                                <div class="col-8 row justify-content-start align-items-center">
+                                    <div class="col-2">
+                                        <img src="../src/assets/logos/msft.png" alt="">
+                                    </div>
+                                    <div class="col-8">
+                                        <span><div class="stock-name">Mircosoft</div>MSFT</span>
+                                    </div> 
+                                </div>
+                                <div class="col-4 text-end">
+                                    <a href="stocks/terminal?symbol=MSFT" class="btn btn-transparent" style="background-color: #303C51;">Trade</a>
+                                </div>
+                            </div>
+
+                            <div class="row col-12 justify-content-between align-items-center mb-4">
+                                <div class="col-8 row justify-content-start align-items-center">
+                                    <div class="col-2">
+                                        <img src="../src/assets/logos/nflx.png" alt="">
+                                    </div>
+                                    <div class="col-8">
+                                        <span><div class="stock-name">Netflix Inc.</div>NFLX</span>
+                                    </div> 
+                                </div>
+                                <div class="col-4 text-end">
+                                    <a href="stocks/terminal?symbol=nflx" class="btn btn-transparent" style="background-color: #303C51;">Trade</a>
+                                </div>
+                            </div>
+
+                            <div class="row col-12 justify-content-between align-items-center mb-4">
+                                <div class="col-8 row justify-content-start align-items-center">
+                                    <div class="col-2">
+                                        <img src="../src/assets/logos/tsla.png" alt="">
+                                    </div>
+                                    <div class="col-8">
+                                        <span><div class="stock-name">Tesla Inc.</div>TSLA</span>
+                                    </div> 
+                                </div>
+                                <div class="col-4 text-end">
+                                    <a href="stocks/terminal?symbol=tsla" class="btn btn-transparent" style="background-color: #303C51;">Trade</a>
+                                </div>
+                            </div>
+
+                            <div class="row col-12 justify-content-between align-items-center mb-4">
+                                <div class="col-8 row justify-content-start align-items-center">
+                                    <div class="col-2">
+                                        <img src="../src/assets/logos/amzn.png" alt="">
+                                    </div>
+                                    <div class="col-8">
+                                        <span><div class="stock-name">Amazon Inc.</div>AMZN</span>
+                                    </div> 
+                                </div>
+                                <div class="col-4 text-end">
+                                    <a href="stocks/terminal?symbol=amzn" class="btn btn-transparent" style="background-color: #303C51;">Trade</a>
+                                </div>
+                            </div>
+
+                            <div class="row col-12 justify-content-between align-items-center mb-4">
+                                <div class="col-8 row justify-content-start align-items-center">
+                                    <div class="col-2">
+                                        <img src="../src/assets/logos/btc.svg" alt="">
+                                    </div>
+                                    <div class="col-8">
+                                        <span><div class="stock-name">Bitcoin</div>BTC</span>
+                                    </div> 
+                                </div>
+                                <div class="col-4 text-end">
+                                    <a href="crypto/terminal?symbol=btc" class="btn btn-transparent" style="background-color: #303C51;">Trade</a>
+                                </div>
+                            </div>
+
+                            <div class="row col-12 justify-content-between align-items-center mb-4">
+                                <div class="col-8 row justify-content-start align-items-center">
+                                    <div class="col-2">
+                                        <img src="../src/assets/logos/eth.svg" alt="">
+                                    </div>
+                                    <div class="col-8">
+                                        <span><div class="stock-name">Ethereum</div>ETH</span>
+                                    </div> 
+                                </div>
+                                <div class="col-4 text-end">
+                                    <a href="crypto/terminal?symbol=eth" class="btn btn-transparent" style="background-color: #303C51;">Trade</a>
+                                </div>
+                            </div>
+
+                            <div class="row col-12 justify-content-between align-items-center mb-4">
+                                <div class="col-8 row justify-content-start align-items-center">
+                                    <div class="col-2">
+                                        <img src="../src/assets/logos/sol.svg" alt="">
+                                    </div>
+                                    <div class="col-8">
+                                        <span><div class="stock-name">Solana</div>SOL</span>
+                                    </div> 
+                                </div>
+                                <div class="col-4 text-end">
+                                    <a href="crypto/terminal?symbol=sol" class="btn btn-transparent" style="background-color: #303C51;">Trade</a>
+                                </div>
+                            </div>
+
+                            <div class="row col-12 justify-content-between align-items-center mb-4">
+                                <div class="col-8 row justify-content-start align-items-center">
+                                    <div class="col-2">
+                                        <img src="../src/assets/logos/ton.svg" alt="">
+                                    </div>
+                                    <div class="col-8">
+                                        <span><div class="stock-name">TON</div>TON</span>
+                                    </div> 
+                                </div>
+                                <div class="col-4 text-end">
+                                    <a href="crypto/terminal?symbol=ton" class="btn btn-transparent" style="background-color: #303C51;">Trade</a>
+                                </div>
+                            </div>
+
+                            <div class="row col-12 justify-content-between align-items-center mb-4">
+                                <div class="col-8 row justify-content-start align-items-center">
+                                    <div class="col-2">
+                                        <img src="../src/assets/logos/xrp.svg" alt="">
+                                    </div>
+                                    <div class="col-8">
+                                        <span><div class="stock-name">Ripple</div>XRP</span>
+                                    </div> 
+                                </div>
+                                <div class="col-4 text-end">
+                                    <a href="crypto/terminal?symbol=xrp" class="btn btn-transparent" style="background-color: #303C51;">Trade</a>
                                 </div>
                             </div>
                         </div>

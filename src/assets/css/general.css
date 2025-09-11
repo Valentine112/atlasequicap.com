@@ -41,31 +41,75 @@ body{
     color: #000;
 }
 
+hr{
+    border: 1px solid #303f50;
+    background-color: #303f50;
+}
+.sub-head{
+    font-size: 20px;
+    color: var(--white);
+    font-weight: 600;
+}
+.sub-sub-head{
+    font-size: 16px;
+    color: var(--white);
+    font-weight: 600;
+}
+
+.btn-link{
+    background: #198754 !important;
+    border-color: #198754;
+    color: #fff!important;
+}
+.table-responsive{
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    white-space: nowrap;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.bg-dark{
+    background: #121921!important;
+}
+.bg-dark h1{
+    color: var(--white)!important;
+}
+.modal{
+    font-family: 'SourceSansPro', sans-serif;
+}
 .content{
     position: relative;
     height: 100vh;
     max-height: 100vh;
-    width: 94.4em;
+    width: 100%;
     margin-left: auto;
     overflow-y: auto;
-    padding: 0% 4%;
+    padding: 0% 2%;
     background-color: #121921;
 }
 .content main{
-    margin-top: 30%;
+    margin-top: 3rem;
     color: #fff;
-    width: 95%;
+    width: 100%;
     display: block;
 }
-@media screen and (min-width: 768px) {
-    .content main{
-        margin-top: 10%;
-    }
+
+main .btn{
+    padding: 3px 10px!important;
 }
 main .title{
     font-family: 'montserrat', sans-serif;
     font-size: 25px;
     font-weight: 600;
+    color: silver;
+}
+main .sub-sect{
+    color: silver;
+}
+.data-body a{
+    background-color: var(--blend-color);
+    color: var(--white);
 }
 .data-header > div{
     display: flex;
@@ -74,8 +118,8 @@ main .title{
 }
 .data-header .wallet-sec{
     background-color: #222;
-    color: #30deab;
-    padding: 10px 15px;
+    color: var(--main-color);
+    padding: 5px 15px;
     border-radius: 5px;
     margin-right: 10px;
     font-size: 14px;
@@ -83,12 +127,47 @@ main .title{
     width: fit-content;
 }
 .data-header .wallet-sec.active{
-    background-color: #30deab;
+    background-color: var(--main-color);
     color: #222;
 }
+
+.positions{
+    max-height: 100vh;
+    padding: 3%;
+    border: 1px solid #303f50;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.positions::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge, Opera */
+}
+
 .positions-body img{
     height: 20px;
     width: 20px;
+}
+.positions-body .stock-name{
+    color: var(--white);
+    font-size: 18px;
+}
+.positions-body a{
+    color: #BCF000;
+    background-color: darkslategrey;
+}
+
+.payment-methods{
+    background-color: var(--blend-color);
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+.payment-methods img{
+    height: 30px;
+    width: 30px;
+    vertical-align: baseline;
+}
+.payment-methods .btn-link{
+    padding: 5px 15px!important;
 }
 .form-inp{
     border: 1px solid #f1f1f1;

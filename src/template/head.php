@@ -4,16 +4,16 @@
 <style>
     .header-nav{
         position: absolute;
-        top: 0;
+        top: 1%;
         left: 0;
         width: 100%;
         background: transparent;
         display: flex;
         align-items: center;
         justify-content: space-end;
-        padding: 13px 3%;
+        padding: 1rem 3%;
         box-shadow: 0 2px 4px rgba(0, 0,0, 0.1);
-        z-index: 1000;
+        z-index: 1;
         color: grey;
         font-size: 16px;
     }
@@ -23,7 +23,7 @@
         margin-left: 20px;
     }
 </style>
-<div class="header-nav justify-content-end">
+<div class="header-nav justify-content-end align-items-center">
     <div>
         <span>Wallet: 0.0</span>
     </div>
@@ -31,6 +31,6 @@
         <i class="las la-stream" style="background-color: #19212A; padding: 7px; border-radius: 5px;"></i>
     </div>
     <div>
-        <p style="color: #30DEAB; font-size: 18px; padding: 10px; background-color: #19212A; margin-left: 20px; border-radius: 50px;">KF</p>
+        <span style="color: #30DEAB; font-size: 18px; padding: 10px; background-color: #19212A; margin-left: 20px; border-radius: 50px;">KF</span>
     </div>
 </div>

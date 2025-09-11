@@ -16,6 +16,9 @@ body{
     padding: 1% 1%;
     font-size: 15px;
 }
+.login-card{
+    background: #121922!important;
+}
 .login-register-links{
     margin: 5% 0;
 }
