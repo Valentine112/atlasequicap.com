@@ -41,6 +41,11 @@ body{
     color: #000;
 }
 
+.table{
+    --bs-table-bg: #19212A;
+    --bs-table-color: var(--white);
+    --bs-table-border-color: #303f50;
+}
 hr{
     border: 1px solid #303f50;
     background-color: #303f50;
@@ -55,7 +60,6 @@ hr{
     color: var(--white);
     font-weight: 600;
 }
-
 .btn-link{
     background: #198754 !important;
     border-color: #198754;
@@ -69,15 +73,35 @@ hr{
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
-.bg-dark{
+.form-inp{
+    background-color: #19212A!important;
+    color: #fff!important;
+    border: 1px solid #303f50!important;
+}
+.table-box{
+    background: #010314!important;
+}
+.modal-content{
     background: #121921!important;
 }
-.bg-dark h1{
+.modal-content h1{
     color: var(--white)!important;
 }
 .modal{
     font-family: 'SourceSansPro', sans-serif;
 }
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+body {
+    font-family: Roboto, sans-serif;
+}
+
+#chart {
+    max-width: 650px;
+    margin: 35px auto;
+}
+
+
 .content{
     position: relative;
     height: 100vh;
@@ -156,7 +180,7 @@ main .sub-sect{
     background-color: darkslategrey;
 }
 
-.payment-methods{
+.card-box{
     background-color: var(--blend-color);
     padding: 10px 15px;
     border-radius: 10px;

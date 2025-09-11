@@ -25,8 +25,8 @@
         <nav id="sidebar">
             <div class="custom-menu">
                 <button type="button" id="sidebarCollapse" class="btn btn">
-	          <i class="las la-bars"></i>
-	          <span class="sr-only">Toggle Menu</span>
+	            <i class="las la-bars"></i>
+	            <span class="sr-only">Toggle Menu</span>
 	        </button>
             </div>
             <div class="p-4">
@@ -36,7 +36,7 @@
                         <a href="home"><i class="las la-home mr-3"></i></span> Home</a>
                     </li>
                     <li>
-                        <a href="aasets"><i class="las la-digital-tachograph mr-3"></i></span> Assets</a>
+                        <a href="assets"><i class="las la-digital-tachograph mr-3"></i></span> Assets</a>
                     </li>
                     <li>
                         <a href="deposit"><i class="las la-file-invoice mr-3"></i></span> Deposit</a>
@@ -51,7 +51,7 @@
                         <a href="#"><i class="las la-signal mr-3"></i></span> Signal</a>
                     </li>
                     <li>
-                        <a href="#"><i class="las la-chart-line mr-3"></i></span> Trade</a>
+                        <a href="market"><i class="las la-chart-line mr-3"></i></span> Trade</a>
                     </li>
                     <li>
                         <a href="#"><i class="las la-users mr-3"></i></span> Copy Trade</a>

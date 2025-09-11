@@ -61,6 +61,10 @@
         require "src/page/user/wallets.php";
     })
 
+    ->get('/user/assets', function() {
+        require "src/page/user/assets.php";
+    })
+
     ->get('/user/history', function() {
         require "src/page/user/history.php";
     })

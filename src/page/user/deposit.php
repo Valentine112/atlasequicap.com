@@ -26,7 +26,7 @@
                         <p class="title">Deposit</p>
                     </header>
 
-                    <section class="payment-methods mt-4">
+                    <section class="payment-methods card-box mt-4">
                         <div class="sub-head">
                             Payment Method
                         </div>
@@ -80,7 +80,7 @@
                                 </div>
 
                                 <div class="col-6 col-lg-4 text-end">
-                                    <a href="" class="btn btn-transparent btn-link btn-link">Deposit now</a>
+                                    <button href="" class="btn btn-transparent btn-link btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Deposit now</button>
                                 </div>
                             </div>
 
@@ -106,7 +106,7 @@
                                 </div>
 
                                 <div class="col-6 col-lg-4 text-end">
-                                    <a href="" class="btn btn-transparent btn-link btn-link">Deposit now</a>
+                                    <button href="" class="btn btn-transparent btn-link btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Deposit now</button>
                                 </div>
                             </div>
 
@@ -132,45 +132,48 @@
                                 </div>
 
                                 <div class="col-6 col-lg-4 text-end">
-                                    <a href="" class="btn btn-transparent btn-link btn-link">Deposit now</a>
+                                    <button href="" class="btn btn-transparent btn-link btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Deposit now</button>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <header>
-                        <p class="title">Latest Deposits</p>
-                    </header>
-                    <section class="deposit-history">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-dark border-0 bg-transparent">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">TRANSACTION ID #</th>
-                                        <th scope="col">DATE</th>
-                                        <th scope="col">PAYMENT METHOD</th>
-                                        <th scope="col">AMOUNT</th>
-                                        <th scope="col">STATUS</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
+
+                    <div class="mt-4">
+                        <header>
+                            <p class="title">Latest Deposits</p>
+                        </header>
+                        <section class="deposit-history">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-box border-0 bg-transparent">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">TRANSACTION ID #</th>
+                                            <th scope="col">DATE</th>
+                                            <th scope="col">PAYMENT METHOD</th>
+                                            <th scope="col">AMOUNT</th>
+                                            <th scope="col">STATUS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
                 </main>
             </section>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content bg-dark">
+                    <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel" class="payment-head sub-head">Deposit Bitcoin</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -178,13 +181,16 @@
                         <div class="modal-body">
                             <div class="modal-details">
                                <div class="mb-3">
-                                <label for="formGroupExampleInput" class="form-label">Amount (USD)</label>
-                                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Amount in USD">
+                                    <label for="formGroupExampleInput" class="form-label">Amount (USD)</label>
+                                    <input type="text" class="form-control form-inp" id="formGroupExampleInput" placeholder="Amount in USD">
                                 </div>
                                 <div>
-                                    <label for="amount">Amount (USD)</label>
+                                    <label for="amount">Copy Address</label>
                                     <br>
-                                    <input type="text" placeholder="Amount in USD">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control form-inp" placeholder="Wallet address" aria-label="Example text with button addon" aria-describedby="button-addon1" id="address">
+                                        <button class="btn btn-outline-secondary" type="button" id="button-addon1">Copy</button>
+                                    </div>
                                 </div>
                             
                             </div>
