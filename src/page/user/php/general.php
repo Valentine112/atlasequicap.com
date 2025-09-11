@@ -7,19 +7,19 @@
     $db = new Database;
     $selecting = new Select($db);
     // Check if user is logged in
-    if(empty($_SESSION['token'])) header("location: ../login");
+    if(empty($_COOKIE['auth_token'])) header("location: ../login");
 
     $admin = "admin@qfsledgerconnect.org";
     // Check if session is already created
     $user = null;
-    if(!empty($_SESSION['token'])):
+    if(!empty($_COOKIE['auth_token'])):
         (int) $zero = 0;
         // ------- FETCH USER INFO --------- //
         $data = [
-            "token" => $_SESSION['token'],
+            "token" => $_COOKIE['auth_token'],
             "1" => "1",
             "needle" => "*",
-            "table" => "user"
+            "table" => "users"
         ];
         $user = Func::searchDb($db, $data, "AND");
         $userId = $user['id'];
@@ -173,7 +173,7 @@
 
         $selecting = new Select($db);
         $selecting->more_details("WHERE id = ? LIMIT 1# $userId");
-        $action = $selecting->action("duration, refcode, walletbalance, initial_balance", "user");
+        $action = $selecting->action("duration, refcode, walletbalance, initial_balance", "users");
         if($action != null) return $action;
         $value = $selecting->pull();
         $selecting->reset();
@@ -198,7 +198,7 @@
         $selecting->reset();
         
         $selecting->more_details("WHERE referred = ? AND verify = ?# $refcode# $zero");
-        $action = $selecting->action("username, email, verify", "user");
+        $action = $selecting->action("username, email, verify", "users");
         if($action != null) return $action;
         $referralBonus = $selecting->pull();
         $selecting->reset();

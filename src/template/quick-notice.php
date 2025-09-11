@@ -24,7 +24,7 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            box-shadow: 3px 3px 20px 2px #141E2C;
+            box-shadow: 3px 3px 10px 0px #141E2C;
             padding-left: 35px;
             padding-right: 25px;
             margin: auto;

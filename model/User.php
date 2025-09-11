@@ -58,7 +58,7 @@
                         // Generate token, save as cookie and update the database
                         $token = Func::tokenGenerator();
                         Func::save_cookie($token);
-                        $updating = new Update("SET token = ? WHERE email = ?# $token# $email");
+                        $updating = new Update(self::$db, "SET token = ? WHERE email = ?# $token# $email");
                         if($updating->mutate('ss', 'users')):
                             $this->status = 1;
                             $this->content = "Success";
@@ -73,6 +73,7 @@
 
                         $mailing->set_params((new EmailBody($body))->main(), "Registration");
                         if($mailing->send_mail()):
+                            $this->message = "fill";
                             $this->status = 0;
                             $this->content = "An email has been sent to you, please follow the instructions to verify your account";
                         endif;
@@ -99,6 +100,8 @@
 
             $fullname = $value['fullname'];
             $email = $value['email'];
+            $country = $value['country'];
+            $phone = $value['phone'];
             $password = $value['password'];
             $referred = $value['referred'];
 
@@ -106,97 +109,83 @@
             $firstname = $name[0];
             $lastname = $name[1] ?? "";
 
-
-            // Check if username exist
+            // Check for email
             $data = [
-                'username' => $username,
+                'email' => $email,
                 '1' => '1',
                 'needle' => 'token',
-                'table' => 'user'
+                'table' => 'users'
             ];
-
             $result = Func::searchDb(self::$db, $data, "AND");
             if(!$result):
-                // Check for email
-                $data = [
-                    'email' => $email,
-                    '1' => '1',
-                    'needle' => 'token',
-                    'table' => 'user'
-                ];
-                $result = Func::searchDb(self::$db, $data, "AND");
-                if(!$result):
-                    self::$db->autocommit(false);
-                    // Check if there are 2 names atleast
-                    if(strlen(trim($lastname)) < 1):
+                self::$db->autocommit(false);
+                // Check if there are 2 names atleast
+                if(strlen(trim($lastname)) < 1):
+                    $this->message = "fill";
+                    $this->content = "We require at least 2 of your names";
+                else:
+                    // Check if password is greater than 7
+                    if(strlen(trim($password)) < 7):
                         $this->message = "fill";
-                        $this->content = "We require at least 2 of your names";
+                        $this->content = "Password should be greater than 7";
                     else:
-                        // Check if password is greater than 7
-                        if(strlen(trim($password)) < 7):
-                            $this->message = "fill";
-                            $this->content = "Password should be greater than 7";
-                        else:
-                            // Send email, then proceed to save user
-                            $token = Func::tokenGenerator();
+                        // Send email, then proceed to save user
+                        $token = Func::tokenGenerator();
 
-                            // Save the user to the database
-                            $subject = [
-                                "token",
-                                "fname",
-                                "lname",
-                                "refcode",
-                                "username",
-                                "email",
-                                "password",
-                                "date"
+                        // Save the user to the database
+                        $subject = [
+                            "token",
+                            "fullname",
+                            "refcode",
+                            "country",
+                            "phone",
+                            "email",
+                            "password",
+                            "referred",
+                            "date"
+                        ];
+
+                        $items = [
+                            $token,
+                            $fullname,
+                            random_int(1000, 9999).time(),
+                            $country,
+                            $phone,
+                            $email,
+                            password_hash($password, PASSWORD_DEFAULT),
+                            $referred,
+                            Func::dateFormat()
+                        ];
+
+                        $inserting = new Insert(self::$db, "users", $subject, "");
+                        if($inserting->action($items, 'sssisssss')):
+                            //self::$db->autocommit(true);
+                            
+                            $mailing = new Mailing($email, $fullname, $token, Func::email_config());
+                            $body = [
+                                "head" => "Welcome to Atlasequicap",
+                                "elements" => "Thank you for choosing us as your partner in finance! We're thrilled to have you, but first click on this link to verify your account <a href='https://atlasequicap.com/verify?token=$token'>Click here</a>"
                             ];
 
-                            $items = [
-                                $token,
-                                $firstname,
-                                $lastname,
-                                random_int(1000, 9999).time(),
-                                $username,
-                                $email,
-                                password_hash($password, PASSWORD_DEFAULT),
-                                Func::dateFormat()
-                            ];
-
-                            $inserting = new Insert(self::$db, "user", $subject, "");
-                            if($inserting->action($items, 'sssissss')):
-                                //self::$db->autocommit(true);
-                                
-                                $mailing = new Mailing($email, $fullname, $token, Func::email_config());
-                                $body = [
-                                    "head" => "Welcome to Atlasequicap",
-                                    "elements" => "Thank you for choosing us as your partner in finance! We're thrilled to have you, but first click on this link to verify your account <a href='https://atlasequicap.com/verify?token=$token'>Click here</a>"
-                                ];
-
-                                $mailing->set_params((new EmailBody($body))->main(), "Registration");
-                                if($mailing->send_mail()):
-                                    self::$db->autocommit(true);
-                                    $this->status = 1;
-                                    $this->type = "Success";
-                                    $this->content = "Success";
-                                else:
-                                    $this->message = "void";
-                                    $this->content = "Something went wrong. . .";
-                                endif;
+                            $mailing->set_params((new EmailBody($body))->main(), "Registration");
+                            if($mailing->send_mail()):
+                                self::$db->autocommit(true);
+                                $this->status = 1;
+                                $this->type = "Success";
+                                $this->content = "Success";
                             else:
                                 $this->message = "void";
                                 $this->content = "Something went wrong. . .";
                             endif;
+                        else:
+                            $this->message = "void";
+                            $this->content = "Something went wrong. . .";
                         endif;
                     endif;
-                else:
-                    $this->message = "fill";
-                    $this->content = "Email already exist";
                 endif;
-
             else:
                 $this->message = "fill";
-                $this->content = "Username already exist";
+                $this->content = "Email already exist";
             endif;
 
             return $this->deliver();

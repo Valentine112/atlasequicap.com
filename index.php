@@ -27,6 +27,10 @@
         require "src/page/register.php";
     })
 
+    ->get('/verify', function() {
+        require "src/page/verify.php";
+    })
+
     ->get('/2fa', function() {
         require "src/page/2fa.php";
     })

@@ -1,6 +1,5 @@
 <?php
     namespace Src\Config;
-    
     class Head {
 
         public static function tags() {

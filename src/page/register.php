@@ -296,7 +296,7 @@
 
             <div class="signup-section">
                 <span>Already have an account? </span>
-                <a href="signup" class="neural-signup">Login now</a>
+                <a href="login" class="neural-signup">Login now</a>
             </div>
 
             <div class="success-neural" id="successMessage">
