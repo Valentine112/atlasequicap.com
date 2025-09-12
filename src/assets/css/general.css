@@ -97,11 +97,18 @@ body {
 }
 
 #chart {
-    max-width: 650px;
+    width: 90%;
+    height: 100vh!important;
     margin: 35px auto;
 }
-
-
+.apexcharts-canvas{
+    width: 90%!important;
+    height: 100vh!important;
+}
+foreignObject{
+    width: 90%!important;
+    height: 100vh!important;
+}
 .content{
     position: relative;
     height: 100vh;
@@ -192,6 +199,16 @@ main .sub-sect{
 }
 .payment-methods .btn-link{
     padding: 5px 15px!important;
+}
+.assets-info .sub-sub-head{
+    color: grey;
+    font-weight: 400;
+}
+.assets-info h2{
+    font-family: 'montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: silver!important;
 }
 .form-inp{
     border: 1px solid #f1f1f1;

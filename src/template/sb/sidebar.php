@@ -16,6 +16,15 @@
             margin: auto;
             vertical-align: middle;
         }
+        .sidebar-content{
+            height: 100vh;
+            overflow-y: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .sidebar-content::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Edge, Opera */
+        }
     </style>
 </head>
 
@@ -29,7 +38,7 @@
 	            <span class="sr-only">Toggle Menu</span>
 	        </button>
             </div>
-            <div class="p-4">
+            <div class="p-4 sidebar-content">
                 <h1><a href="index.html" class="logo">Atlasequicap <span>Atlasequicap Brokers</span></a></h1>
                 <ul class="list-unstyled components mb-5">
                     <li class="active">
@@ -45,11 +54,13 @@
                         <a href="withdraw"><i class="las la-hand-holding-usd mr-3"></i></span> Withdraw</a>
                     </li>
                     <li>
-                        <a href="#"><i class="las la-sync mr-3"></i></span> Convert</a>
+                        <a href="convert"><i class="las la-sync mr-3"></i></span> Convert</a>
                     </li>
                     <li>
                         <a href="#"><i class="las la-signal mr-3"></i></span> Signal</a>
                     </li>
+                    <li class="py-2" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                        <small style="color: grey;"> Trading</small>
                     <li>
                         <a href="market"><i class="las la-chart-line mr-3"></i></span> Trade</a>
                     </li>
@@ -57,11 +68,14 @@
                         <a href="#"><i class="las la-users mr-3"></i></span> Copy Trade</a>
                     </li>
                     <li>
-                        <a href="#"><i class="las la-image mr-3"></i></span> Live Trading</a>
+                        <a href="market"><i class="las la-image mr-3"></i></span> Live Trading</a>
                     </li>
                     <li>
                         <a href="#"><i class="las la-wallet mr-3"></i></span> Connect Wallet</a>
                     </li>
+                    <li class="py-2" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                        <small style="color: grey;"> Account</small>
+                    <li>
                     <li>
                         <a href="#"><i class="las la-cog mr-3"></i></span> Settings</a>
                     </li>

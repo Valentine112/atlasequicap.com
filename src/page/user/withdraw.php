@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="row justify-content-end mt-4 text-end">
-                            <div class="col-6 col-md-3">
+                            <div class="col-8 col-lg-6 col-md-3">
                                 <button class="btn btn-primary w-60">Confirm Withdrawal</button>
                             </div>
                         </div>

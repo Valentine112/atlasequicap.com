@@ -65,6 +65,10 @@
         require "src/page/user/assets.php";
     })
 
+    ->get('/user/convert', function() {
+        require "src/page/user/convert.php";
+    })
+
     ->get('/user/history', function() {
         require "src/page/user/history.php";
     })

@@ -32,7 +32,7 @@
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-12 row justify-content-between align-items-center py-1 mb-1 payment-method">
+                            <div class="col-12 row justify-content-between align-items-center py-1 my-2 payment-method">
                                 <div class="col-5 col-lg-4">
                                     <div class="row col-lg-6 payment-methods align-items-center">
                                         <div class="col-5">
@@ -53,12 +53,12 @@
                                     <small>Fee: 0%</small>
                                 </div>
 
-                                <div class="col-6 col-lg-4 text-end">
+                                <div class="col-7 col-lg-4 text-end">
                                     <button href="" class="btn btn-transparent btn-link btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Deposit now</button>
                                 </div>
                             </div>
 
-                            <div class="col-12 row justify-content-between align-items-center py-1 mb-1 payment-method">
+                            <div class="col-12 row justify-content-between align-items-center py-1 my-2 payment-method">
                                 <div class="col-5 col-lg-4">
                                     <div class="row col-lg-6 payment-methods align-items-center">
                                         <div class="col-5">
@@ -84,7 +84,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 row justify-content-between align-items-center py-1 mb-1 payment-method">
+                            <div class="col-12 row justify-content-between align-items-center py-1 my-2 payment-method">
                                 <div class="col-5 col-lg-4">
                                     <div class="row col-lg-6 payment-methods align-items-center">
                                         <div class="col-5">
@@ -110,7 +110,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 row justify-content-between align-items-center py-1 mb-1 payment-method">
+                            <div class="col-12 row justify-content-between align-items-center py-1 my-2 payment-method">
                                 <div class="col-5 col-lg-4">
                                     <div class="row col-lg-6 payment-methods align-items-center">
                                         <div class="col-5">

@@ -35,7 +35,7 @@
                             </div>
                             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
                                 {
-                                "colorTheme": "light",
+                                "colorTheme": "dark",
                                 "isTransparent": false,
                                 "locale": "en",
                                 "currencies": [
@@ -49,8 +49,8 @@
                                     "NZD",
                                     "CNY"
                                 ],
-                                "backgroundColor": "#ffffff",
-                                "width": 100%,
+                                "backgroundColor": "#19212A",
+                                "width": 550,
                                 "height": 400
                                 }
                             </script>
