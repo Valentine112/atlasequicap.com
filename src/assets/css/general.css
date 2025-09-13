@@ -244,61 +244,7 @@ table td{
     border: 1px solid #333;
     padding: 1% 0;
 }
-.dashboard .boxCover{
-    width: 100%;
-    margin: auto;
-}
-.dashboard .boxes{
-    position: relative;
-    background-image: url("../images/line-shape.png");
-    border-radius: 5px;
-    padding: 10px 20px;
-    box-shadow: 0 0 0.875rem 0 #e1e1e1;
-    margin: 1% 0%;
-    display: inline-block;
-    color: #000;
-}
-.boxes > div:last-child{
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    height: fit-content;
-    width: fit-content;
-}
-.boxes > div:last-child i{
-    background-color: #bcf000;
-    border: 1px solid #bcf000;
-    padding: 10px;
-    border-radius: 50px;
-    color: #000;
-}
-.boxes > div > div{
-    margin: 15px 0;
-    font-size: 14px;
-}
-.boxes > div > div:nth-child(2) {
-    font-size: 24px;
-    font-family: 'montserrat', sans-serif;
-    margin: 0; 
-    padding: 0; 
-}
-.quick-links{
-    background-color: transparent!important;
-}
-.quick-links i{
-    padding: 10px;
-    border-radius: 50px;
-    font-size: 30px;
-    background-color: #bcf000;
-    box-shadow: 1px 2px 2px #e1e1e1;
-    color: #fff;
-    font-weight: 800;
-}
-.quick-links a{
-    color: #222;
-    font-weight: 500;
-    text-decoration: none;
-}
+
 .assets{
     border-radius: 5px;
 }
@@ -349,7 +295,17 @@ table td{
 .form-body > div{
     margin: 2% 0;
 }
-
+.signals h5{
+    color: #fff;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+}
+.signals-box h4{
+    color: var(--main-color);
+}
+.signals-box .btn{
+    padding: 8px 10px!important;
+}
 .profile label{
     display: block;
 }

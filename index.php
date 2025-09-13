@@ -69,6 +69,14 @@
         require "src/page/user/convert.php";
     })
 
+    ->get('/user/signals', function() {
+        require "src/page/user/signals.php";
+    })
+
+    ->get('/user/stocks', function() {
+        require "src/page/user/stocks.php";
+    })
+
     ->get('/user/history', function() {
         require "src/page/user/history.php";
     })

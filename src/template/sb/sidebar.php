@@ -57,12 +57,17 @@
                         <a href="convert"><i class="las la-sync mr-3"></i></span> Convert</a>
                     </li>
                     <li>
-                        <a href="#"><i class="las la-signal mr-3"></i></span> Signal</a>
+                        <a href="signals"><i class="las la-signal mr-3"></i></span> Signal</a>
                     </li>
                     <li class="py-2" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
                         <small style="color: grey;"> Trading</small>
-                    <li>
-                        <a href="market"><i class="las la-chart-line mr-3"></i></span> Trade</a>
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false"><i class="las la-chart-line mr-3"></i></span> Trade</a>
+
+                        <ul class="dropdown-menu bg-dark px-3">
+                            <li><a class="dropdown-item" href="stocks">Stocks Trading</a></li>
+                            <li><a class="dropdown-item" href="crypto/terminal?coin=btc">Crypto Futures</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="#"><i class="las la-users mr-3"></i></span> Copy Trade</a>
