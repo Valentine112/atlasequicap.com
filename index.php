@@ -77,6 +77,10 @@
         require "src/page/user/stocks.php";
     })
 
+    ->get('/user/terminal', function() {
+        require "src/page/user/terminal.php";
+    })
+
     ->get('/user/history', function() {
         require "src/page/user/history.php";
     })

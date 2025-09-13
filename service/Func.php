@@ -308,6 +308,10 @@
             return $profit;
         }
 
+        public static function generateCode() : int {
+            return random_int(1000000000, 9999999999)
+        }
+
         public static function save_cookie(string $token) {
             $exp = strtotime('+3 days');
 

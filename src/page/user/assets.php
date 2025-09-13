@@ -39,25 +39,25 @@
 
                         <section class="data-section">
                             <div class="data-header">
-                                <div>
-                                    <div class="wallet-sec active">Stocks Trading</div>
+                                <div id="nav-tab" role="tablist">
+                                    <div class="wallet-sec active" id="stock-tab" data-bs-toggle="tab" data-bs-target="#stock" type="button" role="tab" aria-controls="stock" aria-selected="true" onclick="tradeTab('ST')">Stocks Trading</div>
                                     &emsp;
-                                    <div class="wallet-sec">Cryptocurrency Trading</div>
+                                    <div class="wallet-sec" id="crypto-tab" data-bs-toggle="tab" data-bs-target="#crypto" type="button" role="tab" aria-controls="crypto" aria-selected="false" onclick="tradeTab('CT')">Cryptocurrency Trading</div>
                                 </div>
                             </div>
                             <div class="data-body">
                                 <div class="row justify-content-between align-items-center mb-4">
                                     <div class="col-5">
                                         <div class="sub-sect">TRADING ID</div>
-                                        <p class="trade-id sub-head">ST-VT-4868680821</p>
+                                        <p class="trade-id sub-head"><span id="initials">ST</span>-VT-4868680821</p>
                                     </div>
                                     <div class="col-5 text-end">
                                         <a href="deposit" class="btn btn-transparent">Deposit</a>
                                     </div>
                                 </div>
                                 
-                                <div class="assets-info">
-                                    <div class="stock row justify-content-around px-3">
+                                <div class="assets-info tab-content" id="nav-tabContent">
+                                    <div class="tab-pane show fade stock active row justify-content-around px-3" id="stock" role="tabpanel" aria-labelledby="stock-tab">
                                         <div class="row col-12">
                                             <div class="col-6">
                                                 <div class="sub-sub-head">
@@ -100,7 +100,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="crypto d-none row justify-content-around px-3">
+                                    <div class="tab-pane fade crypto row justify-content-around px-3" id="crypto" role="tabpanel" aria-labelledby="crypto-tab">
                                         <div class="row col-12">
                                             <div class="col-6">
                                                 <div class="sub-sub-head">
@@ -278,5 +278,8 @@
         chart.render();
     });
 
+    function tradeTab(initials) {
+        document.getElementById("initials").innerText = initials
+    }
 </script>
 </html>

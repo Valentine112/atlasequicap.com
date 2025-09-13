@@ -306,6 +306,29 @@ table td{
 .signals-box .btn{
     padding: 8px 10px!important;
 }
+.stocks-list{
+    max-height: 80vh;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.stocks-list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge, Opera */
+}
+.stocks-list a{
+    background-color: #f1f1f1!important;
+    font-size: 15px!important;
+}
+@media screen and (min-width: 767px){
+    .stocks-list span{
+        font-size: 15px!important;
+        font-weight: 400;
+    }
+    .stock-name{
+        font-size: 15px!important;
+        font-weight: 600;
+    }
+}
 .profile label{
     display: block;
 }
