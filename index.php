@@ -81,6 +81,10 @@
         require "src/page/user/terminal.php";
     })
 
+    ->get('/user/options', function() {
+        require "src/page/user/options.php";
+    })
+
     ->get('/user/history', function() {
         require "src/page/user/history.php";
     })

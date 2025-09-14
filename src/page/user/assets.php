@@ -1,4 +1,4 @@
-<?php //require "php/general.php"; ?>
+<?php require "php/general.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,7 +78,7 @@
                                         </div>
                                         <div class="col-12 mt-3">
                                             <div class="table-responsive">
-                                                <table class="table table-hover table-box border-0 bg-transparent">
+                                                <table class="table table-borderless table-hover table-box border-0 bg-transparent">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">SYMBOL</th>

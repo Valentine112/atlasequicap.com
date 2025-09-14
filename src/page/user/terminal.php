@@ -1,4 +1,10 @@
 <?php //require "php/general.php"; ?>
+<?php
+    /*$symbol = "";
+    if(isset($_GET['symbol'])):
+        $symbol = Func::cleanData($_GET['symbol'], 'string');
+    endif;*/
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +44,7 @@
                         <!-- TradingView Widget END -->
                     </section>
 
-                    <div class="card-box mt-3 col-lg-7">
+                    <div class="card-box mt-3 col-lg-7 statistics">
                         <h5 class="sub-sub-head">Key Statistics</h5>
                         <hr>
                         <div class="row mt-1 justify-content-between align-items-center">
@@ -60,6 +66,106 @@
                             <div class="col-6 text-end">
                                 <div style="color: silver">Today's Profit</div>
                                 <div>$0.00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-box mt-3">
+                        <div class="data-header">
+                            <div id="nav-tab" role="tablist">
+                                <div class="wallet-sec active" id="buy-tab" data-bs-toggle="tab" data-bs-target="#buy" type="button" role="tab" aria-controls="buy" aria-selected="true">Buy</div>
+                                &emsp;
+                                <div class="wallet-sec" id="sell-tab" data-bs-toggle="tab" data-bs-target="#sell" type="button" role="tab" aria-controls="sell" aria-selected="false">Sell</div>
+                                
+                            </div>
+                        </div>
+                        <div class="assets-info tab-content" id="nav-tabContent">
+                            <div class="tab-pane show fade active data-body" id="buy" role="tabpanel" aria-labelledby="buy-tab">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="col-3">
+                                        Order Type
+                                    </div>
+                                    <div class="col-9">
+                                        <select name="order" id="order" class="form-control form-inp" onchange="orderType(this)">
+                                            <option value="market">Market Buy</option>
+                                            <option value="limit">Limit Buy</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="limitOpts" class="d-none">
+                                    <div class="row justify-content-between align-items-center mt-3">
+                                        <div class="col-3">Buy Limit</div>
+                                        <div class="col-9">
+                                            <input type="text" placeholder="0" class="form-control form-inp">
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-between align-items-center mt-3">
+                                        <div class="col-3">Exp Date.</div>
+                                        <div class="col-9">
+                                            <select name="limitExp" id="limitExp" class="form-control form-inp">
+                                                <option value="day">A Day</option>
+                                                <option value="week">A Week</option>
+                                                <option value="month">A Month</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-between align-items-center mt-3">
+                                    <div class="col-3">Amount</div>
+                                    <div class="col-9">
+                                        <input type="text" placeholder="Amount (USD)" class="form-control form-inp">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row justify-content-between align-items-center mt-3">
+                                    <div class="col-3">Wallet Balance</div>
+                                    <div class="col-9 text-end">
+                                        $0.00
+                                    </div>
+                                </div>
+                                <hr>
+                                <div>
+                                    <button class="form-control btn" onclick="order(this, 'buy')">Buy</button>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade data-body" id="sell" role="tabpanel" aria-labelledby="sell-tab">
+                            <div class="row justify-content-between align-items-center">
+                                <div class="col-3">
+                                    Order Type
+                                </div>
+                                <div class="col-9">
+                                    <select name="order" id="order" class="form-control form-inp" onchange="orderType(this)">
+                                        <option value="market">Market Sell</option>
+                                        <option value="limit">Limit Sell</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="limitOpts" class="d-none">
+                                <div class="row justify-content-between align-items-center mt-3">
+                                    <div class="col-3">Sell Limit</div>
+                                    <div class="col-9">
+                                        <input type="text" placeholder="0" class="form-control form-inp">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-between align-items-center mt-3">
+                                <div class="col-3">Amount</div>
+                                <div class="col-9">
+                                    <input type="text" placeholder="Amount (USD)" class="form-control form-inp">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row justify-content-between align-items-center mt-3">
+                                <div class="col-3">Available Shares</div>
+                                <div class="col-9 text-end">
+                                    0.00
+                                </div>
+                            </div>
+                            <hr>
+                            <div>
+                                <button class="form-control btn" onclick="order(this, 'sell')">Sell</button>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -130,10 +236,21 @@
         }`
 
         document.getElementById("tradingContainer").insertAdjacentElement('beforeend', script)
-
-        console.log(script)
     })
 
-    
+    function orderType(self) {
+        console.log(self.value)
+        let limitOpts = self.closest(".data-body").querySelector("#limitOpts")
+        if(self.value == "limit"){
+            limitOpts.classList.remove("d-none")
+        }
+        else{
+            limitOpts.classList.add("d-none")
+        }
+    }
+
+    function order(self, type) {
+        
+    }
 </script>
 </html>

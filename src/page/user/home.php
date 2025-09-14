@@ -1,4 +1,4 @@
-<?php //require "php/general.php"; ?>
+<?php require "php/general.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,29 +28,46 @@
 
                     <section class="data-section">
                         <div class="data-header">
-                            <div>
-                                <div class="wallet-sec active">Stocks Trading</div>
+                            <div id="nav-tab" role="tablist">
+                                <div class="wallet-sec active" id="stock-tab" data-bs-toggle="tab" data-bs-target="#stock" type="button" role="tab" aria-controls="stock" aria-selected="true">Stocks Trading</div>
                                 &emsp;
-                                <div class="wallet-sec">Cryptocurrency Trading</div>
+                                <div class="wallet-sec" id="crypto-tab" data-bs-toggle="tab" data-bs-target="#crypto" type="button" role="tab" aria-controls="crypto" aria-selected="true">Cryptocurrency Trading</div>
                             </div>
                         </div>
                         <div class="data-body">
                             <div class="row justify-content-between align-items-center mb-4">
                                 <div class="col-5">
                                     <div class="sub-sect">TRADING ID</div>
-                                    <p class="trade-id sub-head">ST-VT-4868680821</p>
+                                    <p class="trade-id sub-head">VT-<?= $user['tradeId']; ?></p>
                                 </div>
                                 <div class="col-5 text-end">
                                     <a href="deposit" class="btn btn-transparent">Deposit</a>
                                 </div>
                             </div>
-                            <div class="row col-11 mx-auto justify-content-between align-items-center mb-4" style="border: 1px solid #303f50; padding: 20px; border-radius: 10px;">
-                                <div class="col-5">
-                                    <div class="balance sub-head">$0.00</div>
-                                    <span><span id="walletType">Crypto</span>Wallet Balance</span>
+
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane show fade active" id="stock" role="tabpanel" aria-labelledby="stock-tab">
+                                    <div class="row col-11 mx-auto justify-content-between align-items-center mb-4" style="border: 1px solid #303f50; padding: 20px; border-radius: 10px;">
+                                        <div class="col-5">
+                                            <div class="balance sub-head">$<?= $user['stock']; ?>.00</div>
+                                            <span>StockWallet Balance</span>
+                                        </div>
+                                        <div class="col-7 text-end align-items-center">
+                                            <a href="convert" class="btn btn-transparent"><i class="las la-wallet"></i>&ensp;Transfer</a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-7 text-end align-items-center">
-                                    <a href="" class="btn btn-transparent"><i class="las la-wallet"></i>&ensp;Transfer</a>
+                                
+                                <div class="tab-pane fade" id="crypto" role="tabpanel" aria-labelledby="crypto-tab">
+                                    <div class="row col-11 mx-auto justify-content-between align-items-center mb-4" style="border: 1px solid #303f50; padding: 20px; border-radius: 10px;">
+                                        <div class="col-5">
+                                            <div class="balance sub-head">$<?= $user['crypto']; ?>.00</div>
+                                            <span>CryptoWallet Balance</span>
+                                        </div>
+                                        <div class="col-7 text-end align-items-center">
+                                            <a href="convert" class="btn btn-transparent"><i class="las la-wallet"></i>&ensp;Transfer</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

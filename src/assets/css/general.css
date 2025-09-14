@@ -46,6 +46,10 @@ body{
     --bs-table-color: var(--white);
     --bs-table-border-color: #303f50;
 }
+tbody, td, tfoot, th, thead, tr{
+    border-top: 1px solid #333!important;
+    border-bottom: 1px solid #333!important;
+}
 hr{
     border: 1px solid #303f50;
     background-color: #303f50;

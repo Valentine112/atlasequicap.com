@@ -1,3 +1,8 @@
+<?php
+    $name = explode(" ", $user['fullname']);
+    $first = substr($name[0], 0, 1);
+    $second = substr($name[1], 0, 1);
+?>
 <head>
     <link rel="stylesheet" href="../src/assets/css/line-awesome-1.3.0/1.3.0/css/line-awesome.min.css">
 </head>
@@ -25,12 +30,12 @@
 </style>
 <div class="header-nav justify-content-end align-items-center">
     <div>
-        <span>Wallet: 0.0</span>
+        <span>Wallet: $<?= $user['wallet']; ?>.00</span>
     </div>
-    <div>
+    <!-- <div>
         <i class="las la-stream" style="background-color: #19212A; padding: 7px; border-radius: 5px;"></i>
-    </div>
+    </div> -->
     <div>
-        <span style="color: #30DEAB; font-size: 18px; padding: 10px; background-color: #19212A; margin-left: 20px; border-radius: 50px;">KF</span>
+        <span style="color: #30DEAB; font-size: 18px; font-weight: 600; padding: 10px; background-color: #19212A; margin-left: 20px; border-radius: 50px;"><?= $first.$second; ?></span>
     </div>
 </div>
