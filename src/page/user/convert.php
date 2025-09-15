@@ -41,7 +41,7 @@
                                 <div class="col-9 row">
                                     <div class="col-6">
                                         <select class="form-control form-inp fromBox" onchange="from(this)">
-                                            <option value="main" data-bal="<?= $user['wallet']; ?>">Main Wallet</option>
+                                            <option value="wallet" data-bal="<?= $user['wallet']; ?>">Main Wallet</option>
                                             <option value="stock" data-bal="<?= $user['stock']; ?>">Stock Wallet</option>
                                             <option value="crypto" data-bal="<?= $user['crypto']; ?>">Crypto Wallet</option>
                                         </select>
@@ -81,6 +81,12 @@
     </div>
 </body>
 <script>
+    let data = {
+        type: "error",
+        status: 0,
+        message: "fill",
+        content: ""
+    }
     async function from(self) {
         let optionInd = self.selectedIndex
         let option = self.options[optionInd]
@@ -111,7 +117,7 @@
         let optionsData = {
             stock: `<option value="stock" class="to stock" data-bal="<?= $user['stock']; ?>">Stock Wallet</option>`,
             crypto: `<option value="crypto" class="to crypto" data-bal="<?= $user['crypto']; ?>">Crypto Wallet</option>`,
-            main: `<option value="main" class="to main" data-bal="<?= $user['wallet']; ?>">Main Wallet</option>`
+            main: `<option value="wallet" class="to main" data-bal="<?= $user['wallet']; ?>">Main Wallet</option>`
         }
         optionsData[type] = ""
         Object.keys(optionsData).forEach(key => {
@@ -120,8 +126,45 @@
     }
 
     function convert(self) {
+        data.type = "warning"
+        data.content = "Please make a valid amount"
         let amount = document.getElementById("amount")
-        
+        let from = document.querySelector(".fromBox")
+        let to = document.querySelector(".toBox")
+        // Check if amount is filled
+        // Check that the balance is sufficient for the conversion
+        if(amount.value.length < 1) {
+            new Func().notice_box(data)
+            amount.focus()
+        }else{
+            let fromInd = from.selectedIndex
+            let option = from.options[fromInd]
+            if(Number(amount.value) > option.getAttribute("data-bal")) {
+                data.content = "Insufficient Balance"
+                new Func().notice_box(data)
+            }else{
+                let payload = {
+                    part: "user",
+                    action: "convert",
+                    val: {
+                        amount: amount.value,
+                        from: from.value,
+                        to: to.value
+                    }
+                }
+
+                new Func().request("../request.php", JSON.stringify(payload), 'json')
+                .then(val => {
+                    new Func().notice_box(val)
+
+                    if(val.status === 1) {
+                        setTimeout(() => {
+                            location.reload()
+                        }, 1000);
+                    }
+                })
+            }
+        }
     }
 </script>
 </html>

@@ -466,7 +466,7 @@
             $mode = $this->data['val']['mode'];
             $address = $this->data['val']['address'];
 
-            //self::$db->autocommit(false);
+            self::$db->autocommit(false);
 
             // Check if the data is fill
             if(empty($amount)):
@@ -514,6 +514,77 @@
             return $this->deliver();
         }
 
+        public function convert() : array {
+            $this->status = 0;
+            $this->message = "fill";
+            $this->type = "error";
+
+            (int) $amount = $this->data['val']['amount'];
+            (int) $from = $this->data['val']['from'];
+            (int) $to = $this->data['val']['to'];
+
+            $updating = new Update(self::$db, "SET $from = $from - ?, $to = $to + ? WHERE id = ?# $amount# $amount# $this->user");
+            if($updating->mutate('iii', 'users')):
+                $this->type = "success";
+                $this->status = 1;
+                $this->content = "Your transfer was successful";
+            else:
+                $this->content = "Something went wrong...";
+            endif;
+
+            return $this->deliver();
+        }
+
+        public function signal() : array {
+            $this->status = 0;
+            $this->message = "fill";
+            $this->type = "error";
+
+            (int) $signalId = $this->data['val']['signalId'];
+            (int) $amount = $this->data['val']['amount'];
+            (int) $price = $this->data['val']['price'];
+
+            // Fetch user info
+            $data = [
+                "id" => $this->user,
+                "1" => "1",
+                "needle" => "*",
+                "table" => "users"
+            ];
+
+            $user = Func::searchDb(self::$db, $data, "AND");
+            if(empty($user)) return $user;
+            if($amount < $price):
+                $this->content = "Your wallet balance is not sufficient enough for this transaction";
+            else:
+                if($user['wallet'] < $price):
+                    $this->content = "Your wallet balance is not sufficient enough for this transaction";
+                else:
+                    self::$db->autocommit(false);
+                    // Insert into usersignals
+                    $subject = ["tranx", "user", "signal", "amount", "date"];
+                    $items = [Func::generateCode(), $this->user, $signalId, $amount, Func::dateFormat()];
+                    // Save to database next
+                    $inserting = new Insert(self::$db, "usersignals", $subject, "");
+                    $action = $inserting->action($items, 'iiiis');
+
+                    if(!$action) return $action;
+                    //Update the new wallet balance
+                    $updating = new Update(self::$db, "SET wallet = wallet - ? WHERE id = ?# $amount# $this->user");
+                    if($updating->mutate('ii', 'users')):
+                        self::$db->autocommit(true);
+                        $this->status = 1;
+                        $this->type = "success";
+                        $this->content = "Signal was purchased successfully";
+                    else:
+                        $this->content = "Something went wrong...";
+                    endif;
+                    
+                endif;
+            endif;
+
+            return $this->deliver();
+        }
         public function activate() : array {
             $this->status = 0;
             $this->message = "fill";

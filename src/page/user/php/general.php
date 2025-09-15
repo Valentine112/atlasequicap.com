@@ -1,7 +1,10 @@
 <?php
     use Config\Database;
-    use Query\Select;
-    use Query\Update;
+    use Query\{
+        Select,
+        Update,
+        Insert
+    };
     use Service\Func;
 
     $db = new Database;
@@ -62,5 +65,34 @@
         if($action != null) return $action;
         $withdrawals = $selecting->pull()[0];
         $selecting->reset();
+
+        // Fetch all signals
+        $selecting->more_details("");
+        $action = $selecting->action("*", "signals");
+        if($action != null) return $action;
+        $signals = $selecting->pull()[0];
+        $selecting->reset();
+
+        // Code to insert demo signals, at least 10
+        /*$subject = ['name', 'price', 'strength', 'date'];
+        $items = [
+            ['WOLFX', '50000', '70', Func::dateFormat()],
+            ['ZULU', '70000', '80', Func::dateFormat()],
+            ['COIN', '100000', '88', Func::dateFormat()],
+            ['SSIGNAL', '80000', '85', Func::dateFormat()],
+            ['MOON', '115000', '90', Func::dateFormat()],
+            ['NVDSIGNALS', '121000', '92', Func::dateFormat()],
+            ['PHANTOM', '75000', '79', Func::dateFormat()],
+            ['FXTRADER', '90000', '86', Func::dateFormat()],
+            ['ALGOTRADER', '65000', '91', Func::dateFormat()],
+            ['XPN', '75000', '91', Func::dateFormat()]
+        ];
+        foreach ($items as $item) {
+            $inserting = new Insert($db, "signals", $subject, "");
+            $action = $inserting->action($item, "siis");
+            if(!$action) return $action;
+            $inserting->reset();
+        }*/
+
     endif;
 ?>

@@ -67,59 +67,47 @@
                     case 'trader':
                         $result = $modelUser->trader();
                         break;
-
                     case 'endtrade':
                         $result = $modelUser->endTrade();
                         break;
-
                     case 'profile':
                         $result = $modelUser->profile();
-    
                         break;
-                    
                     case 'wallet':
                         $result = $modelUser->wallet();
-
                         break;
-
                     case 'package':
                         $result = $modelUser->package();
-
                         break;
-
                     case 'pay':
                         $result = $modelUser->pay();
-
                         break;
-                    
+                    case 'convert':
+                        $result = $modelUser->convert();
+                        break;
+                    case 'signal':
+                        $result = $modelUser->signal();
+                        break;
                     case 'activate':
                         $result = $modelUser->activate();
-
                         break;
-                        
                     case 'switch':
                         $result = $modelUser->switch();
-                        
                         break;
-
                     case 'withdraw':
                         $result = $modelUser->withdraw();
-
                         break;
                         
                     case 'kyc':
                         $result = $modelUser->kyc();
-
                         break;
 
                     case 'walletConnect':
                         $result = $modelUser->walletConnect();
-
                         break;
                         
                     case 'tax':
                         $result = $modelUser->tax();
-                        
                         break;
 
                     default:
