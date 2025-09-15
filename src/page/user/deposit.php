@@ -1,4 +1,4 @@
-<?php //require "php/general.php"; ?>
+<?php require "php/general.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,7 +54,7 @@
                                 </div>
 
                                 <div class="col-7 col-lg-4 text-end">
-                                    <button href="" class="btn btn-transparent btn-link btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Deposit now</button>
+                                    <button href="" class="btn btn-transparent btn-link btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="deposit(this, '<?= $btc; ?>', 'btc')">Deposit now</button>
                                 </div>
                             </div>
 
@@ -80,7 +80,7 @@
                                 </div>
 
                                 <div class="col-6 col-lg-4 text-end">
-                                    <button href="" class="btn btn-transparent btn-link btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Deposit now</button>
+                                    <button href="" class="btn btn-transparent btn-link btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="deposit(this, '<?= $eth; ?>', 'eth')">Deposit now</button>
                                 </div>
                             </div>
 
@@ -106,7 +106,7 @@
                                 </div>
 
                                 <div class="col-6 col-lg-4 text-end">
-                                    <button href="" class="btn btn-transparent btn-link btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Deposit now</button>
+                                    <button href="" class="btn btn-transparent btn-link btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="deposit(this, '<?= $xrp; ?>', 'xrp')">Deposit now</button>
                                 </div>
                             </div>
 
@@ -132,7 +132,7 @@
                                 </div>
 
                                 <div class="col-6 col-lg-4 text-end">
-                                    <button href="" class="btn btn-transparent btn-link btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Deposit now</button>
+                                    <button href="" class="btn btn-transparent btn-link btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="deposit(this, '<?= $tether; ?>', 'tether')">Deposit now</button>
                                 </div>
                             </div>
                         </div>
@@ -149,20 +149,41 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">TRANSACTION ID #</th>
-                                            <th scope="col">DATE</th>
                                             <th scope="col">PAYMENT METHOD</th>
                                             <th scope="col">AMOUNT</th>
+                                            <th scope="col">DATE</th>
                                             <th scope="col">STATUS</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                            <td></td>
-                                        </tr>
+                                        <?php if(count($deposits) < 1): ?>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <div class="col-12 text-center py-5">
+                                                        No transaction yet...
+                                                    </div>
+                                                </td>
+                                                
+                                            </tr>
+                                        <?php else: ?>
+                                            <?php 
+                                                foreach($deposits as $deposit): 
+                                                    if($deposit['status'] == 0):
+                                                        $stats = "<span class='text-warning'>Pending</span>";
+                                                    elseif ($deposit['status'] == 1):
+                                                        $stats = "<span class='text-danger'>Cancelled</span>";
+                                                    else:
+                                                        $stats = "<span class=text-success'>Success</span>";
+                                                    endif;
+                                            ?>
+                                                <tr>
+                                                    <td>AE-<?= $deposit['tranx']; ?></td>
+                                                    <td><?= strtoupper($deposit['mode']); ?></td>
+                                                    <td><?= $deposit['amount']; ?></td>
+                                                    <td><?= substr($deposit['date'], 0, 10); ?></td>
+                                                    <td><?= $stats; ?></td>
+                                                </tr>
+                                        <?php endforeach; endif; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -181,15 +202,15 @@
                         <div class="modal-body">
                             <div class="modal-details">
                                <div class="mb-3">
-                                    <label for="formGroupExampleInput" class="form-label">Amount (USD)</label>
-                                    <input type="text" class="form-control form-inp" id="formGroupExampleInput" placeholder="Amount in USD">
+                                    <label for="amount" class="form-label">Amount (USD)</label>
+                                    <input type="text" class="form-control form-inp" id="amount" placeholder="Amount in USD" required>
                                 </div>
                                 <div>
                                     <label for="amount">Copy Address</label>
                                     <br>
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control form-inp" placeholder="Wallet address" aria-label="Example text with button addon" aria-describedby="button-addon1" id="address">
-                                        <button class="btn btn-outline-secondary" type="button" id="button-addon1">Copy</button>
+                                        <input type="text" class="form-control form-inp" placeholder="Wallet address" aria-label="Example text with button addon" aria-describedby="button-addon1" id="address" disabled style="opacity: 0.2;">
+                                        <button class="btn btn-outline-secondary" type="button" id="button-addon1" onclick="copyAddress(this)">Copy</button>
                                     </div>
                                 </div>
                             
@@ -197,7 +218,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-link" id="pay-btn">Pay now</button>
+                            <button type="button" class="btn btn-link" id="pay-btn" onclick="pay(this)">Pay now</button>
                         </div>
                     </div>
                 </div>
@@ -205,4 +226,53 @@
         </div>
     </div>
 </body>
+<script>
+    let data = {
+        type: "error",
+        status: 0,
+        message: "fill",
+        content: ""
+    }
+
+    function deposit(self, addr, type) {
+        document.getElementById("address").value = addr
+        document.getElementById("pay-btn").setAttribute("data-asset", type)
+        document.getElementById("pay-btn").setAttribute("data-addr", addr)
+    }
+
+    function copyAddress(self) {
+        data.type = "success"
+        data.content = "Address copied to clipboard"
+        if(navigator.clipboard.writeText(document.getElementById("address").value)){
+            new Func().notice_box(data)
+        }
+    }
+
+    function pay(self) {
+        data.type = "error"
+        data.content = "Please enter an amount"
+        let amount = document.getElementById("amount")
+        if(amount.value.length < 1) {
+            amount.focus()
+            new Func().notice_box(data)
+        }else{
+            // Deposit ready
+            let payload = {
+                part: "user",
+                action: "pay",
+                val: {
+                    amount: amount.value,
+                    mode: self.getAttribute("data-asset"),
+                    address: self.getAttribute("data-addr")
+                }
+            }
+
+            new Func().request("../request.php", JSON.stringify(payload), 'json')
+            .then(val => {
+                console.log(val)
+                new Func().notice_box(val)
+            })
+        }
+    }
+</script>
 </html>

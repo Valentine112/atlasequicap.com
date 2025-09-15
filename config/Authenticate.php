@@ -14,7 +14,7 @@
                 "content" => ""
             ];
 
-            if(!empty($_SESSION['token'])):
+            if(!empty($_COOKIE['auth_token'])):
                 $sessionToken = Func::cleanData($_COOKIE['auth_token'], 'string');
 
                 // Check if the token actually exist
@@ -45,7 +45,6 @@
                 ];
 
             endif;
-
             return $result;
         }
     }

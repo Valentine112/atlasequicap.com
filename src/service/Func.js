@@ -162,14 +162,13 @@ class Func {
     }
 
     notice_box(data) {
-        var type = ""
+        let type = "warning"
         data.message = data.message.toLowerCase()
         var notice_modal = document.querySelector(".quick-notice")
         var error_text = notice_modal.querySelector(".error-text")
 
         if(data.status === 0){
-            if(data.type != null) type = data.type
-
+            //if(data.type != null) type = data.type
             if(data.message == "fill"){
                 error_text.innerHTML = data.content
             }
@@ -177,29 +176,27 @@ class Func {
                 error_text.innerHTML = "Something went wrong. . ."
             }
 
-            remove_previous(error_text)
-
-
+            //remove_previous(error_text)
+            console.log(notice_modal.querySelector("." + type + "-i"))
             // Show the notice
-            //notice_modal.querySelector("." + type + "").style.display = "block"
+            notice_modal.querySelector("." + type + "-i").style.display = "inline"
             error_text.classList.add(type)
 
             notice_modal.style.display = "block"
         }
 
         if(data.status === 1) {
-            if(data.type != null) type = data.type
-
+            //if(data.type != null) type = data.type
             if(data.message == "fill"){
                 error_text.innerHTML = data.content
+                //remove_previous(error_text)
 
-                remove_previous(error_text)
-
+                console.log(notice_modal.querySelector("." + type + "-i"))
                 // Show the notice
-                //notice_modal.querySelector("." + type + "").style.display = "block"
+                notice_modal.querySelector("." + type + "-i").style.display = "inline"
                 error_text.classList.add(type)
 
-                notice_modal.style.display = "block"
+                notice_modal.style.display = "inline!important"
             }
         }
 
@@ -433,4 +430,12 @@ class Func {
         return true
     }
 
+    copyToClipboard(variableName) {
+        try {
+            navigator.clipboard.writeText(variableName);
+            return true
+        } catch (err) {
+            return false
+        }
+    }
 }

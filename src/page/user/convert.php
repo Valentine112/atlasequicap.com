@@ -1,4 +1,4 @@
-<?php //require "php/general.php"; ?>
+<?php require "php/general.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,19 +35,19 @@
                             <p style="color: grey;">From</p>
                             <div class="row justify-content-between">
                                 <div class="col-3 assets-info">
-                                    <h2 class="mb-0">$0.00</h2>
+                                    <h2 class="mb-0" id="fromBalance">$<?= $user['wallet']; ?>.00</h2>
                                     <small>Balance</small>
                                 </div>
                                 <div class="col-9 row">
                                     <div class="col-6">
-                                        <select class="form-control form-inp">
-                                            <option value="main">Main Wallet</option>
-                                            <option>Stock Wallet</option>
-                                            <option>Crypto Wallet</option>
+                                        <select class="form-control form-inp fromBox" onchange="from(this)">
+                                            <option value="main" data-bal="<?= $user['wallet']; ?>">Main Wallet</option>
+                                            <option value="stock" data-bal="<?= $user['stock']; ?>">Stock Wallet</option>
+                                            <option value="crypto" data-bal="<?= $user['crypto']; ?>">Crypto Wallet</option>
                                         </select>
                                     </div>
                                     <div class="col-6">
-                                        <input type="number" class="form-control form-inp" placeholder="0.00">
+                                        <input type="number" class="form-control form-inp" placeholder="0.00" id="amount">
                                     </div>
                                 </div>
                             </div>
@@ -57,15 +57,14 @@
                             <p style="color: grey;">To</p>
                             <div class="row justify-content-between">
                                 <div class="col-3 assets-info">
-                                    <h2 class="mb-0">$0.00</h2>
+                                    <h2 class="mb-0" id="toBalance">$<?= $user['stock']; ?>.00</h2>
                                     <small>Balance</small>
                                 </div>
                                 <div class="col-9 row justify-content-end">
                                     <div class="col-8">
-                                        <select class="form-control form-inp">
-                                            <option value="main" class="main">Main Wallet</option>
-                                            <option class="stock">Stock Wallet</option>
-                                            <option class="crypto">Crypto Wallet</option>
+                                        <select class="form-control form-inp toBox" onchange="to(this)">
+                                            <option value="stock" class="to stock" data-bal="<?= $user['stock']; ?>">Stock Wallet</option>
+                                            <option value="crypto" class="to crypto" data-bal="<?= $user['crypto']; ?>">Crypto Wallet</option>
                                         </select>
                                     </div>
                                 </div>
@@ -73,7 +72,7 @@
                         </div>
                         <hr>
                         <div>
-                            <button class="btn w-100 mt-4 py-3" style="background-color: var(--main-color); padding: 8px 10px!important;">Convert</button>
+                            <button class="btn w-100 mt-4 py-3" style="background-color: var(--main-color); padding: 8px 10px!important;" onclick="convert(this)">Convert</button>
                         </div>
                     </section>
                 </main>
@@ -81,4 +80,48 @@
         </div>
     </div>
 </body>
+<script>
+    async function from(self) {
+        let optionInd = self.selectedIndex
+        let option = self.options[optionInd]
+        let selected = self.value
+        let toBox = document.querySelector(".toBox")
+        let toBoxInd = toBox.selectedIndex
+
+        // Update the balance for the selected wallet
+        document.getElementById("fromBalance").innerText = "$" + option.getAttribute("data-bal") + ".00"
+
+        // Proceed to hide the wallet on the to section
+
+        toBox.innerHTML = ""
+        await options(selected, toBox)
+        document.getElementById("toBalance").innerText = "$" + toBox.options[toBoxInd].getAttribute("data-bal") + ".00"
+
+    }
+
+    function to(self) {
+        let optionInd = self.selectedIndex
+        let option = self.options[optionInd]
+
+        // Update the balance for the selected wallet
+        document.getElementById("toBalance").innerText = "$" + option.getAttribute("data-bal") + ".00"
+    }
+
+    async function options(type, toBox) {
+        let optionsData = {
+            stock: `<option value="stock" class="to stock" data-bal="<?= $user['stock']; ?>">Stock Wallet</option>`,
+            crypto: `<option value="crypto" class="to crypto" data-bal="<?= $user['crypto']; ?>">Crypto Wallet</option>`,
+            main: `<option value="main" class="to main" data-bal="<?= $user['wallet']; ?>">Main Wallet</option>`
+        }
+        optionsData[type] = ""
+        Object.keys(optionsData).forEach(key => {
+            toBox.insertAdjacentHTML('beforeend', optionsData[key])
+        });
+    }
+
+    function convert(self) {
+        let amount = document.getElementById("amount")
+        
+    }
+</script>
 </html>

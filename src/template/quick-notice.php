@@ -9,7 +9,7 @@
             margin: auto;
             display: none;
             transition: opacity 3s ease-out;
-            z-index: 5;
+            z-index: 1100;
         }
         .quick-notice > div{
             border-radius: 5px;
@@ -40,12 +40,8 @@
             width: fit-content;
             padding: 10px;
         }
-        .quick-notice .notice-cover > div:first-child img{
+        .quick-notice .notice-cover > div:first-child i{
             display: none;
-        }
-        .quick-notice .notice-cover > div:first-child img{
-            height: 20px;
-            width: 20px;
         }
         .quick-notice .notice-header span{
             font-weight: 300!important;
@@ -78,7 +74,10 @@
     <div>
         <div class="notice-cover server-error" onclick="this.closest('.quick-notice').style.display = 'none'">
 
-            <div>
+            <div class="notice-img">
+                <i class="las la-check success-i" style="color: lightgreen;"></i>
+                <i class="las la-exclamation-circle warning-i" style="color: orange;"></i>
+                <i class="las la-times error-i" style="color: red;"></i>
                 <!--<img src="../src/icon/notice/success.svg" class="success" alt="">
                 <img src="../src/icon/notice/warning.svg" class="warning" alt="">
                 <img src="../src/icon/notice/error.svg" class="error" alt="">-->
@@ -104,10 +103,9 @@
     }
 
     function remove_previous(notice_message) {
-        document.querySelectorAll(".notice-cover img").forEach(elem => {
+        document.querySelectorAll(".notice-cover i").forEach(elem => {
             elem.style.display = "none"
         })
-
         notice_message.classList.remove("warning", "success", "error")
     }
     

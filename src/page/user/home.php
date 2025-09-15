@@ -38,7 +38,7 @@
                             <div class="row justify-content-between align-items-center mb-4">
                                 <div class="col-5">
                                     <div class="sub-sect">TRADING ID</div>
-                                    <p class="trade-id sub-head">VT-<?= $user['tradeId']; ?></p>
+                                    <p class="trade-id sub-head">AE-<?= $user['tradeId']; ?></p>
                                 </div>
                                 <div class="col-5 text-end">
                                     <a href="deposit" class="btn btn-transparent">Deposit</a>

@@ -179,9 +179,8 @@ class Func {
 
             remove_previous(error_text)
 
-
             // Show the notice
-            //notice_modal.querySelector("." + type + "").style.display = "block"
+            notice_modal.querySelector("." + type + "-i").style.display = "block"
             error_text.classList.add(type)
 
             notice_modal.style.display = "block"
@@ -196,7 +195,7 @@ class Func {
                 remove_previous(error_text)
 
                 // Show the notice
-                //notice_modal.querySelector("." + type + "").style.display = "block"
+                notice_modal.querySelector("." + type + "-i").style.display = "block"
                 error_text.classList.add(type)
 
                 notice_modal.style.display = "block"

@@ -381,68 +381,62 @@
 
             $amount = $this->data['val']['amount'];
             $address = $this->data['val']['address'];
-            $wallet = $this->data['val']['wallet'];
-            $password = $this->data['val']['password'];
+            $mode = $this->data['val']['mode'];
 
             // Fetch user info
             $data = [
                 "id" => $this->user,
                 "1" => "1",
                 "needle" => "*",
-                "table" => "user"
+                "table" => "users"
             ];
 
             $user = Func::searchDb(self::$db, $data, "AND");
             if(empty($user)) return $user;
 
-            $userWallet = $user['walletbalance'] === null ? 0 : $user['walletbalance'];
+            $userWallet = $user['wallet'] === null ? 0 : $user['wallet'];
 
             // Check if withdrawal is above limit
             if($amount >= 100):
                 // Check if user has enough money in his wallet
-                if($amount < $userWallet):
-                    // Verify the password
-                    if(password_verify($password, $user['password'])):
-                        self::$db->autocommit(false);
-                        // Proceed to insert a new record and debit from user wallet
-                        $subject = ['moni', 'mode', 'email', 'status', 'tnx', 'wal', 'date'];
-                        $items = [$amount, $wallet, $user['email'], "pending", Func::tokenGenerator(), $address, Func::dateFormat()];
-                        $inserting = new Insert(self::$db, "wbtc", $subject, "");
-                        $action = $inserting->action($items, "issssss");
+                if($amount <= $userWallet):
+                    self::$db->autocommit(false);
+                    // Proceed to insert a new record and debit from user wallet
+                    $subject = ['tranx', 'amount', 'mode', 'address', 'date'];
+                    $items = [Func::generateCode(), $amount, $mode, $address, Func::dateFormat()];
+                    $inserting = new Insert(self::$db, "withdrawals", $subject, "");
+                    $action = $inserting->action($items, "iisss");
 
-                        if(!$action) return $action;
+                    if(!$action) return $action;
 
-                        // Debit user
-                        $newBalance = $userWallet - $amount;
+                    // Debit user
+                    $newBalance = $userWallet - $amount;
 
-                        $updating = new Update(self::$db, "SET walletbalance = ? WHERE id = ?# $newBalance# $this->user");
-                        $action = $updating->mutate('di', 'user');
-                        if(!$action) return $action;
+                    $updating = new Update(self::$db, "SET wallet = ? WHERE id = ?# $newBalance# $this->user");
+                    $action = $updating->mutate('di', 'users');
+                    if(!$action) return $action;
 
-                        // Notify the user via email
-                        $data = [
-                            "head" => "Withdrawal Transaction",
-                            "elements" => [
-                                "Amount" => $amount,
-                                "Address" => $address,
-                                "Wallet Name" => $wallet,
-                                "Date" => date("Y-m-d")
-                            ]
-                        ];
+                    // Notify the user via email
+                    $data = [
+                        "head" => "Withdrawal Transaction",
+                        "elements" => [
+                            "Amount" => $amount,
+                            "Address" => $address,
+                            "Wallet Name" => $mode,
+                            "Date" => date("Y-m-d")
+                        ]
+                    ];
 
 
-                        $mailing = new Mailing($user['email'], $user['username'], null, Func::email_config());
-                        $mailing->set_params((new EmailBody($data))->main(), "Withdrawal");
-                        if($mailing->send_mail()):
-                            self::$db->autocommit(true);
-                            $this->type = "success";
-                            $this->status = 1;
-                            $this->content = "Withdrawal sent for confirmation";
-                        else:
-                            $this->content = "Something went wrong. . .";
-                        endif;
+                    $mailing = new Mailing($user['email'], $user['fullname'], null, Func::email_config());
+                    $mailing->set_params((new EmailBody($data))->main(), "Withdrawal");
+                    if($mailing->send_mail()):
+                        self::$db->autocommit(true);
+                        $this->type = "success";
+                        $this->status = 1;
+                        $this->content = "Withdrawal sent for confirmation";
                     else:
-                        $this->content = "Incorrect password!";
+                        $this->content = "Something went wrong. . .";
                     endif;
                 else:
                     $this->content = "Insufficient balance";
@@ -460,43 +454,33 @@
             $this->message = "fill";
             $this->type = "error";
 
-            // Check if user has enough to mint
             $data = [
                 "id" => $this->user,
                 "1" => "1",
                 "needle" => "*",
-                "table" => "user"
+                "table" => "users"
             ];
-
             $user = Func::searchDb(self::$db, $data, "AND");
 
-            $amount = $this->data['amount'];
-            $file = $this->data['file'];
-            $method = $this->data['method'];
-            $mode = $this->data['mode'];
+            $amount = $this->data['val']['amount'];
+            $mode = $this->data['val']['mode'];
+            $address = $this->data['val']['address'];
 
-            self::$db->autocommit(false);
+            //self::$db->autocommit(false);
 
             // Check if the data is fill
-            if(empty($amount) || empty($file)):
-                $this->content = "Please fill the forms";
+            if(empty($amount)):
+                $this->content = "Please enter an amount";
             else:
-                $uploading = new Upload("src/deposits", "../../src/deposits", $file);
-                $res = $uploading->saveImage();
-
-                if($res['status'] !== 1) return $res;
-
-                $tnx = Func::tokenGenerator();
-                $btctnx = uniqid("btcid");
-
-                $subject = ["usd", "mode", "image", "btctnx", "email", "status", "type", "tnxid"];
+                $tranx = Func::generateCode();
+                $subject = ["tranx", "user", "amount", "mode", "address", "date"];
                 
-                $items = [$amount, $method, $res['content'][0], $btctnx, $user['email'], "pending", $mode, $tnx];
+                $items = [$tranx, $this->user, $amount, $mode, $address, Func::dateFormat()];
 
                 // Save to database next
-                $inserting = new Insert(self::$db, "btc", $subject, "");
+                $inserting = new Insert(self::$db, "deposit", $subject, "");
 
-                $action = $inserting->action($items, 'isssssss');
+                $action = $inserting->action($items, 'iiisss');
 
                 if(!$action) return $action;
 
@@ -505,14 +489,15 @@
                     "head" => "Deposit Transaction",
                     "elements" => [
                         "Amount" => $amount,
-                        "User" => $user['username'],
-                        "Method" => strtoupper($method),
+                        "User" => $user['fullname'],
+                        "Method" => strtoupper($mode),
+                        "Address" => $address,
                         "Date" => date("Y-m-d")
                     ]
                 ];
 
                 // Send an email address
-                $mailing = new Mailing($user['email'], $user['username'], null, Func::email_config());
+                $mailing = new Mailing($user['email'], $user['fullname'], null, Func::email_config());
                 $mailing->set_params((new EmailBody($data))->main(), "Deposit Request");
                 if($mailing->send_mail()):
                     self::$db->autocommit(true);

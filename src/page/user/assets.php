@@ -49,10 +49,10 @@
                                 <div class="row justify-content-between align-items-center mb-4">
                                     <div class="col-5">
                                         <div class="sub-sect">TRADING ID</div>
-                                        <p class="trade-id sub-head"><span id="initials">ST</span>-VT-4868680821</p>
+                                        <p class="trade-id sub-head"><span id="initials">ST</span>-AE-<?= $user['tradeId']; ?></p>
                                     </div>
                                     <div class="col-5 text-end">
-                                        <a href="deposit" class="btn btn-transparent">Deposit</a>
+                                        <a href="deposit" class="py-2 px-4 form-inp">Deposit</a>
                                     </div>
                                 </div>
                                 
@@ -64,7 +64,7 @@
                                                     Stock Balance
                                                 </div>
                                                 <h2>
-                                                    $0.00
+                                                    $<?= $user['stock']; ?>.00
                                                 </h2>
                                             </div>
                                             <div class="col-6 text-end">
@@ -72,7 +72,7 @@
                                                     Stock Profit
                                                 </div>
                                                 <h2>
-                                                    $0.00
+                                                    $<?= $user['sProfit']; ?>.00
                                                 </h2>
                                             </div>
                                         </div>
@@ -88,12 +88,24 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>Mark</td>
-                                                            <td>Otto</td>
-                                                            <td>@mdo</td>
-                                                            <td>homo</td>
-                                                        </tr>
+                                                        <?php if(count($stocks) < 1): ?>
+                                                            <tr>
+                                                                <td colspan="6">
+                                                                    <div class="col-12 text-center py-5">
+                                                                        No transaction yet...
+                                                                    </div>
+                                                                </td>
+                                                                
+                                                            </tr>
+                                                        <?php else: ?>
+                                                            <?php foreach($stocks as $stock): ?>
+                                                                <tr>
+                                                                    <td><?= $stock['symbol']; ?></td>
+                                                                    <td><?= $stock['shares']; ?></td>
+                                                                    <td><?= $stock['amount']; ?></td>
+                                                                    <td><?= $stock['profit']; ?></td>
+                                                                </tr>
+                                                        <?php endforeach; endif; ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -107,7 +119,7 @@
                                                     Crypto Balance
                                                 </div>
                                                 <h2>
-                                                    $0.00
+                                                    $<?= $user['crypto']; ?>.00
                                                 </h2>
                                             </div>
                                             <div class="col-6 text-end">
@@ -115,7 +127,7 @@
                                                     Crypto Profit
                                                 </div>
                                                 <h2>
-                                                    $0.00
+                                                    $<?= $user['cProfit']; ?>.00
                                                 </h2>
                                             </div>
                                         </div>
@@ -129,16 +141,29 @@
                                                             <th scope="col">ENTRY</th>
                                                             <th scope="col">DURATION</th>
                                                             <th>STATUS</th>
+                                                            <th scope="col">DATE</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>Mark</td>
-                                                            <td>Otto</td>
-                                                            <td>@mdo</td>
-                                                            <td>homo</td>
-                                                            <td>homox2</td>
-                                                        </tr>
+                                                        <?php if(count($crypto) < 1): ?>
+                                                            <tr>
+                                                                <td colspan="6">
+                                                                    <div class="col-12 text-center py-5">
+                                                                        No transaction yet...
+                                                                    </div>
+                                                                </td>
+                                                                
+                                                            </tr>
+                                                        <?php else: ?>
+                                                            <?php foreach($crypto as $crypto): ?>
+                                                                <tr>
+                                                                    <td><?= $crypto['asset']; ?></td>
+                                                                    <td><?= $crypto['size']; ?></td>
+                                                                    <td><?= $crypto['entry']; ?></td>
+                                                                    <td><?= $crypto['duration']; ?></td>
+                                                                    <td><?= $crypto['status']; ?></td>
+                                                                </tr>
+                                                        <?php endforeach; endif; ?>
                                                     </tbody>
                                                 </table>
                                             </div>
