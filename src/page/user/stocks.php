@@ -1,9 +1,10 @@
-<?php //require "php/general.php"; ?>
+<?php require "php/general.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <?php 
         use Src\Config\Head; 
+        use Service\Func;
         Head::tags();
     ?>
     <meta charset="UTF-8">
@@ -52,155 +53,155 @@
                 name: 'Tesla, Inc.',
                 symbol: 'TSLA',
                 logo: 'tsla.png',
-                stockUrl: 'terminal?symbol=tsla',
-                optionsUrl: 'terminal?symbol=tsla'
+                stockUrl: 'terminal?symbol=tsla&type=stock',
+                optionsUrl: 'terminal?symbol=tsla&type=stock'
             },
             {
                 name: 'Apple Inc.',
                 symbol: 'AAPL',
                 logo: 'aapl.png',
-                stockUrl: 'terminal?symbol=aapl',
-                optionsUrl: 'terminal?symbol=aapl'
+                stockUrl: 'terminal?symbol=aapl&type=stock',
+                optionsUrl: 'terminal?symbol=aapl&type=stock'
             },
             {
                 name: 'Microsoft Corporation',
                 symbol: 'MSFT',
                 logo: 'msft.png',
-                stockUrl: 'terminal?symbol=msft',
-                optionsUrl: 'terminal?symbol=msft'
+                stockUrl: 'terminal?symbol=msft&type=stock',
+                optionsUrl: 'terminal?symbol=msft&type=stock'
             },
             {
                 name: 'Alphabet Inc.',
                 symbol: 'GOOGL',
                 logo: 'googl.png',
-                stockUrl: 'terminal?symbol=googl',
-                optionsUrl: 'terminal?symbol=googl'
+                stockUrl: 'terminal?symbol=googl&type=stock',
+                optionsUrl: 'terminal?symbol=googl&type=stock'
             },
             {
                 name: 'Amazon.com, Inc.',
                 symbol: 'AMZN',
                 logo: 'amzn.png',
-                stockUrl: 'terminal?symbol=amzn',
-                optionsUrl: 'terminal?symbol=amzn'
+                stockUrl: 'terminal?symbol=amzn&type=stock',
+                optionsUrl: 'terminal?symbol=amzn&type=stock'
             },
             {
                 name: 'Meta Platforms, Inc.',
                 symbol: 'META',
                 logo: 'meta.png',
-                stockUrl: 'terminal?symbol=meta',
-                optionsUrl: 'terminal?symbol=meta'
+                stockUrl: 'terminal?symbol=meta&type=stock',
+                optionsUrl: 'terminal?symbol=meta&type=stock'
             },
             {
                 name: 'NVIDIA Corporation',
                 symbol: 'NVDA',
                 logo: 'nvda.png',
-                stockUrl: 'terminal?symbol=nvda',
-                optionsUrl: 'terminal?symbol=nvda'
+                stockUrl: 'terminal?symbol=nvda&type=stock',
+                optionsUrl: 'terminal?symbol=nvda&type=stock'
             },
             {
                 name: 'Netflix, Inc.',
                 symbol: 'NFLX',
                 logo: 'nflx.png',
-                stockUrl: 'terminal?symbol=nflx',
-                optionsUrl: 'terminal?symbol=nflx'
+                stockUrl: 'terminal?symbol=nflx&type=stock',
+                optionsUrl: 'terminal?symbol=nflx&type=stock'
             },
             {
                 name: 'Adobe Inc.',
                 symbol: 'ADBE',
                 logo: 'adbe.png',
-                stockUrl: 'terminal?symbol=adbe',
-                optionsUrl: 'terminal?symbol=adbe'
+                stockUrl: 'terminal?symbol=adbe&type=stock',
+                optionsUrl: 'terminal?symbol=adbe&type=stock'
             },
             {
                 name: 'BYND Cannasoft Enterprises Inc.',
                 symbol: 'BCAN',
                 logo: 'bynd.png',
-                stockUrl: 'terminal?symbol=bynd',
-                optionsUrl: 'terminal?symbol=bynd'
+                stockUrl: 'terminal?symbol=bynd&type=stock',
+                optionsUrl: 'terminal?symbol=bynd&type=stock'
             },
             {
                 name: 'DocuSign, Inc.',
                 symbol: 'DOCU',
                 logo: 'docu.png',
-                stockUrl: 'terminal?symbol=docu',
-                optionsUrl: 'terminal?symbol=docu'
+                stockUrl: 'terminal?symbol=docu&type=stock',
+                optionsUrl: 'terminal?symbol=docu&type=stock'
             },
             {
                 name: 'Affirm Holdings, Inc.',
                 symbol: 'AFRM',
                 logo: 'afrm.png',
-                stockUrl: 'terminal?symbol=afrm',
-                optionsUrl: 'terminal?symbol=afrm'
+                stockUrl: 'terminal?symbol=afrm&type=stock',
+                optionsUrl: 'terminal?symbol=afrm&type=stock'
             },
             {
                 name: 'Applovin Corporation',
                 symbol: 'APP',
                 logo: 'app.png',
-                stockUrl: 'terminal?symbol=app',
-                optionsUrl: 'terminal?symbol=app'
+                stockUrl: 'terminal?symbol=app&type=stock',
+                optionsUrl: 'terminal?symbol=app&type=stock'
             },
             {
                 name: 'Intel Corporation',
                 symbol: 'INTC',
                 logo: 'intc.png',
-                stockUrl: 'terminal?symbol=intc',
-                optionsUrl: 'terminal?symbol=intc'
+                stockUrl: 'terminal?symbol=intc&type=stock',
+                optionsUrl: 'terminal?symbol=intc&type=stock'
             },
             {
                 name: 'PayPal Holdings, Inc',
                 symbol: 'PYPL',
                 logo: 'pypl.png',
-                stockUrl: 'terminal?symbol=pypl',
-                optionsUrl: 'terminal?symbol=pypl'
+                stockUrl: 'terminal?symbol=pypl&type=stock',
+                optionsUrl: 'terminal?symbol=pypl&type=stock'
             },
             {
                 name: 'Qualcom Incorporated',
                 symbol: 'QCOM',
                 logo: 'qcom.png',
-                stockUrl: 'terminal?symbol=qcom',
-                optionsUrl: 'terminal?symbol=qcom'
+                stockUrl: 'terminal?symbol=qcom&type=stock',
+                optionsUrl: 'terminal?symbol=qcom&type=stock'
             },
             {
                 name: 'Rivian Automotive, Inc.',
                 symbol: 'RIVN',
                 logo: 'rivn.png',
-                stockUrl: 'terminal?symbol=rivn',
-                optionsUrl: 'terminal?symbol=rivn'
+                stockUrl: 'terminal?symbol=rivn&type=stock',
+                optionsUrl: 'terminal?symbol=rivn&type=stock'
             },
             {
                 name: 'Starbucks Corporation',
                 symbol: 'SBUX',
                 logo: 'sbux.png',
-                stockUrl: 'terminal?symbol=sbux',
-                optionsUrl: 'terminal?symbol=sbux'
+                stockUrl: 'terminal?symbol=sbux&type=stock',
+                optionsUrl: 'terminal?symbol=sbux&type=stock'
             },
             {
                 name: 'United Airlines Holdings, Inc.',
                 symbol: 'UAL',
                 logo: 'ual.png',
-                stockUrl: 'terminal?symbol=ual',
-                optionsUrl: 'terminal?symbol=ual'
+                stockUrl: 'terminal?symbol=ual&type=stock',
+                optionsUrl: 'terminal?symbol=ual&type=stock'
             },
             {
                 name: 'Harrow, Inc.',
                 symbol: 'HROW',
                 logo: 'hrow.png',
-                stockUrl: 'terminal?symbol=hrow',
-                optionsUrl: 'terminal?symbol=hrow'
+                stockUrl: 'terminal?symbol=hrow&type=stock',
+                optionsUrl: 'terminal?symbol=hrow&type=stock'
             },
             {
                 name: 'Hydrofarm Holdings Group, Inc.',
                 symbol: 'HYFM',
                 logo: 'hyfm.png',
-                stockUrl: 'terminal?symbol=hyfm',
-                optionsUrl: 'terminal?symbol=hyfm'
+                stockUrl: 'terminal?symbol=hyfm&type=stock',
+                optionsUrl: 'terminal?symbol=hyfm&type=stock'
             },
             {
                 name: 'Hyzon Motors Inc.',
                 symbol: 'HYZN',
                 logo: 'hyzn.png',
-                stockUrl: 'terminal?symbol=hyzn',
-                optionsUrl: 'terminal?symbol=hyzn'
+                stockUrl: 'terminal?symbol=hyzn&type=stock',
+                optionsUrl: 'terminal?symbol=hyzn&type=stock'
             },
         ]
 

@@ -88,6 +88,12 @@
                     case 'signal':
                         $result = $modelUser->signal();
                         break;
+                    case 'signalCancel':
+                        $result = $modelUser->signalCancel();
+                        break;
+                    case 'orderStock':
+                        $result = $modelUser->orderStock();
+                        break;
                     case 'activate':
                         $result = $modelUser->activate();
                         break;

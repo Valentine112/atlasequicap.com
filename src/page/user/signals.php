@@ -3,7 +3,8 @@
 <html lang="en">
 <head>
     <?php 
-        use Src\Config\Head; 
+        use Src\Config\Head;
+        use Service\Func;
         Head::tags();
     ?>
     <meta charset="UTF-8">
@@ -88,7 +89,7 @@
             </section>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel" class="payment-head sub-head">My Signals</h1>
@@ -96,23 +97,69 @@
                         </div>
                         <div class="modal-body">
                             <div class="modal-details">
-                                <p class="sub-sect py-5">You have no active signals. Purchase a signal to view it here.</p>
+                                <div class="table-responsive">
+                                    <table class="table table-box border-0 bg-transparent">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">TRANSACTION ID</th>
+                                                <th scope="col">SIGNAL</th>
+                                                <th scope="col">AMOUNT</th>
+                                                <th scope="col">PROFIT</th>
+                                                <th scope="col">STATUS</th>
+                                                <th scope="col">DATE</th>
+                                                <th scope="col">ACTION</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if(count($signals) < 1): ?>
+                                                <tr>
+                                                    <td colspan="6">
+                                                        <div class="col-12 text-center py-5">
+                                                            You have no active signals. Purchase a signal to view it here.
+                                                        </div>
+                                                    </td>
+                                                    
+                                                </tr>
+                                            <?php else: ?>
+                                                <?php 
+                                                    foreach($usersignals as $signal): 
+                                                        if($signal['status'] == 0):
+                                                            $stats = "<span class='text-warning'>Running</span>";
+                                                        elseif ($signal['status'] == 1):
+                                                            $stats = "<span class='text-danger'>Cancelled</span>";
+                                                        else:
+                                                            $stats = "<span class=text-success'>Ended</span>";
+                                                        endif;
 
-                                <div class="row col-12 justify-content-around mx-auto py-1">
-                                    <div class="col-4">
-                                        <h5 class="sub-sub-head mb-0">$0.00</h5>
-                                        <small style="color: grey;">Amount</small>
-                                    </div>
-                                    <div class="col-4">
-                                        <h5 class="sub-sub-head mb-0">OVLLTR</h5>
-                                        <small style="color: grey;">Signal</small>
-                                    </div>
-                                    <div class="col-4">
-                                        <h5 class="sub-sub-head mb-0">12/0/3</h5>
-                                        <small style="color: grey;">Date</small>
-                                    </div>
-
-                                    <hr>
+                                                        // Fetch signal name
+                                                        $data = [
+                                                            "id" => $signal['signalId'],
+                                                            "1" => "1",
+                                                            "needle" => "*",
+                                                            "table" => "signals"
+                                                        ];
+                                                        $signalName = Func::searchDb($db, $data, "AND")['name'];
+                                                ?>
+                                                    <tr>
+                                                        <td>AE-<?= $signal['tranx']; ?></td>
+                                                        <td><?= strtoupper($signalName); ?></td>
+                                                        <td>$<?= $signal['amount']; ?></td>
+                                                        <td>$<?= $signal['profit']; ?>.00</td>
+                                                        <td><?= $stats; ?></td>
+                                                        <td><?= substr($signal['date'], 0, 10); ?></td>
+                                                        <td>
+                                                            <?php if($signal['status'] == 0): ?>
+                                                                <button class="btn btn-danger" onclick="cancel(this, <?= $signal['signalId']; ?>)">Cancel</button>
+                                                            <?php elseif($signal['status'] == 1): ?>
+                                                                <span class="text-white">Cancelled</span>
+                                                            <?php else: ?>
+                                                                <span class="text-success">Ended</span>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                    </tr>
+                                            <?php endforeach; endif; ?>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -140,12 +187,14 @@
         if(amount.value < price) {
             data.type = "warning"
             data.content = "Amount not up to signal price"
+            amount.focus()
             new Func().notice_box(data)
         }else{
             // Check if wallet is up to signal price
             if(wallet < price) {
                 data.type = "error"
                 data.content = "Your wallet balance is not sufficient enough for this transaction"
+                amount.focus()
                 new Func().notice_box(data)
             }else{
                 let payload = {
@@ -160,7 +209,6 @@
 
                 new Func().request("../request.php", JSON.stringify(payload), 'json')
                 .then(val => {
-                    console.log(val)
                     new Func().notice_box(val)
                     if(val.status === 1) {
                         setTimeout(() => {
@@ -170,6 +218,26 @@
                 })
             }
         }
+    }
+
+    function cancel(self, id) {
+        let payload = {
+            part: "user",
+            action: "signalCancel",
+            val: {
+                signalId: id
+            }
+        }
+
+        new Func().request("../request.php", JSON.stringify(payload), 'json')
+        .then(val => {
+            new Func().notice_box(val)
+            if(val.status === 1) {
+                setTimeout(() => {
+                    location.reload()
+                }, 1000);
+            }
+        })
     }
 </script>
 </html>

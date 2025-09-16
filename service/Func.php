@@ -318,6 +318,53 @@
             setcookie("auth_token", $token, $exp, "/", "", FALSE, TRUE);
         }
 
+        public static function fetchStock($symbol) {
+            // Stock symbol
+            $apiKey = "OICIHF9AY25UXE8N."; // Get free key at https://www.alphavantage.co
+
+            /*$url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={$symbol}&apikey={$apiKey}";
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            $data = json_decode($response, true);
+
+            if (isset($data["Global Quote"])) {
+                return $data['Global Quote'];
+            } else {
+                return false;
+            }*/
+
+            // Stock symbol (example: Apple)
+            // Yahoo Finance API endpoint
+            $url = "https://query1.finance.yahoo.com/v8/finance/chart/{$symbol}?interval=1m";
+
+            // Initialize cURL
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            // Add headers (important for Yahoo)
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                'User-Agent: Mozilla/5.0'
+            ]);
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            // Decode JSON
+            $data = json_decode($response, true);
+
+            // Extract current price
+            if (isset($data["chart"]["result"][0]["meta"])) {
+                return $data["chart"]["result"][0]["meta"];
+            } else {
+                return false;
+            }
+        }
+
     }
 
 ?>

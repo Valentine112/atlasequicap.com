@@ -561,30 +561,108 @@
                     $this->content = "Your wallet balance is not sufficient enough for this transaction";
                 else:
                     self::$db->autocommit(false);
-                    // Insert into usersignals
-                    $subject = ["tranx", "user", "signal", "amount", "date"];
-                    $items = [Func::generateCode(), $this->user, $signalId, $amount, Func::dateFormat()];
-                    // Save to database next
-                    $inserting = new Insert(self::$db, "usersignals", $subject, "");
-                    $action = $inserting->action($items, 'iiiis');
+                    // Make sure the user doesn't have any running signal from this person
+                    // Fetch user signal from this person
+                    (int) $zero = 0;
+                    $selecting = new Select(self::$db);
+                    $selecting->more_details("WHERE user = ? AND signalId = ? AND status = ?# $this->user# $signalId# $zero");
+                    $action = $selecting->action("*", "usersignals");
+                    if($action != null) return $action;
+                    if($selecting->pull()[1] < 1):
+                        if(empty($result)):
+                        // Insert into usersignals
+                            $subject = ["tranx", "user", "signalId", "amount", "date"];
+                            $items = [Func::generateCode(), $this->user, $signalId, $amount, Func::dateFormat()];
+                            // Save to database next
+                            $inserting = new Insert(self::$db, "usersignals", $subject, "");
+                            $action = $inserting->action($items, 'iiiis');
 
-                    if(!$action) return $action;
-                    //Update the new wallet balance
-                    $updating = new Update(self::$db, "SET wallet = wallet - ? WHERE id = ?# $amount# $this->user");
-                    if($updating->mutate('ii', 'users')):
-                        self::$db->autocommit(true);
-                        $this->status = 1;
-                        $this->type = "success";
-                        $this->content = "Signal was purchased successfully";
+                            if(!$action) return $action;
+                            //Update the new wallet balance
+                            $updating = new Update(self::$db, "SET wallet = wallet - ? WHERE id = ?# $amount# $this->user");
+                            if($updating->mutate('ii', 'users')):
+                                self::$db->autocommit(true);
+                                $this->status = 1;
+                                $this->type = "success";
+                                $this->content = "Signal was purchased successfully";
+                            else:
+                                $this->content = "Something went wrong...";
+                            endif;
+                        endif;
                     else:
-                        $this->content = "Something went wrong...";
+                        $this->status = 1;
+                        $this->type = "error";
+                        $this->content = "You alway have an active signal from this person";
                     endif;
-                    
+                    $selecting->reset();
                 endif;
             endif;
 
             return $this->deliver();
         }
+
+        public function signalCancel() : array {
+            $this->status = 0;
+            $this->message = "fill";
+            $this->type = "error";
+
+            (int) $signalId = $this->data['val']['signalId'];
+            (int) $one = 1;
+            (int) $zero = 0;
+            // Confirm that signal is still running
+            self::$db->autocommit(false);
+            $updating = new Update(self::$db, "SET status = ? WHERE status = ? AND signalId = ? AND user = ?#$one# $zero# $signalId# $this->user");
+            if($updating->mutate('iiii', 'usersignals')):
+                // Fetch signal profit and add to user wallet
+                // Fetch profit
+                $data = [
+                    "signalId" => $signalId,
+                    "user" => $this->user,
+                    "needle" => "*",
+                    "table" => "usersignals"
+                ];
+
+                $signal = Func::searchDb(self::$db, $data, "AND");
+                $returnAmount = $signal['profit'] + $signal['amount'];
+                $updating = new Update(self::$db, "SET wallet = wallet + ? WHERE id = ?# $returnAmount# $this->user");
+                if($updating->mutate('ii', 'users')):
+                    self::$db->autocommit(true);
+                    $this->status = 1;
+                    $this->type = "success";
+                    $this->content = "You have successfully cancelled the plan";
+                endif;
+            endif;
+
+            return $this->deliver();
+        }
+
+        public function orderStock() : array {
+            $this->status = 0;
+            $this->message = "fill";
+            $this->type = "error";
+ 
+            list($market, $price, $symbol, $amount, $type, $limitPrice, $expDate) = array_values($this->data['val']);
+
+            (int) $one = 1;
+            (int) $zero = 0;
+            // Confirm that signal is still running
+            $triggered = $type == "Limit Buy" || $type == "Limit Sell" ? 0 : 1;
+            
+            $subject = ["tranx", "market", "user", "signalId", "amount", "date"];
+            $items = [Func::generateCode(), $this->user, $signalId, $amount, Func::dateFormat()];
+            // Save to database next
+            $inserting = new Insert(self::$db, "usersignals", $subject, "");
+            $action = $inserting->action($items, 'iiiis');
+
+            if(!$action) return $action;
+            self::$db->autocommit(true);
+            $this->status = 1;
+            $this->type = "success";
+            $this->content = "You have successfully cancelled the plan";
+
+            return $this->deliver();
+        }
+
         public function activate() : array {
             $this->status = 0;
             $this->message = "fill";

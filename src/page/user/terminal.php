@@ -1,9 +1,10 @@
-<?php //require "php/general.php"; ?>
+<?php require "php/general.php"; ?>
 <?php
-    /*$symbol = "";
+    use Service\Func;
+    $symbol = "";
     if(isset($_GET['symbol'])):
         $symbol = Func::cleanData($_GET['symbol'], 'string');
-    endif;*/
+    endif;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +71,7 @@
                         </div>
                     </div>
 
-                    <div class="card-box mt-3">
+                    <div class="card-box mt-3 symbol-box">
                         <div class="data-header">
                             <div id="nav-tab" role="tablist">
                                 <div class="wallet-sec active" id="buy-tab" data-bs-toggle="tab" data-bs-target="#buy" type="button" role="tab" aria-controls="buy" aria-selected="true">Buy</div>
@@ -87,8 +88,8 @@
                                     </div>
                                     <div class="col-9">
                                         <select name="order" id="order" class="form-control form-inp" onchange="orderType(this)">
-                                            <option value="market">Market Buy</option>
-                                            <option value="limit">Limit Buy</option>
+                                            <option value="Market Buy">Market Buy</option>
+                                            <option value="Limit Buy">Limit Buy</option>
                                         </select>
                                     </div>
                                 </div>
@@ -96,16 +97,16 @@
                                     <div class="row justify-content-between align-items-center mt-3">
                                         <div class="col-3">Buy Limit</div>
                                         <div class="col-9">
-                                            <input type="text" placeholder="0" class="form-control form-inp">
+                                            <input type="text" placeholder="0" class="form-control form-inp" id="limitPrice" value="<?= $symbolInfo['regularMarketPrice'] ?? null; ?>">
                                         </div>
                                     </div>
                                     <div class="row justify-content-between align-items-center mt-3">
                                         <div class="col-3">Exp Date.</div>
                                         <div class="col-9">
                                             <select name="limitExp" id="limitExp" class="form-control form-inp">
-                                                <option value="day">A Day</option>
-                                                <option value="week">A Week</option>
-                                                <option value="month">A Month</option>
+                                                <option value="1">A Day</option>
+                                                <option value="7">A Week</option>
+                                                <option value="30">A Month</option>
                                             </select>
                                         </div>
                                     </div>
@@ -113,19 +114,19 @@
                                 <div class="row justify-content-between align-items-center mt-3">
                                     <div class="col-3">Amount</div>
                                     <div class="col-9">
-                                        <input type="text" placeholder="Amount (USD)" class="form-control form-inp">
+                                        <input type="number" placeholder="Amount (USD)" class="form-control form-inp" id="amount">
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row justify-content-between align-items-center mt-3">
                                     <div class="col-3">Wallet Balance</div>
                                     <div class="col-9 text-end">
-                                        $0.00
+                                        $<?= $user['wallet']; ?>.00
                                     </div>
                                 </div>
                                 <hr>
                                 <div>
-                                    <button class="form-control btn" onclick="order(this, 'buy')">Buy</button>
+                                    <button class="form-control btn" onclick="order(this, 'buy', 'stock', <?= $symbolInfo['regularMarketPrice'] ?? null; ?>, '<?= $symbol; ?>')">Buy</button>
                                 </div>
                             </div>
 
@@ -152,7 +153,7 @@
                             <div class="row justify-content-between align-items-center mt-3">
                                 <div class="col-3">Amount</div>
                                 <div class="col-9">
-                                    <input type="text" placeholder="Amount (USD)" class="form-control form-inp">
+                                    <input type="text" placeholder="Amount (USD)" class="form-control form-inp" id="amount">
                                 </div>
                             </div>
                             <hr>
@@ -175,6 +176,13 @@
     </div>
 </body>
 <script>
+    let data = {
+        type: "error",
+        status: 0,
+        message: "fill",
+        content: ""
+    }
+    let wallet = <?= $user['wallet']; ?>;
     window.addEventListener("load", () =>  {
         // Fetch parameter from URL
         let param = new Func().getPath()['parameter'] ?? null
@@ -213,7 +221,7 @@
             "symbols": [
                 [
                 "Microsoft",
-                "MSFT|1D"
+                "${symbol.toUpperCase()}|1D"
                 ]
             ],
             "dateRanges": [
@@ -239,9 +247,8 @@
     })
 
     function orderType(self) {
-        console.log(self.value)
         let limitOpts = self.closest(".data-body").querySelector("#limitOpts")
-        if(self.value == "limit"){
+        if(self.value == "Limit Buy" || self.value == "Limit Sell"){
             limitOpts.classList.remove("d-none")
         }
         else{
@@ -249,7 +256,56 @@
         }
     }
 
-    function order(self, type) {
+    function order(self, orderType, market, price, symbol) {
+        let error = false
+        let parent = self.closest(".data-body")
+
+        let amount = parent.querySelector("#amount").value
+        let type = parent.querySelector("#order").value
+        let limitPrice = parent.querySelector("#limitPrice").value
+        let expDate = parent.querySelector("#limitExp").value
+        let dataObj = {market, price, symbol, amount, type, limitPrice, expDate}
+
+        // validations
+        // Amount is in both, so i just targeted the closest one to this element
+        if(amount < 1 || amount == "") {
+            data.type = "warning"
+            data.content = "Please enter a valid amount"
+            new Func().notice_box(data)
+            error = true
+        }
+
+        // Check for the limit price next
+        if(type == "Limit Buy" || type == "Limit Sell") {
+            console.log("here")
+            if(limitPrice < 1 || limitPrice == "") {
+                data.type = "warning"
+                data.content = "Please enter a valid limit"
+                new Func().notice_box(data)
+                error = true
+            }else{
+                if(error) error = true
+            }
+        }
+
+        if(!error){
+            let payload = {
+                part: "user",
+                action: "orderStock",
+                val: dataObj
+            }
+            console.log(payload)
+
+            new Func().request("../request.php", JSON.stringify(payload), 'json')
+            .then(val => {
+                new Func().notice_box(val)
+                if(val.status === 1) {
+                    setTimeout(() => {
+                        location.reload()
+                    }, 1000);
+                }
+            })
+        }
         
     }
 </script>

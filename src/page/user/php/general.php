@@ -73,6 +73,13 @@
         $signals = $selecting->pull()[0];
         $selecting->reset();
 
+        // Fetch user signals
+        $selecting->more_details("WHERE user = ? ORDER BY id DESC# $userId");
+        $action = $selecting->action("*", "usersignals");
+        if($action != null) return $action;
+        $usersignals = $selecting->pull()[0];
+        $selecting->reset();
+
         // Code to insert demo signals, at least 10
         /*$subject = ['name', 'price', 'strength', 'date'];
         $items = [
@@ -93,6 +100,11 @@
             if(!$action) return $action;
             $inserting->reset();
         }*/
-
+        if(isset($_GET['symbol'])):
+            $symbolInfo = "";
+            if($_GET['type'] == "stock"):
+                $symbolInfo = Func::fetchStock($_GET['symbol']);
+            endif;
+        endif;
     endif;
 ?>
