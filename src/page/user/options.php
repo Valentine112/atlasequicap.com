@@ -69,25 +69,40 @@
                             <table class="table table-borderless table-box border-0 bg-transparent">
                                 <thead>
                                     <tr>
-                                        <th scope="col">STRIKE PRICE</th>
-                                        <th scope="col">IMPLIED VOLUME</th>
-                                        <th scope="col">SIZE</th>
-                                        <th scope="col">BID SIZE</th>
-                                        <th scope="col">LAST PRICE</th>
-                                        <th scope="col">OPEN INTEREST</th>
-                                        <th scope="col">PRICE</th>
+                                        <th col="">Type</th>
+                                        <th col="">Strike</th>
+                                        <th col="">Expiration</th>
+                                        <th col="">Last Price</th>
+                                        <th col="">Bid</th>
+                                        <th col="">Ask</th>
+                                        <th col="">Volume</th>
+                                        <th col="">Open Interest</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php 
+                                    foreach ($optionsInfo['data'] as $contract):
+                                        $contractSymbol = $contract['contractSymbol'];
+                                        $type = (str_contains($contractSymbol, "C")) ? "CALL" : "PUT";
+                                        $strike = $contract['strike'];
+                                        $expiry = $contract['expirationDate'];
+                                        $last = $contract['lastPrice'] ?? "-";
+                                        $bid = $contract['bid'] ?? "-";
+                                        $ask = $contract['ask'] ?? "-";
+                                        $volume = $contract['volume'] ?? "-";
+                                        $oi = $contract['openInterest'] ?? "-";
+                                ?>
                                     <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>homo</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td><button class="btn btn-link">Put</button></td>
+                                        <td><?= $type; ?></td>
+                                        <td><?= $strike; ?></td>
+                                        <td><?= $expiry; ?></td>
+                                        <td><?= $last; ?></td>
+                                        <td><?= $bid; ?></td>
+                                        <td><?= $ask; ?></td>
+                                        <td><?= $volume; ?></td>
+                                        <td><?= $oi; ?></td>
                                     </tr>
+                                <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
