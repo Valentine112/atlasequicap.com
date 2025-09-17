@@ -1,9 +1,10 @@
-<?php //require "php/general.php"; ?>
+<?php require "php/general.php"; ?>
 <?php
-    /*$symbol = "";
+    use Service\Func;
+    $symbol = "";
     if(isset($_GET['symbol'])):
         $symbol = Func::cleanData($_GET['symbol'], 'string');
-    endif;*/
+    endif;
 
     function getStockOptions($symbol) {
         // Yahoo Finance API endpoint
@@ -56,6 +57,7 @@
                 <main>
                     <header>
                         <p class="title">Options</p>
+                        <?php print_r($optionsInfo); ?>
                     </header>
 
                     <section>
@@ -64,7 +66,7 @@
                     <hr>
                     <div class="data-body">
                         <div class="table-responsive">
-                            <table class="table table-borderless table-hover table-box border-0 bg-transparent">
+                            <table class="table table-borderless table-box border-0 bg-transparent">
                                 <thead>
                                     <tr>
                                         <th scope="col">STRIKE PRICE</th>

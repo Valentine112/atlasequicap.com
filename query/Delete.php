@@ -48,7 +48,6 @@
             }
             if($deleting->execute()):
                 return true;
-
             else:
                 $this->type = "error";
                 $this->status = 0;

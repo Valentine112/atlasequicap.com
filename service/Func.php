@@ -308,8 +308,8 @@
             return $profit;
         }
 
-        public static function generateCode() : int {
-            return random_int(1000000000, 9999999999);
+        public static function generateCode() : string {
+            return random_int(1000000000, 99999999999).time();
         }
 
         public static function save_cookie(string $token) {
@@ -363,6 +363,27 @@
             } else {
                 return false;
             }
+        }
+
+        public static function getStockOptions($symbol) {
+
+            $token = "d35dit1r01qhqkb1uurgd35dit1r01qhqkb1uus0"; // from finnhub.io
+
+            $url = "https://finnhub.io/api/v1/stock/option-chain?symbol={$symbol}&token={$token}";
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $response = curl_exec($ch);
+
+            if(curl_errno($ch)){
+                die("cURL Error: " . curl_error($ch));
+            }
+            curl_close($ch);
+
+            $data = json_decode($response, true);
+
+            return $data;
         }
 
     }

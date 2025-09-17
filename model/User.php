@@ -640,25 +640,102 @@
             $this->status = 0;
             $this->message = "fill";
             $this->type = "error";
- 
-            list($market, $price, $symbol, $amount, $type, $limitPrice, $expDate) = array_values($this->data['val']);
 
+            self::$db->autocommit(false);
+ 
+            list($orderType, $market, $price, $symbol, $amount, $type, $limitPrice, $expDate, $id) = array_values($this->data['val']);
+
+            $symbol = strtoupper($symbol);
             (int) $one = 1;
             (int) $zero = 0;
-            // Confirm that signal is still running
-            $triggered = $type == "Limit Buy" || $type == "Limit Sell" ? 0 : 1;
-            
-            $subject = ["tranx", "market", "user", "signalId", "amount", "date"];
-            $items = [Func::generateCode(), $this->user, $signalId, $amount, Func::dateFormat()];
-            // Save to database next
-            $inserting = new Insert(self::$db, "usersignals", $subject, "");
-            $action = $inserting->action($items, 'iiiis');
 
-            if(!$action) return $action;
-            self::$db->autocommit(true);
-            $this->status = 1;
-            $this->type = "success";
-            $this->content = "You have successfully cancelled the plan";
+            // Set the triggered according to the order type
+            $triggered = ($type == "Limit Buy" || $type == "Limit Sell") ? 0 : 1;
+            if($orderType == "buy"):
+                // Confirm that there is no other active order
+                $selecting = new Select(self::$db);
+                $selecting->more_details("WHERE user = ? AND symbol = ? AND triggered = 1 ORDER BY id DESC# $this->user# $symbol");
+                $action = $selecting->action("*", "stocks");
+                if($action != null) return $action;
+                $userStocks = $selecting->pull()[0];
+                if(count($userStocks) > 0):
+                    $this->status = 0;
+                    $this->type = "error";
+                    $this->content = "You already have a share from this stock";
+                else:
+                    $shares = round($amount / $price, 2);
+                    $code = Func::generateCode();
+                    $subject = ["tranx", "market", "user", "symbol", "shares", "orderType", "limitOrder", "exp", "amount", "triggered", "profit", "date"];
+                    $items = [$code, $market, $this->user, $symbol, $shares, $type, $limitPrice, $expDate, $amount, $triggered, $zero, Func::dateFormat()];
+
+                    // Save to database next
+                    $inserting = new Insert(self::$db, "stocks", $subject, "");
+                    $action = $inserting->action($items, 'ssisssssiiis');
+                    if(!$action) return $action;
+                    // Update user wallet if triggered is 1
+                    if($triggered == 1):
+                        $updating = new Update(self::$db, "SET stock = stock - ? WHERE id = ?# $amount# $this->user");
+                        if(!$updating->mutate('ii', 'users')):
+                            return $this->content = "Something went wrong...";
+                        endif;
+                    endif;
+
+                    self::$db->autocommit(true);
+                    $this->status = 1;
+                    $this->type = "success";
+                    $this->content = "You have purchased $symbol";
+                endif;
+            endif;
+
+            if($orderType == "sell"):
+                // Fetch stock info
+                $data = [
+                    "id" => $id,
+                    "1" => "1",
+                    "needle" => "*",
+                    "table" => "stocks"
+                ];
+
+                $stock = Func::searchDb(self::$db, $data, "AND");
+                if(empty($stock)):
+                    $this->status = 0;
+                    $this->type = "error";
+                    $this->content = "You do not own any $symbol stock";
+                else:
+                    if($stock['triggered'] == 0): 
+                        // Just delete the limit
+                        $deleting = new Delete(self::$db, "WHERE id = ?, $id");
+                        if($deleting->proceed('stocks')):
+                            self::$db->autocommit(true);
+                            $this->status = 1;
+                            $this->type = "success";
+                            $this->content = "You have successfully closed your $symbol limit";
+                        else:
+                            $this->content = "Something went wrong...";
+                        endif;
+                    elseif($stock['triggered'] == 1):
+                        // Set the triggered to 2, meaning the trade has closed
+                        // Update user wallet if triggered is 1
+
+                        $totalProfit = $price * $stock['shares'];
+                        $updating = new Update(self::$db, "SET stock = stock + ? WHERE id = ?# $totalProfit# $this->user");
+                        if($updating->mutate('ii', 'users')):
+                            // Update the stock status
+                            $updating = new Update(self::$db, "SET triggered = 2, profit = ? - amount WHERE id = ?# $totalProfit# $id");
+                            if($updating->mutate('ii', 'stocks')):
+                                self::$db->autocommit(true);
+                                $this->status = 1;
+                                $this->type = "success";
+                                $this->content = "You have successfully sold your $symbol shares";
+                            else:
+                                $this->content = "Something went wrong...";
+                            endif;
+                        else:
+                            $this->content = "Something went wrong...";
+                        endif;
+                    endif;
+                endif;
+            endif;
 
             return $this->deliver();
         }

@@ -54,154 +54,154 @@
                 symbol: 'TSLA',
                 logo: 'tsla.png',
                 stockUrl: 'terminal?symbol=tsla&type=stock',
-                optionsUrl: 'terminal?symbol=tsla&type=stock'
+                optionsUrl: 'options?options=tsla&type=stock'
             },
             {
                 name: 'Apple Inc.',
                 symbol: 'AAPL',
                 logo: 'aapl.png',
                 stockUrl: 'terminal?symbol=aapl&type=stock',
-                optionsUrl: 'terminal?symbol=aapl&type=stock'
+                optionsUrl: 'options?options=aapl&type=stock'
             },
             {
                 name: 'Microsoft Corporation',
                 symbol: 'MSFT',
                 logo: 'msft.png',
                 stockUrl: 'terminal?symbol=msft&type=stock',
-                optionsUrl: 'terminal?symbol=msft&type=stock'
+                optionsUrl: 'options?options=msft&type=stock'
             },
             {
                 name: 'Alphabet Inc.',
                 symbol: 'GOOGL',
                 logo: 'googl.png',
                 stockUrl: 'terminal?symbol=googl&type=stock',
-                optionsUrl: 'terminal?symbol=googl&type=stock'
+                optionsUrl: 'options?options=googl&type=stock'
             },
             {
                 name: 'Amazon.com, Inc.',
                 symbol: 'AMZN',
                 logo: 'amzn.png',
                 stockUrl: 'terminal?symbol=amzn&type=stock',
-                optionsUrl: 'terminal?symbol=amzn&type=stock'
+                optionsUrl: 'options?options=amzn&type=stock'
             },
             {
                 name: 'Meta Platforms, Inc.',
                 symbol: 'META',
                 logo: 'meta.png',
                 stockUrl: 'terminal?symbol=meta&type=stock',
-                optionsUrl: 'terminal?symbol=meta&type=stock'
+                optionsUrl: 'options?options=meta&type=stock'
             },
             {
                 name: 'NVIDIA Corporation',
                 symbol: 'NVDA',
                 logo: 'nvda.png',
                 stockUrl: 'terminal?symbol=nvda&type=stock',
-                optionsUrl: 'terminal?symbol=nvda&type=stock'
+                optionsUrl: 'options?options=nvda&type=stock'
             },
             {
                 name: 'Netflix, Inc.',
                 symbol: 'NFLX',
                 logo: 'nflx.png',
                 stockUrl: 'terminal?symbol=nflx&type=stock',
-                optionsUrl: 'terminal?symbol=nflx&type=stock'
+                optionsUrl: 'options?options=nflx&type=stock'
             },
             {
                 name: 'Adobe Inc.',
                 symbol: 'ADBE',
                 logo: 'adbe.png',
                 stockUrl: 'terminal?symbol=adbe&type=stock',
-                optionsUrl: 'terminal?symbol=adbe&type=stock'
+                optionsUrl: 'options?options=adbe&type=stock'
             },
             {
                 name: 'BYND Cannasoft Enterprises Inc.',
                 symbol: 'BCAN',
                 logo: 'bynd.png',
                 stockUrl: 'terminal?symbol=bynd&type=stock',
-                optionsUrl: 'terminal?symbol=bynd&type=stock'
+                optionsUrl: 'options?options=bynd&type=stock'
             },
             {
                 name: 'DocuSign, Inc.',
                 symbol: 'DOCU',
                 logo: 'docu.png',
                 stockUrl: 'terminal?symbol=docu&type=stock',
-                optionsUrl: 'terminal?symbol=docu&type=stock'
+                optionsUrl: 'options?options=docu&type=stock'
             },
             {
                 name: 'Affirm Holdings, Inc.',
                 symbol: 'AFRM',
                 logo: 'afrm.png',
                 stockUrl: 'terminal?symbol=afrm&type=stock',
-                optionsUrl: 'terminal?symbol=afrm&type=stock'
+                optionsUrl: 'options?options=afrm&type=stock'
             },
             {
                 name: 'Applovin Corporation',
                 symbol: 'APP',
                 logo: 'app.png',
                 stockUrl: 'terminal?symbol=app&type=stock',
-                optionsUrl: 'terminal?symbol=app&type=stock'
+                optionsUrl: 'options?options=app&type=stock'
             },
             {
                 name: 'Intel Corporation',
                 symbol: 'INTC',
                 logo: 'intc.png',
                 stockUrl: 'terminal?symbol=intc&type=stock',
-                optionsUrl: 'terminal?symbol=intc&type=stock'
+                optionsUrl: 'options?options=intc&type=stock'
             },
             {
                 name: 'PayPal Holdings, Inc',
                 symbol: 'PYPL',
                 logo: 'pypl.png',
                 stockUrl: 'terminal?symbol=pypl&type=stock',
-                optionsUrl: 'terminal?symbol=pypl&type=stock'
+                optionsUrl: 'options?options=pypl&type=stock'
             },
             {
                 name: 'Qualcom Incorporated',
                 symbol: 'QCOM',
                 logo: 'qcom.png',
                 stockUrl: 'terminal?symbol=qcom&type=stock',
-                optionsUrl: 'terminal?symbol=qcom&type=stock'
+                optionsUrl: 'options?options=qcom&type=stock'
             },
             {
                 name: 'Rivian Automotive, Inc.',
                 symbol: 'RIVN',
                 logo: 'rivn.png',
                 stockUrl: 'terminal?symbol=rivn&type=stock',
-                optionsUrl: 'terminal?symbol=rivn&type=stock'
+                optionsUrl: 'options?options=rivn&type=stock'
             },
             {
                 name: 'Starbucks Corporation',
                 symbol: 'SBUX',
                 logo: 'sbux.png',
                 stockUrl: 'terminal?symbol=sbux&type=stock',
-                optionsUrl: 'terminal?symbol=sbux&type=stock'
+                optionsUrl: 'options?options=sbux&type=stock'
             },
             {
                 name: 'United Airlines Holdings, Inc.',
                 symbol: 'UAL',
                 logo: 'ual.png',
                 stockUrl: 'terminal?symbol=ual&type=stock',
-                optionsUrl: 'terminal?symbol=ual&type=stock'
+                optionsUrl: 'options?options=ual&type=stock'
             },
             {
                 name: 'Harrow, Inc.',
                 symbol: 'HROW',
                 logo: 'hrow.png',
                 stockUrl: 'terminal?symbol=hrow&type=stock',
-                optionsUrl: 'terminal?symbol=hrow&type=stock'
+                optionsUrl: 'options?options=hrow&type=stock'
             },
             {
                 name: 'Hydrofarm Holdings Group, Inc.',
                 symbol: 'HYFM',
                 logo: 'hyfm.png',
                 stockUrl: 'terminal?symbol=hyfm&type=stock',
-                optionsUrl: 'terminal?symbol=hyfm&type=stock'
+                optionsUrl: 'options?options=hyfm&type=stock'
             },
             {
                 name: 'Hyzon Motors Inc.',
                 symbol: 'HYZN',
                 logo: 'hyzn.png',
                 stockUrl: 'terminal?symbol=hyzn&type=stock',
-                optionsUrl: 'terminal?symbol=hyzn&type=stock'
+                optionsUrl: 'options?options=hyzn&type=stock'
             },
         ]
 

@@ -51,22 +51,25 @@
                         <div class="row mt-1 justify-content-between align-items-center">
                             <div class="col-6">
                                 <div style="color: silver">Total Shares</div>
-                                <div class="sub-sub-head">0.00 <small>TSLA</small></div>
+                                <div class="sub-sub-head">
+                                    <?= $totalShares; ?>
+                                    <small><?= strtoupper($symbol); ?></small>
+                                </div>
                             </div>
                             <div class="col-6 text-end">
                                 <div style="color: silver">Total Profit</div>
-                                <div>$0.00</div>
+                                <div>$<?= $totalProfit; ?></div>
                             </div>
                         </div>
                         <hr>
                         <div class="row mt-1 justify-content-between align-items-center">
                             <div class="col-6">
                                 <div style="color: silver">Cost of Purchase</div>
-                                <div class="sub-sub-head">$0.00</div>
+                                <div class="sub-sub-head">$<?= $totalAmount; ?></div>
                             </div>
                             <div class="col-6 text-end">
-                                <div style="color: silver">Today's Profit</div>
-                                <div>$0.00</div>
+                                <div style="color: silver">Stock</div>
+                                <div><?= strtoupper($symbol); ?></div>
                             </div>
                         </div>
                     </div>
@@ -119,54 +122,64 @@
                                 </div>
                                 <hr>
                                 <div class="row justify-content-between align-items-center mt-3">
-                                    <div class="col-3">Wallet Balance</div>
+                                    <div class="col-3">Stock Balance</div>
                                     <div class="col-9 text-end">
-                                        $<?= $user['wallet']; ?>.00
+                                        $<?= $user['stock']; ?>.00
                                     </div>
                                 </div>
                                 <hr>
                                 <div>
-                                    <button class="form-control btn" onclick="order(this, 'buy', 'stock', <?= $symbolInfo['regularMarketPrice'] ?? null; ?>, '<?= $symbol; ?>')">Buy</button>
+                                    <button class="form-control btn" onclick="order(this, 'buy', 'stock', <?= $symbolInfo['regularMarketPrice'] ?? null; ?>, '<?= $symbol; ?>', <?= count($userStocks) > 0 ? $userStocks[0]['id'] : 0; ?>)">Buy</button>
                                 </div>
                             </div>
 
                             <div class="tab-pane fade data-body" id="sell" role="tabpanel" aria-labelledby="sell-tab">
-                            <div class="row justify-content-between align-items-center">
-                                <div class="col-3">
-                                    Order Type
+                            
+                                <div class="table-responsive">
+                                    <table class="table table-box border-0 bg-transparent">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">SHARES</th>
+                                                <th scope="col">ORDER</th>
+                                                <th scope="col">AMOUNT</th>
+                                                <th scope="col">LIMIT</th>
+                                                <th scope="col">DATE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if(count($userStocks) < 1): ?>
+                                                <tr>
+                                                    <td colspan="6">
+                                                        <div class="col-12 text-center py-5">
+                                                            You current do not own any <?= $symbol; ?> stock
+                                                        </div>
+                                                    </td>
+                                                    
+                                                </tr>
+                                            <?php else: ?>
+                                                <?php foreach($userStocks as $stock): ?>
+                                                    <tr>
+                                                        <td><?= $stock['shares']; ?></td>
+                                                        <td><?= $stock['orderType']; ?></td>
+                                                        <td>$<?= $stock['amount']; ?></td>
+                                                        <td><?= $stock['limitOrder']; ?></td>
+                                                        <td><?= substr($stock['date'], 0, 10); ?></td>
+                                                    </tr>
+                                            <?php endforeach; endif; ?>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="col-9">
-                                    <select name="order" id="order" class="form-control form-inp" onchange="orderType(this)">
-                                        <option value="market">Market Sell</option>
-                                        <option value="limit">Limit Sell</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div id="limitOpts" class="d-none">
+                                <hr>
                                 <div class="row justify-content-between align-items-center mt-3">
-                                    <div class="col-3">Sell Limit</div>
-                                    <div class="col-9">
-                                        <input type="text" placeholder="0" class="form-control form-inp">
+                                    <div class="col-3">Available Shares</div>
+                                    <div class="col-9 text-end">
+                                        <?= count($userStocks) > 0 ? $userStocks[0]['shares'] : 0; ?> <?= strtoupper($symbol); ?>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row justify-content-between align-items-center mt-3">
-                                <div class="col-3">Amount</div>
-                                <div class="col-9">
-                                    <input type="text" placeholder="Amount (USD)" class="form-control form-inp" id="amount">
+                                <hr>
+                                <div>
+                                    <button class="form-control btn" onclick="order(this, 'sell', 'stock', <?= $symbolInfo['regularMarketPrice'] ?? null; ?>, '<?= $symbol; ?>', <?= count($userStocks) > 0 ? $userStocks[0]['id'] : 0; ?>)">Sell/Close All</button>
                                 </div>
-                            </div>
-                            <hr>
-                            <div class="row justify-content-between align-items-center mt-3">
-                                <div class="col-3">Available Shares</div>
-                                <div class="col-9 text-end">
-                                    0.00
-                                </div>
-                            </div>
-                            <hr>
-                            <div>
-                                <button class="form-control btn" onclick="order(this, 'sell')">Sell</button>
-                            </div>
                             </div>
                         </div>
                     </div>
@@ -182,7 +195,7 @@
         message: "fill",
         content: ""
     }
-    let wallet = <?= $user['wallet']; ?>;
+    let stock = <?= $user['stock']; ?>;
     window.addEventListener("load", () =>  {
         // Fetch parameter from URL
         let param = new Func().getPath()['parameter'] ?? null
@@ -256,28 +269,41 @@
         }
     }
 
-    function order(self, orderType, market, price, symbol) {
+    function order(self, orderType, market, price, symbol, id) {
         let error = false
         let parent = self.closest(".data-body")
+        let type = ""
+        let limitPrice = ""
+        let expDate = ""
+        let amount = ""
 
-        let amount = parent.querySelector("#amount").value
-        let type = parent.querySelector("#order").value
-        let limitPrice = parent.querySelector("#limitPrice").value
-        let expDate = parent.querySelector("#limitExp").value
-        let dataObj = {market, price, symbol, amount, type, limitPrice, expDate}
+        if(orderType == "buy"){
+            amount = parent.querySelector("#amount").value
+            type = parent.querySelector("#order").value
+            limitPrice = parent.querySelector("#limitPrice").value
+            expDate = parent.querySelector("#limitExp").value
+        }
 
         // validations
-        // Amount is in both, so i just targeted the closest one to this element
-        if(amount < 1 || amount == "") {
-            data.type = "warning"
-            data.content = "Please enter a valid amount"
-            new Func().notice_box(data)
-            error = true
+        // Check if stock balance is sufficient
+        if(orderType == "buy"){
+            if(stock < amount) {
+                data.type = "warning"
+                data.content = "Please fund your stock wallet"
+                new Func().notice_box(data)
+                error = true
+            }
+            // Amount is in both, so i just targeted the closest one to this element
+            if(amount < 1 || amount == "") {
+                data.type = "warning"
+                data.content = "Please enter a valid amount"
+                new Func().notice_box(data)
+                error = true
+            }
         }
 
         // Check for the limit price next
-        if(type == "Limit Buy" || type == "Limit Sell") {
-            console.log("here")
+        if(type == "Limit Buy") {
             if(limitPrice < 1 || limitPrice == "") {
                 data.type = "warning"
                 data.content = "Please enter a valid limit"
@@ -286,7 +312,12 @@
             }else{
                 if(error) error = true
             }
+        }else{
+            limitPrice = ""
+            expDate = ""
         }
+
+        let dataObj = {orderType, market, price, symbol, amount, type, limitPrice, expDate, id}
 
         if(!error){
             let payload = {
@@ -294,7 +325,6 @@
                 action: "orderStock",
                 val: dataObj
             }
-            console.log(payload)
 
             new Func().request("../request.php", JSON.stringify(payload), 'json')
             .then(val => {

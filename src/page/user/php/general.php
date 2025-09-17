@@ -104,6 +104,36 @@
             $symbolInfo = "";
             if($_GET['type'] == "stock"):
                 $symbolInfo = Func::fetchStock($_GET['symbol']);
+                // fetch user stocks
+                $symbol = strtoupper($_GET['symbol']);
+                $selecting->more_details("WHERE user = ? AND symbol = ? AND triggered < 2 ORDER BY id DESC# $userId# $symbol");
+                $action = $selecting->action("*", "stocks");
+                if($action != null) return $action;
+                $userStocks = $selecting->pull()[0];
+                $selecting->reset();
+
+                // Fetch total history on the stock
+                $symbol = strtoupper($_GET['symbol']);
+                $selecting->more_details("WHERE user = ? AND symbol = ? AND triggered > 0 ORDER BY id DESC# $userId# $symbol");
+                $action = $selecting->action("SUM(shares), SUM(profit), SUM(amount)", "stocks");
+                if($action != null) return $action;
+                $totalStocks = $selecting->pull()[0];
+                $totalShares = 0;
+                $totalProfit = 0.00;
+                $totalAmount = 0.00;
+                if(count($totalStocks) > 0):
+                    $totalShares = round($totalStocks[0]['SUM(shares)'], 2);
+                    $totalProfit = $totalStocks[0]['SUM(profit)'];
+                    $totalAmount = $totalStocks[0]['SUM(amount)'];
+                endif;
+                $selecting->reset();
+            endif;
+        endif;
+
+        if(isset($_GET['options'])):
+            $optionsInfo = "";
+            if($_GET['type'] == "stock"):
+                $optionsInfo = Func::getStockOptions($_GET['options']);
             endif;
         endif;
     endif;
