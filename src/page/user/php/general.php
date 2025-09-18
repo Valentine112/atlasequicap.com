@@ -133,8 +133,12 @@
         if(isset($_GET['options'])):
             $optionsInfo = "";
             if($_GET['type'] == "stock"):
-                $optionsInfo = Func::getStockOptions($_GET['options']);
+                //$optionsInfo = json_encode(Func::getStockOptions($_GET['options']));
             endif;
+        endif;
+
+        if(isset($_GET['coin'])):
+            $coins = Func::fetchCoin();
         endif;
     endif;
 ?>

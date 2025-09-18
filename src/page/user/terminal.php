@@ -38,7 +38,7 @@
                         <div class="tradingview-widget-container" id="tradingContainer">
                             <div class="tradingview-widget-container__widget"></div>
                             <div class="tradingview-widget-copyright">
-                                <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank" id="chartlink"><span class="blue-text">MSFT chart by TradingView</span></a>
+                                <a href="" rel="noopener nofollow" target="_blank" id="coinUrl"><span class="blue-text">XAUUSD chart by TradingView</span></a>
                             </div>
                             
                         </div>

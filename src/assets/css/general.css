@@ -333,6 +333,16 @@ table td{
         font-weight: 600;
     }
 }
+.cryptoOrder div{
+    font-size: 15px!important;
+}
+.historyBox > div > div{
+    cursor: pointer;
+}
+.historyBox .active{
+    background: #111;
+    border-radius: 5px;
+}
 .profile label{
     display: block;
 }

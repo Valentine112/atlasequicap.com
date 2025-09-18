@@ -41,9 +41,10 @@
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../src/assets/css/general.css">
     <link rel="stylesheet" href="../assets/css/line-awesome.min.css">
+    <script src="../src/assets/js/pagination.min.js"></script>
     <title>QFSLedgerConnect - Storage for your wallets</title>
 </head>
 <body class="data-light-body">
@@ -57,7 +58,7 @@
                 <main>
                     <header>
                         <p class="title">Options</p>
-                        <?php print_r($optionsInfo); ?>
+                        <?php //print_r($optionsInfo); ?>
                     </header>
 
                     <section>
@@ -66,7 +67,7 @@
                     <hr>
                     <div class="data-body">
                         <div class="table-responsive">
-                            <table class="table table-borderless table-box border-0 bg-transparent">
+                            <table class="table table-borderless table-box border-0 bg-transparent" id="data-container">
                                 <thead>
                                     <tr>
                                         <th col="">Type</th>
@@ -79,32 +80,9 @@
                                         <th col="">Open Interest</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                <?php 
-                                    foreach ($optionsInfo['data'] as $contract):
-                                        $contractSymbol = $contract['contractSymbol'];
-                                        $type = (str_contains($contractSymbol, "C")) ? "CALL" : "PUT";
-                                        $strike = $contract['strike'];
-                                        $expiry = $contract['expirationDate'];
-                                        $last = $contract['lastPrice'] ?? "-";
-                                        $bid = $contract['bid'] ?? "-";
-                                        $ask = $contract['ask'] ?? "-";
-                                        $volume = $contract['volume'] ?? "-";
-                                        $oi = $contract['openInterest'] ?? "-";
-                                ?>
-                                    <tr>
-                                        <td><?= $type; ?></td>
-                                        <td><?= $strike; ?></td>
-                                        <td><?= $expiry; ?></td>
-                                        <td><?= $last; ?></td>
-                                        <td><?= $bid; ?></td>
-                                        <td><?= $ask; ?></td>
-                                        <td><?= $volume; ?></td>
-                                        <td><?= $oi; ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                                </tbody>
+                                
                             </table>
+                            <div id="pagination-container"></div>
                         </div>
                     </div>
 
@@ -166,4 +144,57 @@
         </div>
     </div>
 </body>
+<script>
+    $('#pagination-container').pagination({
+        dataSource: [1, 2, 3, 4, 5, 6, 7],
+        callback: function(data, pagination) {
+            // template method of yourself
+            var html = template(data);
+            $('#data-container').html(html);
+        }
+    })
+
+    function template(data) {
+        let html = "<tbody>"
+        var tBody = `<tr>
+                        <td>${data.type}</td>
+                        <td${data.strike}</td>
+                        <td>${data.expirationDate}</td>
+                        <td>${data.lastPrice}</td>
+                        <td>${data.bid}</td>
+                        <td>${data.ask}</td>
+                        <td>${data.volume}</td>
+                        <td>${data.openInterest}</td>
+                    </tr>`;
+        $.each(data, function(index, item){
+            html += tBody;
+        });
+        html += '</tbody>';
+        return html;
+    }
+
+    const symbol = "AAPL";
+    const token = "d35dit1r01qhqkb1uurgd35dit1r01qhqkb1uus0"; // <-- replace with your finnhub.io API key
+    const url = `https://finnhub.io/api/v1/stock/option-chain?symbol=${symbol}&token=${token}`;
+
+    async function fetchOptions() {
+        try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error("HTTP " + res.status);
+            const data = await res.json();
+
+            console.log("Options Data:", data);
+
+            // If you want just calls & puts:
+            if (data && data.data) {
+            console.log("Calls:", data.data.calls);
+            console.log("Puts:", data.data.puts);
+            }
+        } catch (err) {
+            console.error("Error fetching options:", err);
+        }
+    }
+
+    console.log(fetchOptions())
+</script>
 </html>

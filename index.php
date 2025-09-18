@@ -85,6 +85,10 @@
         require "src/page/user/options.php";
     })
 
+    ->get('/user/crypto', function() {
+        require "src/page/user/crypto.php";
+    })
+
     ->get('/user/history', function() {
         require "src/page/user/history.php";
     })

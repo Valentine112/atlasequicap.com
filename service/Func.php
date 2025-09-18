@@ -383,7 +383,12 @@
 
             $data = json_decode($response, true);
 
-            return $data;
+            return $data['data'][0];
+        }
+
+        public static function fetchCoin() {
+            // Binance ticker endpoint (all tradable pairs)
+            // Binance API through AllOrigins proxy
         }
 
     }

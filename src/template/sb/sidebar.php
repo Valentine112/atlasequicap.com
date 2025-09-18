@@ -60,20 +60,27 @@
                         <a href="signals"><i class="las la-signal mr-3"></i></span> Signal</a>
                     </li>
                     <li class="py-2" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
-                        <small style="color: grey;"> Trading</small>
+                    <small style="color: grey;"> Trading</small>
                     <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false"><i class="las la-chart-line mr-3"></i></span> Trade</a>
+                        <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="false" id="navbarLevel1"><i class="las la-chart-line mr-3"></i></span> Trade</a>
 
-                        <ul class="dropdown-menu bg-dark px-3">
+                        <ul class="dropdown-menu dropdown-menu-right bg-dark px-3" aria-labelledby="navbarLevel1">
                             <li><a class="dropdown-item" href="stocks">Stocks Trading</a></li>
-                            <li><a class="dropdown-item" href="crypto/terminal?coin=btc">Crypto Futures</a></li>
+                            <li><a class="dropdown-item" href="crypto?coin=btc">Crypto Futures</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="#"><i class="las la-users mr-3"></i></span> Copy Trade</a>
                     </li>
                     <li>
-                        <a href="market"><i class="las la-image mr-3"></i></span> Live Trading</a>
+                        <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false"><i class="las la-image mr-3"></i></span> Live</a>
+
+                        <ul class="dropdown-menu bg-dark px-3">
+                            <li><a class="dropdown-item" href="market">Live Trading</a></li>
+                            <li><a class="dropdown-item" href="certificate">Trading Certificate</a></li>
+                        </ul>
+                    </li>
                     </li>
                     <li>
                         <a href="#"><i class="las la-wallet mr-3"></i></span> Connect Wallet</a>
@@ -104,18 +111,6 @@
                         </div>
                     </form>
                 </div>
-
-                <div class="footer">
-                    <p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="../src/template/sb/colorlib.com" target="_blank">Colorlib.com</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
-                </div>
-
             </div>
         </nav>
 
