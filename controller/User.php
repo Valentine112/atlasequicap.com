@@ -94,6 +94,9 @@
                     case 'orderStock':
                         $result = $modelUser->orderStock();
                         break;
+                    case 'orderCrypto':
+                        $result = $modelUser->orderCrypto();
+                        break;
                     case 'activate':
                         $result = $modelUser->activate();
                         break;

@@ -309,7 +309,7 @@
         }
 
         public static function generateCode() : string {
-            return random_int(1000000000, 99999999999).time();
+            return bin2hex(random_bytes(5));
         }
 
         public static function save_cookie(string $token) {
@@ -389,6 +389,36 @@
         public static function fetchCoin() {
             // Binance ticker endpoint (all tradable pairs)
             // Binance API through AllOrigins proxy
+            // API endpoint (CoinGecko example)
+            $url = "https://api.coingecko.com/api/v3/coins/bitcoin";
+
+            // Initialize cURL
+            $ch = curl_init();
+
+            // Set cURL options
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            // Execute request
+            $response = curl_exec($ch);
+
+            // Close cURL
+            curl_close($ch);
+
+            // Decode JSON response
+            $data = json_decode($response, true);
+
+            return [
+                "price" => $data['market_data']['current_price']['usd'],
+                "symbol" => $data['symbol']
+            ];
+
+            // Print some coin info
+            echo "Name: " . $data['name'] . "\n";
+            echo "Symbol: " . $data['symbol'] . "\n";
+            echo "Current Price (USD): " . $data['market_data']['current_price']['usd'] . "\n";
+            echo "Market Cap (USD): " . $data['market_data']['market_cap']['usd'] . "\n";
+            echo "24h Volume (USD): " . $data['market_data']['total_volume']['usd'] . "\n";
         }
 
     }

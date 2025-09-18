@@ -740,6 +740,31 @@
             return $this->deliver();
         }
 
+        public function orderCrypto() : array {
+            $this->status = 0;
+            $this->message = "fill";
+            $this->type = "error";
+ 
+            list($order, $symbol, $amount, $side, $entry, $tp, $sl, $duration, $leverage) = array_values($this->data['val']);
+
+            $symbol = strtoupper($symbol);
+            (int) $one = 1;
+            (int) $zero = 0;
+            $code = Func::generateCode();
+            $subject = ["tranx", "user", "orderType", "asset", "size", "entry", "duration", "tp", "sl", "profit", "date"];
+            $items = [$code, $this->user, $order, $symbol, $amount, $entry, $duration, $tp, $sl, $zero, Func::dateFormat()];
+            // Save to database next
+            $inserting = new Insert(self::$db, "crypto", $subject, "");
+            $action = $inserting->action($items, 'sisisisssss');
+            if(!$action) return $action;
+
+            $this->status = 1;
+            $this->type = "success";
+            $this->content = "You have successfully placed a trade on $symbol";
+            return $this->deliver();
+        }
+
+
         public function activate() : array {
             $this->status = 0;
             $this->message = "fill";

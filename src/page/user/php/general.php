@@ -80,6 +80,13 @@
         $usersignals = $selecting->pull()[0];
         $selecting->reset();
 
+        // Fetch user crypto
+        $selecting->more_details("WHERE user = ? ORDER BY id DESC# $userId");
+        $action = $selecting->action("*", "crypto");
+        if($action != null) return $action;
+        $userCrypto = $selecting->pull()[0];
+        $selecting->reset();
+
         // Code to insert demo signals, at least 10
         /*$subject = ['name', 'price', 'strength', 'date'];
         $items = [
@@ -138,7 +145,7 @@
         endif;
 
         if(isset($_GET['coin'])):
-            $coins = Func::fetchCoin();
+            $coins = Func::fetchCoin($_GET['coin']);
         endif;
     endif;
 ?>

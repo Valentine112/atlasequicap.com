@@ -38,7 +38,7 @@
                         <div class="tradingview-widget-container" id="tradingContainer">
                             <div class="tradingview-widget-container__widget"></div>
                             <div class="tradingview-widget-copyright">
-                                <a href="" rel="noopener nofollow" target="_blank" id="coinUrl"><span class="blue-text">XAUUSD chart by TradingView</span></a>
+                                <a href="" rel="noopener nofollow" target="_blank" id="coinUrl"><span class="blue-text"></span></a>
                             </div>
                             
                         </div>

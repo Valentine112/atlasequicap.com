@@ -88,7 +88,10 @@
     ->get('/user/crypto', function() {
         require "src/page/user/crypto.php";
     })
-
+    ->get('/user/copytrade', function() {
+        require "src/page/user/copytrade.php";
+    })
+    IY[47IJ6G*0Yty
     ->get('/user/history', function() {
         require "src/page/user/history.php";
     })

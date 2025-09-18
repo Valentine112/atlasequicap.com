@@ -41,57 +41,56 @@
             <div class="p-4 sidebar-content">
                 <h1><a href="index.html" class="logo">Atlasequicap <span>Atlasequicap Brokers</span></a></h1>
                 <ul class="list-unstyled components mb-5">
-                    <li class="active">
+                    <li class="home">
                         <a href="home"><i class="las la-home mr-3"></i></span> Home</a>
                     </li>
-                    <li>
+                    <li class="assets">
                         <a href="assets"><i class="las la-digital-tachograph mr-3"></i></span> Assets</a>
                     </li>
-                    <li>
+                    <li class="deposit">
                         <a href="deposit"><i class="las la-file-invoice mr-3"></i></span> Deposit</a>
                     </li>
-                    <li>
+                    <li class="withdraw">
                         <a href="withdraw"><i class="las la-hand-holding-usd mr-3"></i></span> Withdraw</a>
                     </li>
-                    <li>
+                    <li class="convert">
                         <a href="convert"><i class="las la-sync mr-3"></i></span> Convert</a>
                     </li>
-                    <li>
+                    <li class="signals">
                         <a href="signals"><i class="las la-signal mr-3"></i></span> Signal</a>
                     </li>
                     <li class="py-2" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
-                    <small style="color: grey;"> Trading</small>
-                    <li class="dropdown">
-                        <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="false" id="navbarLevel1"><i class="las la-chart-line mr-3"></i></span> Trade</a>
+                        <small style="color: grey;"> Trading</small>
+                    </li>
+                    <li class="dropdown py-1" onclick="toggleDrop(this)">
+                        <span><i class="las la-image mr-3"></i> Trading <i class="las la-caret-down ml-5" style="font-size: 13px;"></i></span>
 
-                        <ul class="dropdown-menu dropdown-menu-right bg-dark px-3" aria-labelledby="navbarLevel1">
-                            <li><a class="dropdown-item" href="stocks">Stocks Trading</a></li>
-                            <li><a class="dropdown-item" href="crypto?coin=btc">Crypto Futures</a></li>
+                        <ul class="px-3 ml-5 pl-5 d-none sub-menu">
+                            <li><a href="stocks">Stocks Trading</a></li>
+                            <li><a href="crypto?coin=btc">Crypto Futures</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#"><i class="las la-users mr-3"></i></span> Copy Trade</a>
+                    <li class="copy">
+                        <a href="copytrade"><i class="las la-users mr-3"></i></span> Copy Trade</a>
                     </li>
-                    <li>
-                        <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false"><i class="las la-image mr-3"></i></span> Live</a>
+                    <li class="dropdown py-1" onclick="toggleDrop(this)">
+                        <span><i class="las la-image mr-3"></i> Live <i class="las la-caret-down ml-5" style="font-size: 13px;"></i></span>
 
-                        <ul class="dropdown-menu bg-dark px-3">
-                            <li><a class="dropdown-item" href="market">Live Trading</a></li>
-                            <li><a class="dropdown-item" href="certificate">Trading Certificate</a></li>
+                        <ul class="px-3 ml-5 pl-5 d-none sub-menu">
+                            <li><a href="market">Live Trading</a></li>
+                            <li><a href="certificate">My Certificate</a></li>
                         </ul>
                     </li>
-                    </li>
-                    <li>
-                        <a href="#"><i class="las la-wallet mr-3"></i></span> Connect Wallet</a>
+                    <li class="mt-1 walletconnect">
+                        <a href="walletconnect"><i class="las la-wallet mr-3"></i></span> Connect Wallet</a>
                     </li>
                     <li class="py-2" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
                         <small style="color: grey;"> Account</small>
                     <li>
-                    <li>
+                    <li class="settings">
                         <a href="#"><i class="las la-cog mr-3"></i></span> Settings</a>
                     </li>
-                    <li>
+                    <li class="referrals">
                         <a href="#"><i class="las la-comments mr-3"></i></span> Referrals</a>
                     </li>
                     <li>
@@ -120,5 +119,18 @@
     <script src="../src/template/sb/js/bootstrap.min.js"></script>
     <script src="../src/template/sb/js/main.js"></script>
 </body>
+    <script>
+        window.addEventListener("load", () => {
+            let path = new Func().getPath()['main_path'] ?? null
+            let elem = document.querySelector(`.${path}`) ?? null
+            if(elem != null) {
+                elem.classList.add("active")
+            }
+            console.log(path)
+        })
 
+        function toggleDrop(self) {
+            self.querySelector(".sub-menu").classList.toggle("d-none")
+        }
+    </script>
 </html>
