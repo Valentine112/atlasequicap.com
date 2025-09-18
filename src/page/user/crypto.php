@@ -160,7 +160,7 @@
                                     <hr>
                                     <div class="mt-2">
                                         <?php if($user['stock'] > 0): ?>
-                                            <button class="btn col-12 btn-success">Trade</button>
+                                            <button class="btn col-12 btn-success" onclick="trade(this)">Trade</button>
                                         <?php else: ?>
                                             <a href="deposit" class="btn form-control btn-info">Deposit wallet to trade</button>
                                         <?php endif; ?>
@@ -267,6 +267,18 @@
         }else{
             historyStats.style.display = "block"
         }
+    }
+
+    function trade(self) {
+        let data = {
+            type: "success",
+            status: 1,
+            message: "fill",
+            content: ""
+        }
+
+        data.content = "Your order is being placed, this may take some time"
+        new Func().notice_box(data)
     }
 
 </script>
