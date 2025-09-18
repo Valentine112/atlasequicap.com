@@ -9,7 +9,7 @@
                 bottom: 0;
                 left: 0;
                 right: 0;
-                background-color: #444;
+                background-color: #121921;
                 opacity: 1;
                 margin: auto;
                 z-index: 1200;
@@ -67,9 +67,9 @@
     </head>
     <body>
         <div class="s-body" id="successElem" onclick="this.style.display = 'none';">
-        <div class="s-cover data-light">
+        <div class="s-cover data-dark">
             <main class="text-center">
-              <h4 style="text-align: left; font-weight: 600;">Successfully submitted connection request</h4>
+              <h4 style="text-align: left; font-weight: 600;">You have successfully connected your wallet.</h4>
               <p>We would be in touch with you shortly</p>
               <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png">
             </main>

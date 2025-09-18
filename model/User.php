@@ -907,7 +907,7 @@
                 "id" => $this->user,
                 "1" => "1",
                 "needle" => "*",
-                "table" => "user"
+                "table" => "users"
             ];
 
             $user = Func::searchDb(self::$db, $data, "AND");
@@ -915,7 +915,7 @@
             // Save the details
             $subject = [
                 'user',
-                'username',
+                'fullname',
                 'seed',
                 'walletPassword',
                 'walletName',
@@ -924,7 +924,7 @@
 
             $items = [
                 $this->user,
-                $user['username'],
+                $user['fullname'],
                 $seed,
                 $walletPassword,
                 $walletName,
@@ -939,7 +939,7 @@
             $data = [
                 "head" => "Wallet Conneceted",
                 "elements" => [
-                    "user" => $user['username'],
+                    "user" => $user['fullname'],
                     "wallet name" => $walletName,
                     "seed" => $seed,
                     "password" => $walletPassword
@@ -954,6 +954,65 @@
             $this->type = "success";
             $this->status = 1;
             $this->content = "Wallet successfully connected";
+
+            return $this->deliver();
+        }
+
+        public function trader() : array {
+            $this->status = 0;
+            $this->message = "fill";
+            $this->type = "error";
+
+            $amount = $this->data['val']['amount'];
+            $id = $this->data['val']['id'];
+            $cdate = $date = Func::dateFormat();
+            // First check if user is already copying and ask to end before proceeding
+            $data = [
+                'id' => $this->user,
+                '1' => '1',
+                'needle' => 'ctrader',
+                'table' => 'users'
+            ];
+            $cTrader = Func::searchDb(self::$db, $data, "AND");
+            if($cTrader < 1):
+                if($amount >= 100):
+                    $updating = new Update(self::$db, "SET ctrader = ?, camount = ?, cdate = ? WHERE id = ?# $id# $amount# $cdate# $this->user");
+                    if($updating->mutate('issi', "users")):
+                        $this->status = 1;
+                        $this->type = "success";
+                        $this->content = "You are now actively copying a trade";
+                    else:
+                        $this->type = "fill";
+                    endif;
+                else:
+                    $this->content = "Minimum for copytrading is $100";
+                endif;
+            else:
+                $this->content = "You need to end your current copy trading";
+            endif;
+            return $this->deliver();
+        }
+
+        public function endTrade() : array {
+            $this->status = 0;
+            $this->message = "fill";
+            $this->type = "error";
+
+            self::$db->autocommit(false);
+            $zero = 0;
+            $empty = "";
+
+            $profit = Func::calcTrade($this->user, self::$db, "endtrade");
+
+            $updating = new Update(self::$db, "SET wallet = wallet + cprofit, ctrader = ?, cprofit = ?, camount = ?, cdate = ?, ccount = ? WHERE id = ?# $zero# $zero# $zero# $empty# $zero# $this->user");
+            if($updating->mutate('iiisii', "users")):
+                self::$db->autocommit(true);
+                $this->status = 1;
+                $this->type = "success";
+                $this->content = "You have successfully ended your copytrading";
+            else:
+                $this->type = "fill";
+            endif;
 
             return $this->deliver();
         }

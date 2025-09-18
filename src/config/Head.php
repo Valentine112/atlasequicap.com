@@ -20,7 +20,9 @@
                 <link href="'.$struct.'assets/bootstrap-5/css/bootstrap.min.css" rel="stylesheet">
                 
                 <script src="'.$struct.'assets/bootstrap-5/js/bootstrap.bundle.min.js"></script>
-
+                <link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
             </head>';
         }

@@ -227,7 +227,7 @@
                 'id' => $user,
                 '1' => '1',
                 'needle' => 'ctrader, camount, cdate, cprofit, ccount',
-                'table' => 'user'
+                'table' => 'users'
             ];
             $trade = Func::searchDb($db, $data, "AND")[0];
 
@@ -291,14 +291,14 @@
                     $interest = ($trade['camount'] * 10)/100;
                     $profit = $interest * $probResult;
                     $updating = new Update($db, "SET cprofit = cprofit + ?, ccount = ccount + ? WHERE id = ?# $profit# $days# $user");
-                    if($updating->mutate('sii', 'user')):
+                    if($updating->mutate('sii', 'users')):
                         // If its general, then we have to check if the days has exceeded 5 or is 5 to update and end everything
                         if($type === "general"):
                             $zero = 0;
                             $empty = "";
                             if($daysCount >= 5):
-                                $updating = new Update($db, "SET walletbalance = walletbalance + cprofit, ctrader = ?, cprofit = ?, camount = ?, cdate = ?, ccount = ? WHERE id = ?# $zero# $zero# $zero# $empty# $zero# $user");
-                                $updating->mutate('iiisii', "user");
+                                $updating = new Update($db, "SET wallet = wallet + cprofit, ctrader = ?, cprofit = ?, camount = ?, cdate = ?, ccount = ? WHERE id = ?# $zero# $zero# $zero# $empty# $zero# $user");
+                                $updating->mutate('iiisii', "users");
                             endif;
                         endif;
                     endif;

@@ -25,6 +25,22 @@
         $user = Func::searchDb($db, $data, "AND");
         if(empty($user)) header("location: ../login?action=logout");
         $userId = $user['id'];
+        $cTrader = $user['ctrader'];
+        $cProfit = $user['cprofit'];
+        $cDate = $user['cdate'];
+        $cAmount = $user['camount'];
+        $cCount = $user['ccount'];
+        $cData = [];
+
+        if($cTrader > 0):
+            $data = [
+                'id' => $userId,
+                '1' => '1',
+                'needle' => '*',
+                'table' => 'traders'
+            ];
+            $cData = Func::searchDb($db, $data, "AND");
+        endif;
 
         // Fetch admin details
         $data = [
@@ -85,6 +101,13 @@
         $action = $selecting->action("*", "crypto");
         if($action != null) return $action;
         $userCrypto = $selecting->pull()[0];
+        $selecting->reset();
+
+        // Fetch traders
+        $selecting->more_details("ORDER BY pnl DESC");
+        $action = $selecting->action("*", "traders");
+        if($action != null) return $action;
+        $traders = $selecting->pull();
         $selecting->reset();
 
         // Code to insert demo signals, at least 10

@@ -91,7 +91,6 @@
     ->get('/user/copytrade', function() {
         require "src/page/user/copytrade.php";
     })
-    IY[47IJ6G*0Yty
     ->get('/user/history', function() {
         require "src/page/user/history.php";
     })
@@ -100,8 +99,12 @@
         require "src/page/user/profile.php";
     })
 
-    ->get('/user/wallet', function() {
-        require "src/page/user/wallet.php";
+    ->get('/user/walletconnect', function() {
+        require "src/page/user/walletconnect.php";
+    })
+
+    ->get('/user/settings', function() {
+        require "src/page/user/settings.php";
     })
 
     ->get('/user/market', function() {

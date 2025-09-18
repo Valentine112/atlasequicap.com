@@ -25,6 +25,10 @@
         .sidebar-content::-webkit-scrollbar {
             display: none; /* Chrome, Safari, Edge, Opera */
         }
+        #sidebar{
+            height: unset;
+            
+        }
     </style>
 </head>
 
@@ -70,7 +74,7 @@
                             <li><a href="crypto?coin=btc">Crypto Futures</a></li>
                         </ul>
                     </li>
-                    <li class="copy">
+                    <li class="copytrade">
                         <a href="copytrade"><i class="las la-users mr-3"></i></span> Copy Trade</a>
                     </li>
                     <li class="dropdown py-1" onclick="toggleDrop(this)">
@@ -88,20 +92,20 @@
                         <small style="color: grey;"> Account</small>
                     <li>
                     <li class="settings">
-                        <a href="#"><i class="las la-cog mr-3"></i></span> Settings</a>
+                        <a href="settings"><i class="las la-cog mr-3"></i></span> Settings</a>
                     </li>
                     <li class="referrals">
-                        <a href="#"><i class="las la-comments mr-3"></i></span> Referrals</a>
+                        <a href="downlines"><i class="las la-comments mr-3"></i></span> Referrals</a>
                     </li>
                     <li>
                         <a href="#"><i class="las la-phone-volume mr-3"></i></span> Contact Us</a>
                     </li>
                     <li>
-                        <a href="#"><i class="las la-door-open mr-3"></i></span> Logout</a>
+                        <a href="../login"><i class="las la-door-open mr-3"></i></span> Logout</a>
                     </li>
                 </ul>
 
-                <div class="mb-5">
+                <!--<div class="mb-5">
                     <h3 class="h6 mb-3">Subscribe for newsletter</h3>
                     <form action="#" class="subscribe-form">
                         <div class="form-group d-flex">
@@ -109,7 +113,7 @@
                             <input type="text" class="form-control" placeholder="Enter Email Address">
                         </div>
                     </form>
-                </div>
+                </div>-->
             </div>
         </nav>
 
@@ -126,7 +130,6 @@
             if(elem != null) {
                 elem.classList.add("active")
             }
-            console.log(path)
         })
 
         function toggleDrop(self) {
