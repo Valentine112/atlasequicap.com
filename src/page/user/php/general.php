@@ -31,6 +31,7 @@
         $cAmount = $user['camount'];
         $cCount = $user['ccount'];
         $cData = [];
+        $refcode = $user['refcode'];
 
         if($cTrader > 0):
             $data = [
@@ -108,6 +109,12 @@
         $action = $selecting->action("*", "traders");
         if($action != null) return $action;
         $traders = $selecting->pull();
+        $selecting->reset();
+
+        $selecting->more_details("WHERE referred = ? AND status = 1# $refcode");
+        $action = $selecting->action("fullname, email", "users");
+        if($action != null) return $action;
+        $referralBonus = $selecting->pull();
         $selecting->reset();
 
         // Code to insert demo signals, at least 10

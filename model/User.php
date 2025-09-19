@@ -125,7 +125,7 @@
                     $this->content = "We require at least 2 of your names";
                 else:
                     // Check if password is greater than 7
-                    if(strlen(trim($password)) < 7):
+                    if(strlen(trim($password)) <= 7):
                         $this->message = "fill";
                         $this->content = "Password should be greater than 7";
                     else:
@@ -160,7 +160,7 @@
                         ];
 
                         $inserting = new Insert(self::$db, "users", $subject, "");
-                        if($inserting->action($items, 'sssisssss')):
+                        if($inserting->action($items, 'sssssissss')):
                             //self::$db->autocommit(true);
                             
                             $mailing = new Mailing($email, $fullname, $token, Func::email_config());
@@ -253,38 +253,58 @@
 
             $val = $this->data['val'];
 
-            $fullname = explode(" ", $val['fullname']);
-            $fname = $fullname[0];
-            $lname = $fullname[1] ?? "";
-            $phone = $val['number'];
-            $password = $val['password'];
-            $country = $val['country'];
+            if($val['type'] == "profile"):
+                $fullname = $val['fullname'];
+                $phone = $val['phone'];
+                $country = $val['country'];
 
-            // Check if the password is correct
-            $data = [
-                "id" => $this->user,
-                "1" => "1",
-                "needle" => "password",
-                "table" => "user"
-            ];
+                $name = explode(" ", $fullname);
+                $firstname = $name[0];
+                $lastname = $name[1] ?? "";
+                // Proceed to update the latest data
+                if($fullname != "" && $phone != "" && $country != ""):
+                    if(strlen(trim($lastname)) < 1):
+                        $this->message = "fill";
+                        $this->content = "We require at least 2 of your names";
+                    else:
+                        $updating = new Update(self::$db, "SET fullname = ?, phone = ?, country = ? WHERE id = ?# $fullname# $phone# $country# $this->user");
+                        $action = $updating->mutate('sssi', 'users');
+                        if(!$action) return $action;
 
-            $res = Func::searchDb(self::$db, $data, "AND");
-            if(!empty($res)):
-                // Verify the password
-                if(password_verify($password, $res)):
-                    // Proceed to update the latest data
-                    $updating = new Update(self::$db, "SET fname = ?, lname = ?, phone = ?, country = ? WHERE id = ?# $fname# $lname# $phone# $country# $this->user");
-                    $action = $updating->mutate('ssssi', 'user');
+                        $this->status = 1;
+                        $this->type = "success";
+                        $this->content = "Profile edited successfully";
+                    endif;
+                else:
+                    $data->content = "You cannot leave this forms blank";
+                endif;
+
+            elseif($val['type'] == "security"):
+                $password = $val['password'];
+                if(strlen($password) > 7):
+                    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+                    $updating = new Update(self::$db, "SET password = ? WHERE id = ?# $passwordHash# $this->user");
+                    $action = $updating->mutate('si', 'users');
                     if(!$action) return $action;
 
                     $this->status = 1;
                     $this->type = "success";
                     $this->content = "Profile edited successfully";
                 else:
-                    $this->content = "Password is incorrect";
+                    $data->content = "Pasword should be greater than 7 characters";
                 endif;
-            else:
-                $this->content = "Password is incorrect";
+
+            elseif($val['type'] == "payment"):
+                $btc = $val['btc'];
+                $eth = $val['eth'];
+                $usdt = $val['usdt'];
+                $updating = new Update(self::$db, "SET btc = ?, eth = ?, usdt = ? WHERE id = ?# $btc# $eth# $usdt# $this->user");
+                $action = $updating->mutate('sssi', 'users');
+                if(!$action) return $action;
+
+                $this->status = 1;
+                $this->type = "success";
+                $this->content = "Profile edited successfully";
             endif;
 
             return $this->deliver();
