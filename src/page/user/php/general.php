@@ -111,10 +111,11 @@
         $traders = $selecting->pull();
         $selecting->reset();
 
-        $selecting->more_details("WHERE referred = ? AND status = 1# $refcode");
-        $action = $selecting->action("fullname, email", "users");
+        // Fetch referred
+        $selecting->more_details("WHERE referred = ?# $refcode");
+        $action = $selecting->action("id, fullname, date, status", "users");
         if($action != null) return $action;
-        $referralBonus = $selecting->pull();
+        $referrals = $selecting->pull();
         $selecting->reset();
 
         // Code to insert demo signals, at least 10
@@ -170,7 +171,7 @@
         if(isset($_GET['options'])):
             $optionsInfo = "";
             if($_GET['type'] == "stock"):
-                //$optionsInfo = json_encode(Func::getStockOptions($_GET['options']));
+                $optionsInfo = Func::getStockOptions($_GET['options']);
             endif;
         endif;
 

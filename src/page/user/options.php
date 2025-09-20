@@ -30,7 +30,6 @@
 
         return null;
     }
-    print_r(getStockOptions("AAPL"));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +43,8 @@
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../src/assets/css/general.css">
     <link rel="stylesheet" href="../assets/css/line-awesome.min.css">
-    <script src="../src/assets/js/pagination.min.js"></script>
+    <link rel="stylesheet" href="//cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css">
+    <script src="//cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
     <title>QFSLedgerConnect - Storage for your wallets</title>
 </head>
 <body class="data-light-body">
@@ -58,7 +58,7 @@
                 <main>
                     <header>
                         <p class="title">Options</p>
-                        <?php //print_r($optionsInfo); ?>
+                        <?php //print_r($optionsInfo['options']['CALL']); ?>
                     </header>
 
                     <section>
@@ -67,7 +67,7 @@
                     <hr>
                     <div class="data-body">
                         <div class="table-responsive">
-                            <table class="table table-borderless table-box border-0 bg-transparent" id="data-container">
+                            <table class="table table-borderless table-box border-0 bg-transparent" id="myTable">
                                 <thead>
                                     <tr>
                                         <th col="">Type</th>
@@ -80,7 +80,22 @@
                                         <th col="">Open Interest</th>
                                     </tr>
                                 </thead>
-                                
+                                <tbody>
+                                    <?php
+                                        $options = $optionsInfo['options']['CALL'];
+                                        foreach($options as $option): ?>
+                                        <tr>
+                                            <td><?= $option['type']; ?></td>
+                                            <td>$<?= $option['strike']; ?>.00</td>
+                                            <td><?= $option['expirationDate']; ?></td>
+                                            <td><?= $option['lastPrice']; ?></td>
+                                            <td><?= $option['bid']; ?></td>
+                                            <td><?= $option['ask']; ?></td>
+                                            <td><?= $option['volume']; ?></td>
+                                            <td><?= $option['openInterest']; ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
                             </table>
                             <div id="pagination-container"></div>
                         </div>
@@ -130,11 +145,11 @@
                             <div class="col-8 text-end">
                                 $ <span>4</span>.00
                             </div>
-                        </div>
+                            </div>
                         <hr>
-                        <div>
+                        <!-- <div>
                             <a href="deposit" class="w-100 btn btn-info" style="padding: 5px 10px!important;">Deposit to Trade</a>
-                        </div>
+                        </div> -->
                         <div>
                             <button class="form-control btn btn-link">Put</button>
                         </div>
@@ -145,14 +160,7 @@
     </div>
 </body>
 <script>
-    $('#pagination-container').pagination({
-        dataSource: [1, 2, 3, 4, 5, 6, 7],
-        callback: function(data, pagination) {
-            // template method of yourself
-            var html = template(data);
-            $('#data-container').html(html);
-        }
-    })
+    let table = new DataTable('#myTable');
 
     function template(data) {
         let html = "<tbody>"

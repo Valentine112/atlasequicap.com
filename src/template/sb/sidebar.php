@@ -98,7 +98,7 @@
                         <a href="downlines"><i class="las la-comments mr-3"></i></span> Referrals</a>
                     </li>
                     <li>
-                        <a href="#"><i class="las la-phone-volume mr-3"></i></span> Contact Us</a>
+                        <a href="mailto:support@atlasequicap.com"><i class="las la-phone-volume mr-3"></i></span> Contact Us</a>
                     </li>
                     <li>
                         <a href="../login"><i class="las la-door-open mr-3"></i></span> Logout</a>
