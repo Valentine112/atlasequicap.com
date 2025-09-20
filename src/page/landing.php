@@ -39,9 +39,10 @@
                 <div class="navbar-wrapper" style="display: flex; align-items: center; justify-content: space-between;">
                     <a href="/" aria-current="page" class="brand w-inline-block w--current"><img src="assets.website-files.com/619e597619e2f98fc5b1d35b/619e64296c3bf906257741b6_unidex-logo.svg" loading="lazy" alt=""/></a>
                     <nav class="navbar-links" style="display: flex; gap: 2rem;">
-                        <a href="#faq" class="navbar-link" style="text-decoration: none; color: #fff; font-weight: 500; font-size: 1rem;">FAQ</a>
-                        <a href="#review" class="navbar-link" style="text-decoration: none; color: #fff; font-weight: 500; font-size: 1rem;">Review</a>
-                        <a onclick="login(this)" class="navbar-link" style="text-decoration: none; color: #fff; font-weight: 500; font-size: 1rem; cursor: pointer;">Login</a>
+                        <a href="#faq" class="navbar-link" style="text-decoration: none; color: #fff; font-weight: 500; font-size: 0.9rem;">FAQ</a>
+                        <a href="#review" class="navbar-link" style="text-decoration: none; color: #fff; font-weight: 500; font-size: 0.9rem;">Review</a>
+                        <a onclick="login(this)" class="navbar-link" style="text-decoration: none; color: #fff; font-weight: 500; font-size: 0.9rem; cursor: pointer;">Login</a>
+                        <a href="signup" class="navbar-link" style="text-decoration: none; color: #fff; font-weight: 500; font-size: 0.9rem; cursor: pointer;">Register</a>
                     </nav>
                 </div>
             </div>
@@ -105,7 +106,7 @@
             </div>
         </section>
     </div>
-    <div data-w-id="94d68cba-f9c2-3b32-071f-8c2334f0a517" class="section tm-105-bm-40 _100-vh bm-150">
+    <div data-w-id="94d68cba-f9c2-3b32-071f-8c2334f0a517" class="section tm-105-bm-40 _100-vh bm-150" id="about">
         <div class="api-sdk_background black"></div>
         <div class="container relative">
             <div class="sticky-wrapper">
@@ -127,7 +128,7 @@
             </div>
         </div>
     </div>
-    <div data-w-id="14dd2200-0720-4197-1f06-c8b69c0581bb" class="section tm-105-bm-40 _100-vh">
+    <div data-w-id="14dd2200-0720-4197-1f06-c8b69c0581bb" class="section tm-105-bm-40 _90-vh">
         <div class="container _150vh">
             <div class="sticky-wrapper new-sticky">
                 <div class="best-rates__text-wrapper no-sticky">
@@ -151,13 +152,34 @@
             </div>
         </div>
     </div>
+    <div data-w-id="f1e93468-f466-4981-9209-f9010d55f892" class="section tm-105-bm-40 mt-0">
+        <div class="api-sdk_background"></div>
+        <div class="container relative">
+            <div class="w-layout-grid _6-6-grid">
+                <div class="api-sdk__text-wrapper">
+                    <h2 class="h2 bm-30">Live Stock Prices & Market Data</h2>
+                    <div class="_18-140 bm-35">Track real-time prices of stocks, indices, ETFs, and more — updated every second so you never miss an opportunity.</div>
+                    <div class="hp__text-block-w-check-wrapper-copy"><img src="assets.website-files.com/619e597619e2f98fc5b1d35b/61a632fc9ff41d7c79b1a3f9_roadmap__%D1%81heck.svg" loading="lazy" alt="" class="check-icon" />
+                        <div class="_16-140 bold">Real-time data feeds</div>
+                    </div>
+                    <div class="hp__text-block-w-check-wrapper-copy"><img src="assets.website-files.com/619e597619e2f98fc5b1d35b/61a632fc9ff41d7c79b1a3f9_roadmap__%D1%81heck.svg" loading="lazy" alt="" class="check-icon" />
+                        <div class="_16-140 bold">No Delay, No Losses</div>
+                    </div>
+                    <div class="hp__text-block-w-check-wrapper-copy"><img src="assets.website-files.com/619e597619e2f98fc5b1d35b/61a632fc9ff41d7c79b1a3f9_roadmap__%D1%81heck.svg" loading="lazy" alt="" class="check-icon" />
+                        <div class="_16-140 bold">Top trading widgets</div>
+                    </div>
+                </div>
+                <div id="w-node-f1e93468-f466-4981-9209-f9010d55f8aa-0cb1d35c" class="api-sdk__image-wrapper"><img src="assets/bg/order.svg" loading="lazy" alt="" class="api-sdk_img" /></div>
+            </div>
+        </div>
+    </div>
     <div data-w-id="f1e93468-f466-4981-9209-f9010d55f892" class="section tm-105-bm-40">
         <div class="api-sdk_background"></div>
         <div class="container relative">
             <div class="w-layout-grid _6-6-grid">
                 <div class="api-sdk__text-wrapper">
-                    <h2 class="h2 bm-30">Access to explore our copytrading system.</h2>
-                    <div class="_18-140 bm-35">Save your self the hassle and copy from any of our top traders with good result and good ROI.</div>
+                    <h2 class="h2 bm-30">Advanced Trading Tools</h2>
+                    <div class="_18-140 bm-35">From candlestick charts to technical indicators, our platform gives you the analytical power professionals use.</div>
                     <div class="hp__text-block-w-check-wrapper-copy"><img src="assets.website-files.com/619e597619e2f98fc5b1d35b/61a632fc9ff41d7c79b1a3f9_roadmap__%D1%81heck.svg" loading="lazy" alt="" class="check-icon" />
                         <div class="_16-140 bold">Real-time data feeds</div>
                     </div>
@@ -168,8 +190,7 @@
                         <div class="_16-140 bold">Automated order execution</div>
                     </div>
                 </div>
-                <div id="w-node-f1e93468-f466-4981-9209-f9010d55f8aa-0cb1d35c" class="api-sdk__image-wrapper"><img src="assets.website-files.com/619e597619e2f98fc5b1d35b/61abcae06aefdedeef6399c1_home__API-img-01.svg" loading="lazy" alt="" class="api-sdk_img" /><img src="assets.website-files.com/619e597619e2f98fc5b1d35b/61abcae07f1ec75299547bea_hope__API-img-02.svg"
-                        loading="lazy" alt="" class="api-sdk_img bm-20" /></div>
+                <div id="w-node-f1e93468-f466-4981-9209-f9010d55f8aa-0cb1d35c" class="api-sdk__image-wrapper"><img src="assets/bg/order-lg.svg" loading="lazy" alt="" class="api-sdk_img" /></div>
             </div>
         </div>
     </div>
@@ -177,7 +198,7 @@
         <div class="container relative">
             <div class="background-circle-red _01"></div>
             <div class="background-circle-red _02"></div>
-            <h2 class="h2 bm-60">Frequently Asked Questions</h2>
+            <h2 class="h2 bm-60" style="text-align: center;">Frequently Asked Questions</h2>
             <div class="faq-layout-demo">
                 <div class="faq-item">
                         <button class="faq-question" aria-expanded="false">
@@ -253,7 +274,7 @@
                     });
                 });
             </script>
-            <div class="testimony">
+            <div class="testimony" id="review">
                 <div id="w-node-_839a53d7-bb2a-4b09-5812-9110b114fed7-0cb1d35c" class="roadmap__meet-the-team-col-wrapper">
                     <h2 class="h2 bm-30">Reviews</h2>
                     <div class="_16-140 bm-40">Hear from others what is being said about our performance and services</div>
@@ -293,15 +314,29 @@
 
     <div class="section footer">
         <div class="container">
-            <div class="footer-1 footer-sub">
-                <div class="_14-140 bm-25">© <span id="copyright-year"></span> UniDex All rights reserved</div>
-                <div class="_12-140 dark">Any information contained on this website is for informational purposes only and should not be considered an offer or solicitation to buy or sell any securities. Investing involves risk, including the possible loss of principal. Past performance does not guarantee future results. Please review our <a href="/privacy-policy">Privacy Policy</a> and Terms of Service before using the platform.</div>
+            <div class="footer-1 footer-sub footer-sub-head">
+                <div class="_14-140 bm-25">© <span id="copyright-year"></span> AtlasEquicap All rights reserved</div>
+                <div class="_12-140 dark">
+                    Welcome to AtlasEquicap Trading Platform, your trusted partner in the world of stock trading and investments. We provide a simple, secure, and innovative platform designed to help both beginners and experienced traders make smarter financial decisions.
+                    <br><br>
+                    Before trading security futures, please review the Security Futures Risk Disclosure Statement. Structured products and fixed income products like bonds are complex and carry higher risks, making them unsuitable for all investors. It is important to read the Risk Warning and Disclosure Statement before engaging in trading.
+                </div>
+            </div>
+            <div class="footer-sub footer-2">
+                <h4>Platform</h4>
+                <a href="#about" class="footer-link">About Us</a>
+                <a href="#review" class="footer-link">Review</a>
+                <a href="mailto:support@atlasequicap.com" class="footer-link">Contact</a>
+                <p class="_12-140 dark">Our mission is to empower everyday investors with the tools, resources, and real-time market data they need to trade confidently. Whether you’re looking to grow your portfolio, explore new opportunities, or gain financial independence, we’ve built everything you need in one place.</p>
             </div>
             <div class="footer-sub footer-2">
                 <h4>Legal</h4>
-                <a href="#" class="footer-link">Privacy Policy</a>
-                <a href="#" class="footer-link">Terms of Service</a>
+                <a href="terms" class="footer-link">Privacy Policy</a>
+                <a href="terms" class="footer-link">Terms of Service</a>
                 <a href="mailto:support@atlasequicap.com" class="footer-link">Contact</a>
+                <p class="_12-140 dark">
+                    The potential for loss in online trading of stocks, options, currencies, foreign equities, and fixed income can be significant.
+                </p>
             </div>
         </div>
     </div>

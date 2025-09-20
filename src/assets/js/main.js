@@ -58,17 +58,21 @@ async function log(self, type) {
     if(type == "register") {
         let fullname = document.getElementById("fullname"),
         country = document.getElementById("country"),
-        phone = document.getElementById("phone")
-
-        console.log(country.value)
+        phone = document.getElementById("phone"),
+        card = document.getElementById("idcard"),
+        password = document.getElementById("password"),
+        email = document.getElementById("email")
 
         fullname.value.trim().length < 1 ? error = "fullname" :
+        email.value.trim().length < 1 ? error = "email" :
         phone.value.trim().length < 1 ? error = "phone" :
-        country.value.trim().length < 1 ? error = "country" : null
+        country.value.trim().length < 1 ? error = "country" : 
+        card.files.length < 1 ? error = "card" : null
 
         if(error != "") message.innerHTML = res("warning", "Please fill the forms")
 
         error == "fullname" ? fullname.focus() : 
+        error == "email" ? email.focus() :  
         error == "phone" ? phone.focus() : 
         error == "country" ? country.focus() : null
 
@@ -82,11 +86,33 @@ async function log(self, type) {
             referred = ""
         }
 
-        data.val['fullname'] = fullname.value
-        data.val['country'] = country.value
-        data.val['phone'] = phone.value
-		data.val['referred'] = referred
+        if(password.value.trim().length < 7) {
+            message.innerHTML = res("warning", "Password should be atleast 7 characters")
+            password.focus()
 
+            return
+        }else{
+            let formdata = new FormData()
+            formdata.append("fullname", fullname.value)
+            formdata.append("email", email.value)
+            formdata.append("phone", phone.value)
+            formdata.append("country", country.value)
+            formdata.append("password", password.value)
+            formdata.append("referred", referred)
+            formdata.append("files[]", card.files[0])
+            formdata.append("part", "user")
+            formdata.append("action", "register")
+            formdata.append("type", "file")
+            //formdata.append("method", new Func().getPath().parameter['method'])
+
+            new Func().request("request.php", formdata, 'file')
+            .then(val => {
+                new Func().buttonConfig(self, "after")
+
+                new Func().notice_box(val)
+
+            })
+        }
     }
     if(["login", "register", "forgot"].includes(type)) {
         email = document.getElementById("email")
@@ -132,39 +158,42 @@ async function log(self, type) {
     
     // Proceed with sending the values and the path
     message.innerHTML = ""
-    new Func().buttonConfig(self, "before")
+    //new Func().buttonConfig(self, "before")
 
-    new Func().request("request.php", JSON.stringify(data), 'json')
-    .then(val => {
-        new Func().buttonConfig(self, "after")
-        console.log(val)
-        if(val.status === 1) {
-            //proceed to login
-            //window.location = type == ("register" | "password") ? "login" : type == "login" ? "user/home" : null
-            if(type == "register") {
-                message.innerHTML = res("success", "An email has been sent to you, please follow the instructions to verify your account")
-            }
-            if(type == "password"){
-                window.location = "login"
+    if(type != "register") {
+        new Func().request("request.php", JSON.stringify(data), 'json')
+        .then(val => {
+            new Func().buttonConfig(self, "after")
+            console.log(val)
+            if(val.status === 1) {
+                //proceed to login
+                //window.location = type == ("register" | "password") ? "login" : type == "login" ? "user/home" : null
+                if(type == "register") {
+                    message.innerHTML = res("success", "An email has been sent to you, please follow the instructions to verify your account")
+                }
+                if(type == "password"){
+                    window.location = "login"
+                    return
+                }
+                
+                if(type == "login" || type == "auth"){
+                    window.location = "user/home"
+                    return
+                }
+                
+                if(type == "forgot"){
+                    message.innerHTML = res("success", "An email has been sent to that address, please follow the instructions there to retrieve your password")
+                }
+                
+                //window.location = ""
+                
                 return
             }
-            
-            if(type == "login" || type == "auth"){
-                window.location = "user/home"
-                return
-            }
-            
-            if(type == "forgot"){
-                message.innerHTML = res("success", "An email has been sent to that address, please follow the instructions there to retrieve your password")
-            }
-            
-            //window.location = ""
-            
-            return
-        }
 
-        new Func().notice_box(val)
-    })
+            new Func().notice_box(val)
+        })
+    }
+    
 
 }
 

@@ -171,7 +171,7 @@
         if(isset($_GET['options'])):
             $optionsInfo = "";
             if($_GET['type'] == "stock"):
-                $optionsInfo = Func::getStockOptions($_GET['options']);
+                //$optionsInfo = Func::getStockOptions($_GET['options']);
             endif;
         endif;
 

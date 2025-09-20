@@ -1,4 +1,3 @@
-<!-- meta tags and other links -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,45 +8,44 @@
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QFSLedgerConnect - Storage foor your wallets</title>
-    <link rel="icon" type="image/png" href="assets/images/favicon.png" sizes="16x16">
-    <link rel="stylesheet" href="src/page/assets/css/main.css">
+    <title>Atlasequicap Broker</title>
+    <link rel="stylesheet" href="src/assets/css/login.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="body-cover col-11 col-lg-6 mx-auto">
-            <header>
-                <h2>QFSLedgerConnect</h2>
-            </header>
-
-            <div class="main mt-5">
-                <div id="message"></div>
-                <div>
-                    <h4>New Password</h4>
+    <div class="login">
+        <div class="card-box col-lg-5">
+            <div class="head-sect text-center">
+                <img src="src/assets/images/logo.png" alt="">
+                <h1 class="head">AtlasEquicap</h1>
+            </div>
+            <hr>
+            <div class="">
+                <div class="sub-head">
+                    Change Password
                 </div>
-                <div class="form-group mt-3">
-                    <label for="password">Password</label>
-                    <input type="text" placeholder="Enter new password" id="password" class="form-inp mt-1">
+                <small style="color: grey;">Last step, write down your new password and you are good to go.</small>
+            </div>
+            <div id="message"></div>
+            <div class="mt-3">
+                <div class="mt-3">
+                    <label for="password">New Password</label>
+                    <input type="text" class="form-control form-inp mt-2" placeholder="Password" id="password">
                 </div>
-                <div class="form-group mt-3">
-                    <button class="form-btn col-12" onclick="log(this, 'password')">Submit</button>
+                <div class="mt-4">
+                    <button class="btn btn-link form-control" onclick="log(this, 'password')">Submit</button>
+                </div>
+                <hr>
+                <div class="mt-4">
+                    <a href="login" class="btn btn-info form-control">Login now</a>
+                </div>
+                <div class="mt-4 text-center footer">
+                    <small>By using AtlasEquicap Trading Platform you agree to our <a href="terms">Terms & Conditions</a></small>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- page-wrapper end -->
-    <!-- jQuery library -->
-    <script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
-    <!-- bootstrap js -->
-    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
-    <!-- slick slider js -->
-    <script src="assets/js/vendor/slick.min.js"></script>
-    <script src="assets/js/vendor/wow.min.js"></script>
-    <script src="assets/js/contact.js"></script>
-    <!-- dashboard custom js -->
-    <script src="assets/js/app.js"></script>
+    <?php include "src/template/quick-notice.php"; ?>
     <script src="src/assets/js/main.js"></script>
 </body>
 

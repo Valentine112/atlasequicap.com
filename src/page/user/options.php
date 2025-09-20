@@ -5,32 +5,8 @@
     if(isset($_GET['symbol'])):
         $symbol = Func::cleanData($_GET['symbol'], 'string');
     endif;
-
-    function getStockOptions($symbol) {
-        // Yahoo Finance API endpoint
-        $url = "https://query2.finance.yahoo.com/v7/finance/options/" . urlencode($symbol);
-
-        // Initialize cURL
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        $response = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo "cURL Error: " . curl_error($ch);
-            return null;
-        }
-        curl_close($ch);
-
-        $data = json_decode($response, true);
-
-        if (isset($data["optionChain"]["result"][0]["options"][0])) {
-            return $data["optionChain"]["result"][0]["options"][0];
-        }
-
-        return null;
-    }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +16,7 @@
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../src/assets/css/general.css">
     <link rel="stylesheet" href="../assets/css/line-awesome.min.css">
     <link rel="stylesheet" href="//cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css">
@@ -58,11 +34,32 @@
                 <main>
                     <header>
                         <p class="title">Options</p>
-                        <?php //print_r($optionsInfo['options']['CALL']); ?>
+                        <?php //print_r($optionsInfo); ?>
                     </header>
 
-                    <section>
-                        <h3 class="sub-head">TSLA | <small style="color: var(--main-color);">$395</small></h3>
+                    <section class="options">
+                        <div>
+                            <div>
+                                <h3 class="sub-head"><?= strtoupper($symbol); ?> | <small style="color: var(--main-color);">$395</small></h3>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-6 col-lg-2">
+                                    <div id="nav-tab" role="tablist">
+                                        <div class="wallet-sec" id="buy-tab" data-bs-toggle="tab" data-bs-target="#buy" type="button" role="tab" aria-controls="buy" aria-selected="true">BUY</div>
+                                        &emsp;
+                                        <div class="wallet-sec" id="sell-tab" data-bs-toggle="tab" data-bs-target="#sell" type="button" role="tab" aria-controls="sell" aria-selected="true">SELL</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-2">
+                                    <div id="nav-tab" role="tablist">
+                                        <div class="wallet-sec" id="buy-tab" data-bs-toggle="tab" data-bs-target="#buy" type="button" role="tab" aria-controls="buy" aria-selected="true">BUY</div>
+                                        &emsp;
+                                        <div class="wallet-sec" id="sell-tab" data-bs-toggle="tab" data-bs-target="#sell" type="button" role="tab" aria-controls="sell" aria-selected="true">SELL</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </section>
                     <hr>
                     <div class="data-body">
@@ -70,7 +67,6 @@
                             <table class="table table-borderless table-box border-0 bg-transparent" id="myTable">
                                 <thead>
                                     <tr>
-                                        <th col="">Type</th>
                                         <th col="">Strike</th>
                                         <th col="">Expiration</th>
                                         <th col="">Last Price</th>
@@ -78,14 +74,13 @@
                                         <th col="">Ask</th>
                                         <th col="">Volume</th>
                                         <th col="">Open Interest</th>
+                                        <th>Price</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?php
-                                        $options = $optionsInfo['options']['CALL'];
+                                <tbody class="call">
+                                    <?php $options = $optionsInfo['options']['CALL'];
                                         foreach($options as $option): ?>
                                         <tr>
-                                            <td><?= $option['type']; ?></td>
                                             <td>$<?= $option['strike']; ?>.00</td>
                                             <td><?= $option['expirationDate']; ?></td>
                                             <td><?= $option['lastPrice']; ?></td>
@@ -93,6 +88,7 @@
                                             <td><?= $option['ask']; ?></td>
                                             <td><?= $option['volume']; ?></td>
                                             <td><?= $option['openInterest']; ?></td>
+                                            <td><button class="btn btn-link"><?= $option['type']; ?> <?= $option['lastPrice']; ?></button></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -163,22 +159,20 @@
     let table = new DataTable('#myTable');
 
     function template(data) {
-        let html = "<tbody>"
-        var tBody = `<tr>
-                        <td>${data.type}</td>
-                        <td${data.strike}</td>
-                        <td>${data.expirationDate}</td>
-                        <td>${data.lastPrice}</td>
-                        <td>${data.bid}</td>
-                        <td>${data.ask}</td>
-                        <td>${data.volume}</td>
-                        <td>${data.openInterest}</td>
-                    </tr>`;
-        $.each(data, function(index, item){
-            html += tBody;
-        });
-        html += '</tbody>';
-        return html;
+        console.log(data)
+        
+        data.forEach(item => {
+            let elem = `<tr>
+                <td${item.strike}</td>
+                <td>${item.expirationDate}</td>
+                <td>${item.lastPrice}</td>
+                <td>${item.bid}</td>
+                <td>${item.ask}</td>
+                <td>${item.volume}</td>
+                <td>${item.openInterest}</td>
+            </tr>`;
+            document.querySelector(".call").insertAdjacentHTML("beforeend", elem)
+        })
     }
 
     const symbol = "AAPL";
@@ -191,18 +185,22 @@
             if (!res.ok) throw new Error("HTTP " + res.status);
             const data = await res.json();
 
-            console.log("Options Data:", data);
-
             // If you want just calls & puts:
+            console.log(data.data[0].options)
             if (data && data.data) {
-            console.log("Calls:", data.data.calls);
-            console.log("Puts:", data.data.puts);
+                // return {
+                //     "call": data.data[0].options.CALL,
+                //     "put": data.data[0].options.PUT
+                // }
+                document.getElementById("myTable").insertAdjacentHTML("beforeend", template(data.data[0].options.CALL))
             }
+
+
         } catch (err) {
             console.error("Error fetching options:", err);
         }
     }
 
-    console.log(fetchOptions())
+    //console.log(fetchOptions())
 </script>
 </html>

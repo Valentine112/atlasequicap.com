@@ -3,10 +3,16 @@
     font-optical-sizing: auto;
     color: silver;
     --main-color: #30deab;
+    --main-bg: #121921;
     --blend-color: #19212A;
     --white: rgba(255, 255, 255, 0.8);
-    font-size: 16px;
 }
 .table>:not(caption)>*>* {
     background-color: transparent!important;
+}
+
+@media screen and(min-width: 767px) {
+    *{
+        font-size: 15px!important;
+    }
 }

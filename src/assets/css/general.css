@@ -1,6 +1,4 @@
-body{
-    
-}
+
 .data-dark-body{
     background: #121921;
     color: #fff;
@@ -71,10 +69,11 @@ hr{
     font-weight: 600;
 }
 .btn-link{
-    background: #198754 !important;
-    border-color: #198754;
-    color: #fff!important;
+    background: rgba(25, 135, 84, 0.2) !important;
+    border-color: rgba(25, 135, 84, 0.2);
+    color: #00c805!important;
 }
+
 .table-responsive{
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;

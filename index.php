@@ -40,7 +40,7 @@
     })
 
     ->get('/password', function() {
-        require "src/page/new-password.php";
+        require "src/page/password.php";
     })
 
     ->get('/track', function() {

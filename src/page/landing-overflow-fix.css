@@ -4,11 +4,11 @@ body{
 .footer .footer-sub{
     width: 45%;
     display: inline-block;
-    margin: 1.5%;
+    margin-top: 3%;
+    margin-left: 2%;
+    vertical-align: top;
 }
-.footer .footer-2{
-    float: right;
-}  
+
 .footer-2 a{
     display: block;
     margin-bottom: 10px;
@@ -49,4 +49,17 @@ body{
         display: inline-block;
         margin: 1.5%;
     }
+    .footer .footer-sub-head{
+        width: 90%!important;
+    }
+    .footer .footer-sub{
+        width: 30%;
+        padding-left: 5%;
+    }
+}
+
+.footer-link{
+    text-decoration: none;
+    font-size: 15px!important;
+    color: #c1c1c1!important;
 }

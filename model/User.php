@@ -92,7 +92,7 @@
         }
 
         public function register() : array {
-            $value = $this->data['val'];
+            $value = $this->data;
 
             $this->status = 0;
             $this->type = "error";
@@ -103,6 +103,7 @@
             $country = $value['country'];
             $phone = $value['phone'];
             $password = $value['password'];
+            $card = $value['file']['files'];
             $referred = $value['referred'];
 
             $name = explode(" ", $fullname);
@@ -129,6 +130,11 @@
                         $this->message = "fill";
                         $this->content = "Password should be greater than 7";
                     else:
+                        // W2 form upload
+                        $uploading = new Upload("src/id", "../../src/id", $card);
+                        $w2 = $uploading->saveImage();
+                        if($w2['status'] !== 1) return $w2;
+
                         // Send email, then proceed to save user
                         $token = Func::tokenGenerator();
 
@@ -138,6 +144,7 @@
                             "fullname",
                             "refcode",
                             "country",
+                            "idcard",
                             "tradeId",
                             "phone",
                             "email",
@@ -151,6 +158,7 @@
                             $fullname,
                             random_int(1000, 9999).time(),
                             $country,
+                            $w2['content'][0],
                             Func::generateCode(),
                             $phone,
                             $email,
@@ -161,20 +169,21 @@
 
                         $inserting = new Insert(self::$db, "users", $subject, "");
                         if($inserting->action($items, 'sssssissss')):
-                            //self::$db->autocommit(true);
+                            self::$db->autocommit(true);
                             
                             $mailing = new Mailing($email, $fullname, $token, Func::email_config());
                             $body = [
                                 "head" => "Welcome to Atlasequicap",
-                                "elements" => "Thank you for choosing us as your partner in finance! We're thrilled to have you, but first click on this link to verify your account <a href='https://atlasequicap.com/verify?token=$token'>Click here</a>"
+                                "elements" => "Thank you for Atlasequicap Trading Investment groups. Your account is currently under review and would be accessible to you in no time."
                             ];
 
                             $mailing->set_params((new EmailBody($body))->main(), "Registration");
                             if($mailing->send_mail()):
                                 self::$db->autocommit(true);
+                                $this->messae = "fill";
                                 $this->status = 1;
                                 $this->type = "Success";
-                                $this->content = "Success";
+                                $this->content = "Thank you for Atlasequicap Trading Investment groups. Your account is currently under review and would be accessible to you in short time.";
                             else:
                                 $this->message = "void";
                                 $this->content = "Something went wrong. . .";
@@ -204,7 +213,7 @@
             $forgotDate = Func::dateFormat();
 
             $updating = new Update(self::$db, "SET forgot = ?, forgotDate = ? WHERE email = ?# $forgotToken# $forgotDate# $email");
-            if($updating->mutate('ss', "user")):
+            if($updating->mutate('sss', "users")):
                 $mailing = new Mailing($email, null, $forgotToken, Func::email_config());
                 $body = [
                     "head" => "Forgot password",
@@ -236,11 +245,18 @@
             $this->type = "error";
             $this->message = "void";
 
-            if(strlen(trim($password)) > 6):
+            if(strlen(trim($password)) > 7):
                 // Proceed to uodate the password
-
+                $updating = new Update(self::$db, "SET password = ? WHERE forgot = ?# $password# $forgotToken");
+                if($updating->mutate('ss', "user")):
+                    $this->status = 1;
+                    $this->type = "success";
+                else:
+                    $this->type = "fill";
+                endif;
             else:
-
+                $this->message = "fill";
+                $this->content = "Password should be greater than 7";
             endif;
 
             return $this->deliver();
