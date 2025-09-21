@@ -115,20 +115,8 @@
         require "src/page/user/downlines.php";
     })
 
-    ->get('/user/investment-statement', function() {
-        require "src/page/user/investments.php";
-    })
-
-    ->get('/user/deposit-statement', function() {
-        require "src/page/user/deposits.php";
-    })
-
-    ->get('/user/withdrawal-statement', function() {
-        require "src/page/user/withdrawals.php";
-    })
-
-    ->get('/user/packages', function() {
-        require "src/page/user/packages.php";
+    ->get('/user/certificate', function() {
+        require "src/page/user/certificate.php";
     })
 
     ->get('/user/deposit', function() {

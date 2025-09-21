@@ -100,6 +100,9 @@
                     case 'options':
                         $result = $modelUser->options();
                         break;
+                    case 'certificate':
+                        $result = $modelUser->certificate();
+                        break;
                     case 'activate':
                         $result = $modelUser->activate();
                         break;

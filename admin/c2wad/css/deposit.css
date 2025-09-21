@@ -1,0 +1,18 @@
+body{
+    background-color: red;
+}
+
+table thead tr th{
+    padding: 30px;
+    border: 1px solid #fff;
+    background-color: #727272;
+    color: #fff;
+}
+table tbody tr td{
+    font-size: 13px;
+    border: 1px solid #fff;
+    padding: 15px;
+}
+table tbody tr:nth-child(2n) {
+    background-color: #f1f1f1;
+}

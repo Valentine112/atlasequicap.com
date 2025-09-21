@@ -185,5 +185,8 @@
         if(isset($_GET['coin'])):
             $coins = Func::fetchCoin($_GET['coin']);
         endif;
+
+        Func::calcTrade($userId, $db, "general");
+        Func::calcSignal($userId, $db);
     endif;
 ?>

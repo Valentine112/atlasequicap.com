@@ -315,7 +315,24 @@ table td{
 .profile label{
     display: block;
 }
-
+.certificate small{
+    font-size: 0.8rem!important;
+}
+.certificate .modal-header{
+    border: 0!important;
+}
+.certificate .modal-footer{
+    border-top: 0!important;
+}
+.certificate .floatLock{
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: fit-content;
+    margin: auto;
+    z-index: 2;
+    font-size: 35px;
+}
 .downlines h5{
     color: #CCA354;
 }

@@ -308,6 +308,17 @@
             return $profit;
         }
 
+        public static function calcSignal(int $user, mysqli $db) {
+            // fetch all userr signals first
+            // Then loop through them
+            $selecting = new Select($db);
+
+            // Get all the users that has been blocked by this user first
+            $selecting->more_details("WHERE user = ?# $user");
+            $action = $selecting->action("other", "blocked_users");
+            $selecting->reset();
+        }
+
         public static function generateCode() : string {
             return bin2hex(random_bytes(5));
         }

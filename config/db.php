@@ -28,4 +28,4 @@ class Database extends mysqli
     }
 }*/
 
-$link = new mysqli("localhost", "qfsledg2_user", "Anthonyval1", "qfsledg2_db");
+$link = new mysqli("localhost", "root", "", "stock");

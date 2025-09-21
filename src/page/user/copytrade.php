@@ -51,6 +51,10 @@
                                     <small>Invested</small>
                                     <h5 class="main-color"><?= $cTrader > 0 ? "$".$cAmount : "None"; ?></h5>
                                 </div>
+                                <div class="col-4 justify-content-start">
+                                    <small>Profit</small>
+                                    <h5 class="main-color"><?= $cTrader > 0 ? "$".$cProfit : "None"; ?></h5>
+                                </div>
                                 <?php if($cTrader > 0): ?>
                                     <div class="col-9">
                                         <button class="btn btn-danger" onclick="submit(this, 'endtrade')">Cancel Copytrading</button>

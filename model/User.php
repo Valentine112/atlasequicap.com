@@ -611,7 +611,7 @@
                             $items = [Func::generateCode(), $this->user, $signalId, $amount, Func::dateFormat()];
                             // Save to database next
                             $inserting = new Insert(self::$db, "usersignals", $subject, "");
-                            $action = $inserting->action($items, 'iiiis');
+                            $action = $inserting->action($items, 'siiis');
 
                             if(!$action) return $action;
                             //Update the new wallet balance
@@ -820,6 +820,21 @@
             $this->type = "success";
             $this->content = "You have successfully placed a trade on $symbol";
 
+            return $this->deliver();
+        }
+
+        public function certificate() : array {
+            $this->status = 0;
+            $this->message = "fill";
+            $this->type = "error";
+            $updating = new Update(self::$db, "SET certificate = 1 WHERE id = ?# $this->user");
+            if(!$updating->mutate('i', 'users')):
+                return $this->content = "Something went wrong...";
+            endif;
+
+            $this->status = 1;
+            $this->type = "success";
+            $this->content = "Your request for certificate is currently been processed.";
             return $this->deliver();
         }
 

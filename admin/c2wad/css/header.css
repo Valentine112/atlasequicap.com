@@ -1,0 +1,28 @@
+.cover-body{
+    background: linear-gradient(185deg, #010314, #19212A 70%);
+    border: 1px solid #222; 
+}
+.form-inp{
+    background-color: #19212A!important;
+    color: #fff;
+}
+ul li{
+    padding: 5px!important;
+    font-size: 14px;
+}
+*{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+.content-wrapper{
+    background: #121921;
+}
+.box{
+    background: linear-gradient(185deg, #010314 70%, #19212A);
+    border: 0;
+    padding: 1% 3%;
+}
+.main-sidebar{
+    position: absolute!important;
+    padding-top: 30px;
+}

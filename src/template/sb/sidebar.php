@@ -82,7 +82,7 @@
 
                         <ul class="px-3 ml-5 pl-5 d-none sub-menu">
                             <li><a href="market">Live Trading</a></li>
-                            <li><a href="certificate">My Certificate</a></li>
+                            <li><a href="certificate" class="certificate">My Certificate</a></li>
                         </ul>
                     </li>
                     <li class="mt-1 walletconnect">

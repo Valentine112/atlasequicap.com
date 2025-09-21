@@ -199,7 +199,7 @@
                     </div>
                     
                     <div class="col-12 text-center mt-3">
-                        <button class="btn btn-primary p-5"  data-bs-toggle="modal" data-bs-target="#optionsHistory">Options History</button>
+                        <button class="btn btn-primary p-5" data-bs-toggle="modal" data-bs-target="#optionsHistory">Options History</button>
                     </div>
 
                     <div class="modal" tabindex="-1" aria-labelledby="optionsHistory" id="optionsHistory" aria-hidden="true">
