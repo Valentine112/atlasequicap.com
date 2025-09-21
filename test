@@ -1,2 +1,15 @@
-<div id="w-node-f1e93468-f466-4981-9209-f9010d55f8aa-0cb1d35c" class="api-sdk__image-wrapper"><img src="assets.website-files.com/619e597619e2f98fc5b1d35b/61abcae06aefdedeef6399c1_home__API-img-01.svg" loading="lazy" alt="" class="api-sdk_img" /><img src="assets.website-files.com/619e597619e2f98fc5b1d35b/61abcae07f1ec75299547bea_hope__API-img-02.svg"
-                        loading="lazy" alt="" class="api-sdk_img bm-20" /></div>
+<tbody class="tab-pane fade" id="put" role="tabpanel" aria-labelledby="put-tab">
+                                    <?php $options = $optionsInfo['options']['PUT'];
+                                        foreach($options as $option): ?>
+                                        <tr class="tab-pane fade active" id="put" role="tabpanel" aria-labelledby="put-tab">
+                                            <td>$<?= $option['strike']; ?>.00</td>
+                                            <td><?= $option['expirationDate']; ?></td>
+                                            <td><?= $option['lastPrice']; ?></td>
+                                            <td><?= $option['bid']; ?></td>
+                                            <td><?= $option['ask']; ?></td>
+                                            <td><?= $option['volume']; ?></td>
+                                            <td><?= $option['openInterest']; ?></td>
+                                            <td><button class="btn btn-link"><?= $option['type']; ?></button></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>

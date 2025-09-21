@@ -43,8 +43,8 @@
 	        </button>
             </div>
             <div class="p-4 sidebar-content">
-                <h1><a href="index.html" class="logo">Atlasequicap <span>Atlasequicap Brokers</span></a></h1>
-                <ul class="list-unstyled components mb-5">
+                <img src="../src/assets/images/logo.png" alt="" style="width: 150px; height: auto;">
+                <ul class="list-unstyled components mb-5 mt-4">
                     <li class="home">
                         <a href="home"><i class="las la-home mr-3"></i></span> Home</a>
                     </li>

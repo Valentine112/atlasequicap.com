@@ -800,6 +800,28 @@
             return $this->deliver();
         }
 
+        public function options() : array {
+            $this->status = 0;
+            $this->message = "fill";
+            $this->type = "error";
+            
+            list($symbol, $orderType, $strike, $limitPrice, $contracts, $market, $exp) = array_values($this->data['val']);
+
+            $symbol = strtoupper($symbol);
+            $code = Func::generateCode();
+            $subject = ["tranx", "user", "symbol", "type", "strike", "contract", "market", "limitPrice", "exp", "date"];
+            $items = [$code, $this->user, $symbol, $orderType, $strike, $contracts, $market, $limitPrice, $exp, Func::dateFormat()];
+            // Save to database next
+            $inserting = new Insert(self::$db, "options", $subject, "");
+            $action = $inserting->action($items, 'sissiissss');
+            if(!$action) return $action;
+
+            $this->status = 1;
+            $this->type = "success";
+            $this->content = "You have successfully placed a trade on $symbol";
+
+            return $this->deliver();
+        }
 
         public function activate() : array {
             $this->status = 0;

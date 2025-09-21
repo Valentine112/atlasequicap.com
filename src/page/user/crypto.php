@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../assets/css/line-awesome.min.css">
     <title>QFSLedgerConnect - Storage for your wallets</title>
 </head>
-<body class="data-light-body">
+<body class="data-dark-body">
     <?php include "src/template/quick-notice.php"; ?>
     <div class="section">
         <div class="wrapper d-flex align-items-stretch">

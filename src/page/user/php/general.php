@@ -97,6 +97,13 @@
         $usersignals = $selecting->pull()[0];
         $selecting->reset();
 
+        // Fetch user options
+        $selecting->more_details("WHERE user = ? ORDER BY id DESC# $userId");
+        $action = $selecting->action("*", "options");
+        if($action != null) return $action;
+        $options = $selecting->pull()[0];
+        $selecting->reset();
+
         // Fetch user crypto
         $selecting->more_details("WHERE user = ? ORDER BY id DESC# $userId");
         $action = $selecting->action("*", "crypto");
@@ -171,7 +178,7 @@
         if(isset($_GET['options'])):
             $optionsInfo = "";
             if($_GET['type'] == "stock"):
-                //$optionsInfo = Func::getStockOptions($_GET['options']);
+                $optionsInfo = Func::getStockOptions($_GET['options']);
             endif;
         endif;
 

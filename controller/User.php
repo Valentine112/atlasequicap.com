@@ -97,6 +97,9 @@
                     case 'orderCrypto':
                         $result = $modelUser->orderCrypto();
                         break;
+                    case 'options':
+                        $result = $modelUser->options();
+                        break;
                     case 'activate':
                         $result = $modelUser->activate();
                         break;

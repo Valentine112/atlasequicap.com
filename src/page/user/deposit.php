@@ -259,7 +259,7 @@
             // Deposit ready
             let payload = {
                 part: "user",
-                action: "pay",
+                action: "options",
                 val: {
                     amount: amount.value,
                     mode: self.getAttribute("data-asset"),
@@ -269,7 +269,6 @@
 
             new Func().request("../request.php", JSON.stringify(payload), 'json')
             .then(val => {
-                console.log(val)
                 new Func().notice_box(val)
             })
         }

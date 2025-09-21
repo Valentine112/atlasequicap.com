@@ -27,7 +27,7 @@
                         <p class="title">Stocks</p>
                     </header>
 
-                    <section class="payment-methods card-box col-lg-8 mx-lg-auto mt-4">
+                    <section class="payment-methods stocks card-box col-lg-8 mx-lg-auto mt-4">
                         <div class="row justify-content-between align-items-center">
                             <div class="col-4">
                                 <span class="sub-sub-head">Stocks</span>
