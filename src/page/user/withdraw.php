@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../assets/css/line-awesome.min.css">
     <title>QFSLedgerConnect - Storage for your wallets</title>
 </head>
-<body class="data-light-body">
+<body class="data-dark-body">
     <?php include "src/template/quick-notice.php"; ?>
     <div class="section">
         <div class="wrapper d-flex align-items-stretch">
@@ -36,9 +36,7 @@
                             <select class="form-select form-inp" id="inputGroupSelect01" onchange="withdrawalMode(this)">
                                 <option value="Btc" data-addr="<?= $user['btc']; ?>">Bitcoin</option>
                                 <option value="Eth" data-addr="<?= $user['eth']; ?>">Ethereum</option>
-                                <option value="Bnb" data-addr="<?= $user['bnb']; ?>">BNB</option>
                                 <option value="Usdt" data-addr="<?= $user['usdt']; ?>">USDT</option>
-                                <option value="Xrp" data-addr="<?= $user['xrp']; ?>">XRP</option>
                             </select>
                         </div>
                         <div class="mt-3">
@@ -59,7 +57,7 @@
                         </header>
                         <section class="deposit-history">
                             <div class="table-responsive">
-                                <table class="table table-hover bg-dark table-box border-0 bg-transparent">
+                                <table class="table table-hover table-borderless bg-dark table-box border-0 bg-transparent">
                                     <thead>
                                         <tr>
                                             <th scope="col">TRANSACTION ID #</th>

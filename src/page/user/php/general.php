@@ -101,7 +101,7 @@
         $selecting->more_details("WHERE user = ? ORDER BY id DESC# $userId");
         $action = $selecting->action("*", "options");
         if($action != null) return $action;
-        $options = $selecting->pull()[0];
+        $optionsHistory = $selecting->pull()[0];
         $selecting->reset();
 
         // Fetch user crypto

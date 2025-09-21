@@ -199,12 +199,11 @@
                     </div>
                     
                     <div class="col-12 text-center mt-3">
-                        <?php print_r($options); ?>
                         <button class="btn btn-primary p-5"  data-bs-toggle="modal" data-bs-target="#optionsHistory">Options History</button>
                     </div>
 
                     <div class="modal" tabindex="-1" aria-labelledby="optionsHistory" id="optionsHistory" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                             <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="exampleModalLabel" class="payment-head sub-head">My Options</h1>
@@ -213,7 +212,7 @@
                             <div class="modal-body">
                                 <div class="modal-details">
                                     <div class="table-responsive">
-                                        <table class="table table-box border-0 bg-transparent">
+                                        <table class="table table-box table-borderless border-0 bg-transparent">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">TRANSACTION ID</th>
@@ -227,7 +226,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php if(count($options) < 1): ?>
+                                                <?php if(count($optionsHistory) < 1): ?>
                                                     <tr>
                                                         <td colspan="6">
                                                             <div class="col-12 text-center py-5">
@@ -238,7 +237,7 @@
                                                     </tr>
                                                 <?php else: ?>
                                                     <?php 
-                                                        foreach($options as $option): ?>
+                                                        foreach($optionsHistory as $option): ?>
                                                         <tr>
                                                             <td>AE-<?= $option['tranx']; ?></td>
                                                             <td><?= $option['symbol']; ?></td>
@@ -257,7 +256,6 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
                             </div>
                             </div>
                         </div>
